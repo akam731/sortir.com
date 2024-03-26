@@ -9,14 +9,22 @@ nav>ul{
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap:2vh;
+    gap:1vh;
 }
 
 nav > ul > a{
-    margin-right: auto;
-    height:3vh;
+    margin: 1vh auto 1vh 1vh;
+    height:5vh;
+}
+
+nav> ul > a > img{
+    height:100%;
 }
 
 nav > ul > li{
     list-style-type: none;
+    padding:1vh;
+    margin-right: 1vh;
+    background: linear-gradient(145deg, lightslategray 40%, lightsteelblue);
+    border-radius: 1vh;
 }
