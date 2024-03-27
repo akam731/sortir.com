@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - Profil
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ asset('css/profil.css') }}">
+{% endblock %}
+
+
+{% block body %}
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <form method="POST" enctype="multipart/form-data">
+
+        <h1>Mon Profil</h1>
+
+        {% if user.imgName != null %}
+            {% set imagePath = 'img/profil/' ~ user.imgName %}
+            <img src="{{ asset(imagePath) }}">
+        {% else %}
+            <img src="{{ asset('img/profil/default.png') }}">
+        {% endif %}
+        
+        {{ form_start(form) }}
+
+        {{ form_end(form) }}
+
+    </form>
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+
+{% endblock %}
