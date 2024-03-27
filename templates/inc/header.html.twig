@@ -2,7 +2,9 @@
     <nav>
         <a href="{{ path('main_home') }}"><img src="{{ asset('img/CatToken.png') }}"></a>
         <ul>
-            <li><a href="">Administration</a></li>
+            {%  if is_granted("ROLE_ADMIN") %}
+            <li><a href="{{ path('admin_home') }}">Administration</a></li>
+            {% endif %}
             <li><a href="{{ path('main_home') }}">Accueil</a></li>
             <li><a href="{{ path('profil_home') }}">Mon profil</a></li>
             <li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>
