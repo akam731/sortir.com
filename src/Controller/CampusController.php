@@ -28,6 +28,7 @@ class CampusController extends AbstractController
             return $this->redirectToRoute('app_campus_index', [], Response::HTTP_SEE_OTHER);
         }
 
+
         return $this->render('campus/index.html.twig', [
             'campuses' => $campusRepository->findAll(),
             'campus' => $campus,
