@@ -53,10 +53,8 @@ form > img{
     height: 200px;
     width: 200px;
     object-fit: cover;
-    position: absolute;
-    left: 50px;
-    top: 30%;
     border-radius: 15px;
+    margin: 40px 0;
 }
 
 form > div > div:last-child{
@@ -94,6 +92,18 @@ input[type="file"]{
     width: 150px;
 }
 
-button{
+#user_edit_save{
+    display: inline-block;
+    margin: 40px 0 0 0;
+    color: #ffffff;
+    background: #65A4E3;
+    border: 1px solid #65A4E3;
+    cursor: pointer;
+    height: 40px;
+    width: 150px;
+}
 
+#user_edit_save:hover{
+    color: #65A4E3;
+    background: #fff;
 }
