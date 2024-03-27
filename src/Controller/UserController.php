@@ -73,9 +73,9 @@ class UserController extends AbstractController
                     $hashedPassword = $this->passwordEncoder->hashPassword($user, $mdp);
                     $user->setPassword($hashedPassword);
 
+
                     $entityManager->persist($user);
                     $entityManager->flush();
-
 
                     return $this->redirectToRoute('profil_home_id', ['id' => $user->getId()]);
 
