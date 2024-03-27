@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 
+/**
+      HEADER STYLE : COMPUTER
+ **/
+
 header{
     background: lightgrey;
 }
@@ -16,12 +20,12 @@ nav>ul{
     gap:1vh;
 }
 
-nav > ul > a{
+nav > a{
     margin: 1vh auto 1vh 1vh;
     height:4vh;
 }
 
-nav> ul > a > img{
+nav> a > img{
     height:100%;
 }
 
@@ -37,3 +41,58 @@ nav > ul >li:hover{
     background: linear-gradient(145deg, lightcyan 40%, lightsteelblue);
     box-shadow: inset 0.2vh 0.2vh 0.5vh 0.2vh lightcyan;
 }
+
+nav>ul>li>a{
+    text-decoration: none;
+    color: black;
+}
+
+/**
+      HEADER STYLE : TABLETS
+ **/
+
+
+/**
+      HEADER STYLE : PHONE
+ **/
+@media only screen and (max-width: 450px) and (orientation: portrait) {
+
+    nav {
+        margin: 1dvh 0 0 1dvh;
+        background: lightgrey;
+        border-radius: 40%;
+        height: 6dvh;
+        width:fit-content;
+    }
+
+    nav > a > img {
+        height: 6dvh;
+    }
+
+    nav > ul {
+        display: none;
+        position: absolute;
+        top: 6dvh;
+        left: 0;
+        padding: 1dvh;
+        border-radius: 1dvh;
+    }
+
+    nav:hover > ul {
+        display: block;
+    }
+
+    nav > ul > li {
+        margin-bottom: 1dvh;
+        width:50vw;
+        min-height:5dvh;
+        padding:1dvh;
+        font-size:3dvh;
+    }
+
+    nav > ul > li:hover {
+        border-radius: 1dvh;
+    }
+}
+
+
