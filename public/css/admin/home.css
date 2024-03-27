@@ -1,0 +1,30 @@
+section{
+    margin: 50px 0 0 0;
+}
+section > a{
+    display: inline-flex;
+    width: 200px;
+    height: 30px;
+    text-decoration: none;
+    border: 1px solid #0000EE;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+section > a:hover{
+    background: #0000EE;
+    color: #ffffff;
+}
+
+@media screen and (max-width: 750px){
+
+    section{
+        display: flex;
+        flex-direction: column;
+    }
+
+    h1{
+        font-size: 28px;
+    }
+
+}

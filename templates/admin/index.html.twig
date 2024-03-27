@@ -3,18 +3,20 @@
 {% block title %}Hello AdminController!{% endblock %}
 
 {% block head %}
+    <link rel="stylesheet" href="{{ asset('css/admin/home.css') }}">
 {% endblock %}
 
 {% block body %}
 
     <h1>Page Administration</h1>
 
-    <div>
+    <section>
 
-        <a>Gérer les campus</a>
-        <a>Gérer les villes</a>
-        <a>Gérer les utilisateurs</a>
+        <a href="#">Gérer les campus</a>
+        <a href="#">Gérer les villes</a>
+        <a href="#">Gérer les utilisateurs</a>
 
-    </div>
+
+    </section>
 
 {% endblock %}
