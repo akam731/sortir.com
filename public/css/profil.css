@@ -1,0 +1,80 @@
+/* Affichage d'un profil */
+section{
+    text-align: center;
+    padding: 40px;
+    border-radius: 15px;
+    -webkit-box-shadow: 5px 5px 21px -4px rgba(0,0,0,0.6);
+    box-shadow: 5px 5px 21px -4px rgba(0,0,0,0.6);
+    background: #ffffff;
+}
+
+h1{
+    font-weight: normal;
+    font-size: 30px;
+}
+
+section > p{
+    display: inline-block;
+    margin: 10px 10px;
+    font-size: 18px;
+    min-width: 150px;
+    text-align: left;
+}
+
+
+
+@media screen and (max-width: 500px){
+
+    section{
+        width: 100%;
+        padding: 20px 0 20px 0;
+    }
+    section > p{
+        width: 40%;
+    }
+
+}
+
+
+/* Modification du profil */
+
+
+form {
+    text-align: center;
+    padding: 40px;
+    border-radius: 15px;
+    -webkit-box-shadow: 5px 5px 21px -4px rgba(0, 0, 0, 0.6);
+    box-shadow: 5px 5px 21px -4px rgba(0, 0, 0, 0.6);
+    background: #ffffff;
+    margin: 50px 0 0 0;
+}
+
+form > img{
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+    position: absolute;
+    left: 50px;
+    top: 30%;
+    border-radius: 15px;
+}
+
+
+form > div > label{
+    display: inline-block;
+    margin: 10px 10px;
+    font-size: 18px;
+    min-width: 150px;
+    text-align: left;
+}
+form > div > input{
+    display: inline-block;
+    margin: 10px 10px;
+    font-size: 18px;
+    min-width: 150px;
+    text-align: left;
+}
+
+input[type="file"]{
+    width: 150px;
+}

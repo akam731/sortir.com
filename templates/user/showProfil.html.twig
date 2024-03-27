@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - Profil
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ asset('css/profil.css') }}">
+{% endblock %}
+
+
+{% block body %}
+
+
+    <section>
+
+        <h1>{{ user.firstName }}&nbsp;{{ user.lastName }}</h1>
+        <br>
+        <p>Campus</p><p>{{ user.campus.name }}</p>
+        <br>
+        <p>Prénom</p><p>{{ user.firstName }}</p>
+        <br>
+        <p>Nom</p><p>{{ user.lastName }}</p>
+        <br>
+        <p>Téléphone</p><p>{{ user.phone }}</p>
+        <br>
+        <p>Email</p><p>{{ user.email }}</p>
+
+    </section>
+
+
+{% endblock %}

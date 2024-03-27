@@ -3,8 +3,8 @@
         <a href="{{ path('main_home') }}"><img src="{{ asset('img/CatToken.png') }}"></a>
         <ul>
             <li><a href="#">Administration</a></li>
-            <li><a href="#">Accueil</a></li>
-            <li><a href="#">Mon profil</a></li>
+            <li><a href="{{ path('main_home') }}">Accueil</a></li>
+            <li><a href="{{ path('profil_home') }}">Mon profil</a></li>
             <li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>
         </ul>
     </nav>
