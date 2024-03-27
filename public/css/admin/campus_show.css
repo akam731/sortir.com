@@ -11,6 +11,58 @@ section{
     padding: 40px;
 }
 
+section > form > div > div >img{
+    height: 15px;
+}
+
+section > form{
+    margin: 0 0 0 15px;
+}
+
+section > form > h2{
+    font-weight: normal;
+    font-size: 22px;
+}
+
+section > form > div{
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 340px;
+}
+
+section > form > button{
+    display: inline-block;
+    color: #ffffff;
+    background: #65A4E3;
+    border: 1px solid #65A4E3;
+    cursor: pointer;
+    height: 25px;
+    width: 100px;
+    margin: 0 0 0 15px;
+    text-decoration: none;
+}
+section > form > button:hover{
+    color: #65A4E3;
+    background: #fff;
+}
+
+section > form > div > div{
+    display: inline-flex;
+    border: 1px solid #000;
+    justify-content: center;
+    align-items: center;
+    padding: 0 5px;
+}
+section > form > div > div input{
+    border: none;
+    padding: 0 10px;
+}
+
+section > form > div > div > div{
+    display: inline-block;
+}
+
 table {
     border-collapse: collapse;
     width: 500px;
@@ -47,9 +99,28 @@ table label{
 }
 
 @media screen and (max-width: 650px){
+
+    section > form{
+        margin: 0 0 0 30px;
+        width: 70%;
+        display: inline-flex;
+        flex-direction: column;
+    }
+
+    section > form > div{
+        flex-direction: column;
+        width: 250px;
+        align-items: flex-start;
+    }
+
+    section > form > button{
+        margin: 20px 0 0 0;
+    }
+
     section, table{
+        margin: auto;
         padding: 40px 5px;
-        width: 100%;
+        width: 95%;
     }
 
     table > tbody > tr > td{

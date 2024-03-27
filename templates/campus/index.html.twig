@@ -7,6 +7,8 @@
 {% endblock %}
 
 {% block body %}
+    <br>
+    <br>
     <h1>Gérer les campus</h1>
 
     <br>
@@ -14,6 +16,29 @@
     <br>
 
     <section>
+
+        {{ form_start(searchForm) }}
+
+            <h2>Filtrer les campus</h2>
+            <br>
+
+        <div>
+            <label>Le nom contient</label>
+            <div>
+                <img src="{{ asset('img/loupe.png') }}">
+                {{ form_widget(searchForm)}}
+            </div>
+        </div>
+
+            <button name="campus_Search">
+                Rechercher
+            </button>
+
+
+        {{ form_end(searchForm) }}
+
+        <br>
+        <br>
 
         <table>
             <thead>
@@ -46,5 +71,10 @@
         </table>
 
     </section>
+
+    <br>
+    <br>
+    <br>
+    <br>
 
 {% endblock %}
