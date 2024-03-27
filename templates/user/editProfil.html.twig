@@ -27,6 +27,13 @@
         {{ form_start(form) }}
 
         <div>
+            <div>
+                <label>Campus</label>
+                <p>{{ user.campus.name }}</p>
+            </div>
+        </div>
+
+        <div>
             {% if form_errors(form.pseudo) %}
                 <div>
                     {{ form_errors(form.pseudo) }}
