@@ -1,0 +1,43 @@
+section{
+    text-align: center;
+    background: #fff;
+    border-radius: 15px;
+    -webkit-box-shadow: 5px 5px 21px -4px rgba(0,0,0,0.6);
+    box-shadow: 5px 5px 21px -4px rgba(0,0,0,0.6);
+    padding: 40px;
+}
+
+label{
+    display: none;
+}
+
+section > form > button{
+    display: inline-block;
+    color: #ffffff;
+    background: #65A4E3;
+    border: 1px solid #65A4E3;
+    cursor: pointer;
+    height: 40px;
+    width: 150px;
+    text-decoration: none;
+}
+
+section > form >  button:hover{
+    color: #65A4E3;
+    background: #fff;
+}
+
+.suprrr{
+    color: #ffffff;
+    background: red;
+    border: 1px solid red;
+}
+
+.suprrr:hover{
+    color: red;
+    background: #fff;
+}
+
+section > a:hover{
+    text-decoration: none;
+}

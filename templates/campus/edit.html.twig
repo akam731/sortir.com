@@ -1,13 +1,34 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Campus{% endblock %}
+{% block title %}Modification du campus{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ asset('css/admin/campus_edit.css') }}">
+{% endblock %}
 
 {% block body %}
-    <h1>Edit Campus</h1>
 
-    {{ include('campus/_form.html.twig', {'button_label': 'Update'}) }}
+    <section>
 
-    <a href="{{ path('app_campus_index') }}">back to list</a>
+        <h1>Modifier le Campus</h1>
 
-    {{ include('campus/_delete_form.html.twig') }}
+        <br>
+        <br>
+        <br>
+
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+        <br>
+            <button class="btn">{{ button_label|default('Modifier') }}</button>
+        {{ form_end(form) }}
+
+        <br>
+        {{ include('campus/_delete_form.html.twig') }}
+
+        <br>
+        <br>
+        <a href="{{ path('app_campus_index') }}">Retour à la liste</a>
+
+    </section>
+
 {% endblock %}
