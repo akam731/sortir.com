@@ -62,6 +62,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Event::class, mappedBy: 'participants')]
     private Collection $eventLived;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imgName = null;
+
     public function __construct()
     {
         $this->eventCreated = new ArrayCollection();
@@ -270,6 +273,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if ($this->eventLived->removeElement($eventLived)) {
             $eventLived->removeParticipant($this);
         }
+
+        return $this;
+    }
+
+    public function getImgName(): ?string
+    {
+        return $this->imgName;
+    }
+
+    public function setImgName(?string $imgName): static
+    {
+        $this->imgName = $imgName;
 
         return $this;
     }
