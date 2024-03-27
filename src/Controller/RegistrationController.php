@@ -32,6 +32,10 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            if ($user->isAdministrator()){
+                $user->setRoles(['ROLE_ADMIN']);
+            }
+
             $entityManager->persist($user);
             $entityManager->flush();
 
