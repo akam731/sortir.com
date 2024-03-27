@@ -45,3 +45,14 @@ table > tbody > tr > td > form > button:hover, .table > tbody > tr > td > a:hove
 table label{
     display: none;
 }
+
+@media screen and (max-width: 650px){
+    section, table{
+        padding: 40px 5px;
+        width: 100%;
+    }
+
+    table > tbody > tr > td{
+        width: 50%;
+    }
+}
