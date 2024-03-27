@@ -1,0 +1,47 @@
+main{
+    text-align: left;
+}
+
+section{
+    text-align: left;
+    background: #fff;
+    border-radius: 15px;
+    -webkit-box-shadow: 5px 5px 21px -4px rgba(0,0,0,0.6);
+    box-shadow: 5px 5px 21px -4px rgba(0,0,0,0.6);
+    padding: 40px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 500px;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+}
+table > tbody > tr > td{
+    width: 250px;
+}
+table > tbody > tr > td > form{
+    display: inline-block;
+}
+table > tbody > tr > td > form > button, table > tbody > tr > td > a, table > tbody > tr > td > button{
+    display: inline-block;
+    background: transparent;
+    border: none;
+    color: #0000EE;
+    text-decoration: underline;
+    font-size: 14px;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+table > tbody > tr > td > form > button:hover, .table > tbody > tr > td > a:hover, table > tbody > tr > td > button:hover{
+    text-decoration: none;
+}
+
+table label{
+    display: none;
+}

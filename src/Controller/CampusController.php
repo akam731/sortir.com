@@ -11,14 +11,27 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/campus')]
+#[Route('/admin/campus')]
 class CampusController extends AbstractController
 {
-    #[Route('/', name: 'app_campus_index', methods: ['GET'])]
-    public function index(CampusRepository $campusRepository): Response
+    #[Route('/', name: 'app_campus_index', methods: ['GET', 'POST'])]
+    public function index(Request $request, EntityManagerInterface $entityManager, CampusRepository $campusRepository): Response
     {
+        $campus = new Campus();
+        $form = $this->createForm(CampusType::class, $campus);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($campus);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_campus_index', [], Response::HTTP_SEE_OTHER);
+        }
+
         return $this->render('campus/index.html.twig', [
             'campuses' => $campusRepository->findAll(),
+            'campus' => $campus,
+            'form' => $form,
         ]);
     }
 
