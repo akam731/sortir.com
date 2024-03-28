@@ -3,18 +3,128 @@
 {% block title %}Modification Utilisateur{% endblock %}
 
 {% block head %}
+    <link rel="stylesheet" href="{{ asset('css/profil.css') }}">
 {% endblock %}
 
 {% block body %}
     <h1>Edit User</h1>
 
     {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Sauvegarder') }}</button>
+
+
+    <div>
+        {% if form_errors(form.pseudo) %}
+            <div>
+                {{ form_errors(form.pseudo) }}
+            </div>
+        {% endif %}
+        <div>
+            {{ form_label(form.pseudo) }}
+            {{ form_widget(form.pseudo) }}
+        </div>
+    </div>
+
+    <div>
+        {% if form_errors(form.first_name) %}
+            <div>
+                {{ form_errors(form.first_name) }}
+            </div>
+        {% endif %}
+        <div>
+            {{ form_label(form.first_name) }}
+            {{ form_widget(form.first_name) }}
+        </div>
+    </div>
+
+    <div>
+        {% if form_errors(form.last_name) %}
+            <div>
+                {{ form_errors(form.last_name) }}
+            </div>
+        {% endif %}
+        <div>
+            {{ form_label(form.last_name) }}
+            {{ form_widget(form.last_name) }}
+        </div>
+    </div>
+
+    <div>
+        {% if form_errors(form.phone) %}
+            <div>
+                {{ form_errors(form.phone) }}
+            </div>
+        {% endif %}
+        <div>
+            {{ form_label(form.phone) }}
+            {{ form_widget(form.phone) }}
+        </div>
+    </div>
+
+    <div>
+        {% if form_errors(form.email) %}
+            <div>
+                {{ form_errors(form.email) }}
+            </div>
+        {% endif %}
+        <div>
+            {{ form_label(form.email) }}
+            {{ form_widget(form.email) }}
+        </div>
+    </div>
+
+    <div>
+        {% if form_errors(form.campus) %}
+            <div>
+                {{ form_errors(form.campus) }}
+            </div>
+        {% endif %}
+        <div>
+            {{ form_label(form.campus) }}
+            {{ form_widget(form.campus) }}
+        </div>
+    </div>
+    <div>
+        {% if form_errors(form.administrator) %}
+            <div>
+                {{ form_errors(form.administrator) }}
+            </div>
+        {% endif %}
+        <div>
+            {{ form_label(form.administrator) }}
+            {{ form_widget(form.administrator) }}
+        </div>
+    </div>
+    <div>
+        {% if form_errors(form.active) %}
+            <div>
+                {{ form_errors(form.active) }}
+            </div>
+        {% endif %}
+        <div>
+            {{ form_label(form.active) }}
+            {{ form_widget(form.active) }}
+        </div>
+    </div>
+    <div>
+        {% if form_errors(form.imgName) %}
+            <div>
+                {{ form_errors(form.imgName) }}
+            </div>
+        {% endif %}
+        <div>
+            {{ form_label(form.imgName) }}
+            {{ form_widget(form.imgName) }}
+        </div>
+    </div>
+
     {{ form_end(form) }}
 
+<br>
+<br>
+<br>
+    <a href="{{ path('admin_user') }}">Retour à la liste</a>
 
-    <a href="{{ path('admin_user') }}">back to list</a>
-
-    {{ include('user_crud/_delete_form.html.twig') }}
+    <br>
+    <br>
+    <br>
 {% endblock %}
