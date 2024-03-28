@@ -35,11 +35,8 @@ class CampusController extends AbstractController
         $campuses = $campusRepository->findAll();
 
         if ($formCampusSearch->isSubmitted() && $formCampusSearch->isValid()) {
-
             $sql = $formCampusSearch->getData()['search'];
-
             $campuses = $campusRepository->rechercherObjetsParChaine($sql);
-
         }
 
 

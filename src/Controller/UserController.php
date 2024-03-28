@@ -4,8 +4,10 @@ namespace App\Controller;
 
 
 use App\Entity\User;
+use App\Form\CampusSearchType;
 use App\Form\UserEditType;
 use App\Form\UserType;
+use App\Repository\CampusRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -103,18 +105,76 @@ class UserController extends AbstractController
 
 
 
-
-    #[Route('/', name: 'app_user_index', methods: ['GET'])]
-    public function index(UserRepository $userRepository): Response
+    #[Route('/admin/user/', name: 'admin_user', methods: ['GET', 'POST'])]
+    public function index(UserRepository $userRepository, Request $request): Response
     {
+        $formCampusSearch = $this->createForm(CampusSearchType::class);
+        $formCampusSearch->handleRequest($request);
+
+        $users = $userRepository->findAll();
+
+        if ($formCampusSearch->isSubmitted() && $formCampusSearch->isValid()) {
+            $sql = $formCampusSearch->getData()['search'];
+            $users = $userRepository->rechercherObjetsParChaine($sql);
+        }
+
         return $this->render('user/index.html.twig', [
-            'users' => $userRepository->findAll(),
+            'users' => $users,
+            'searchForm' => $formCampusSearch->createView(),
         ]);
     }
 
+    #[Route('/admin/user/{id}', name: 'admin_user_show', methods: ['GET'])]
+    public function show(User $user, CampusRepository $campusRepository): Response
+    {
+        $campus = $campusRepository->find($user->getCampus());
+
+        return $this->render('user/show.html.twig', [
+            'user' => $user,
+            'campus' => $campus,
+        ]);
+    }
+
+    #[Route('/admin/user/new', name: 'admin_user_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $user = new User();
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_user_crud_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('user/new.html.twig', [
+            'user' => $user,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/admin/{id}/edit', name: 'admin_user_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, User $user, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_user_crud_index', [], Response::HTTP_SEE_OTHER);
+        }
 
 
-    #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
+        return $this->render('user/edit.html.twig', [
+            'user' => $user,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/admin/user/{id}', name: 'admin_user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->getPayload()->get('_token'))) {
@@ -122,6 +182,6 @@ class UserController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('admin_user');
     }
 }

@@ -41,35 +41,39 @@
         <br>
         <br>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Campus</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for campus in campuses %}
-                <tr>
-                    <td>{{ campus.name }}</td>
-                    <td>
-                        <a href="{{ path('app_campus_edit', {'id': campus.id}) }}">Modifier</a>
-                        {{ include('campus/_delete_form.html.twig') }}
-                    </td>
-                </tr>
-            {% endfor %}
-                <tr>
-                     {{ form_start(form) }}
+        <section class="campus_container">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Campus</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for campus in campuses %}
+                    <tr>
+                        <td>{{ campus.name }}</td>
                         <td>
-                            {{ form_widget(form) }}
+                            <a href="{{ path('app_campus_edit', {'id': campus.id}) }}">Modifier</a>
+                            {{ include('campus/_delete_form.html.twig') }}
                         </td>
-                        <td>
-                            <button class="btn">{{ button_label|default('Ajouter') }}</button>
-                        </td>
-                    {{ form_end(form) }}
-                </tr>
-            </tbody>
-        </table>
+                    </tr>
+                {% endfor %}
+                    <tr>
+                         {{ form_start(form) }}
+                            <td>
+                                {{ form_widget(form) }}
+                            </td>
+                            <td>
+                                <button class="btn">{{ button_label|default('Ajouter') }}</button>
+                            </td>
+                        {{ form_end(form) }}
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
 
     </section>
 

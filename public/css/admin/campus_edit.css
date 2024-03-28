@@ -41,3 +41,15 @@ section > form >  button:hover{
 section > a:hover{
     text-decoration: none;
 }
+
+tr{
+    display: flex;
+    justify-content: space-between;
+}
+
+tr > * {
+    display: inline-block;
+    height: 25px;
+    text-align: left;
+    min-width: 100px;
+}

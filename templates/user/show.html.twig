@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail utilisateur{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ asset('css/admin/campus_edit.css') }}">
+{% endblock %}
+
+{% block body %}
+    <br>
+    <br>
+    <h1>Utilisateur</h1>
+
+    <br>
+    <br>
+    <br>
+    <section>
+
+        <table class="table">
+        <tbody>
+            <tr>
+                <th>Pseudo</th>
+                <td>{{ user.pseudo }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ user.lastName }}</td>
+            </tr>
+            <tr>
+                <th>Prénom</th>
+                <td>{{ user.firstName }}</td>
+            </tr>
+            <tr>
+                <th>Téléphone</th>
+                <td>{{ user.phone }}</td>
+            </tr>
+            <tr>
+                <th>Campus</th>
+                <td>{{ campus.name }}</td>
+            </tr>
+            <tr>
+                <th>Administrateur</th>
+                <td>{{ user.administrator ? 'Oui' : 'Non' }}</td>
+            </tr>
+            <tr>
+                <th>Active</th>
+                <td>{{ user.active ? 'Oui' : 'Non' }}</td>
+            </tr>
+            <tr>
+                <th>Image de profil</th>
+                <td>{{ user.imgName}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <br>
+        <br>
+
+
+    <a href="{{ path('admin_user_edit', {'id': user.id}) }}">Modifier</a>
+
+        <br>
+        <br>
+    {{ include('user/_delete_form.html.twig') }}
+    </section>
+
+    <br>
+    <br>
+
+    <a href="{{ path('admin_user') }}">Retour à la liste</a>
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+{% endblock %}

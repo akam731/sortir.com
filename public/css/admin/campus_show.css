@@ -63,6 +63,13 @@ section > form > div > div > div{
     display: inline-block;
 }
 
+section > section{
+    max-height: 300px;
+    overflow-y: auto;
+    box-shadow: none;
+    width: 100%;
+}
+
 table {
     border-collapse: collapse;
     width: 500px;

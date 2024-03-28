@@ -1,42 +1,74 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User index{% endblock %}
+{% block title %}Gestion des utilisateurs{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ asset('css/admin/campus_show.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin/user_index.css') }}">
+{% endblock %}
 
 {% block body %}
-    <h1>User index</h1>
+<br>
+<br>
+<br>
+    <h1>Gérer les utilisateurs</h1>
 
+<br>
+<br>
+<br>
+
+<section>
+
+    {{ form_start(searchForm) }}
+
+    <h2>Filtrer les utilisateurs</h2>
+    <br>
+
+    <div>
+        <label>Le pseudo contient</label>
+        <div>
+            <img src="{{ asset('img/loupe.png') }}">
+            {{ form_widget(searchForm)}}
+        </div>
+    </div>
+
+    <button name="campus_Search">
+        Rechercher
+    </button>
+
+
+    {{ form_end(searchForm) }}
+
+    <br>
+    <br>
+
+    <section class="campus_container">
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>Roles</th>
-                <th>Password</th>
-                <th>Last_name</th>
-                <th>First_name</th>
-                <th>Phone</th>
-                <th>Administrator</th>
-                <th>Active</th>
-                <th>ImgName</th>
-                <th>actions</th>
+                <th>Pseudo</th>
+                <th class="hidden">Email</th>
+                <th class="hidden">Nom</th>
+                <th class="hidden">Prénom</th>
+                <th class="hidden">Téléphone</th>
+                <th class="hidden">Administrator</th>
+                <th class="hidden">Actif</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for user in users %}
             <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td>{{ user.password }}</td>
-                <td>{{ user.lastName }}</td>
-                <td>{{ user.firstName }}</td>
-                <td>{{ user.phone }}</td>
-                <td>{{ user.administrator ? 'Yes' : 'No' }}</td>
-                <td>{{ user.active ? 'Yes' : 'No' }}</td>
-                <td>{{ user.imgName }}</td>
+                <td>{{ user.pseudo }}</td>
+                <td class="hidden">{{ user.email }}</td>
+                <td class="hidden">{{ user.lastName }}</td>
+                <td class="hidden">{{ user.firstName }}</td>
+                <td class="hidden">{{ user.phone }}</td>
+                <td class="hidden">{{ user.administrator ? 'Oui' : 'Non' }}</td>
+                <td class="hidden">{{ user.active ? 'Oui' : 'Non' }}</td>
                 <td>
-                    <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+                    <a href="{{ path('admin_user_show', {'id': user.id}) }}">Détails</a>
+                    <a href="{{ path('admin_user_edit', {'id': user.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -47,5 +79,17 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_user_new') }}">Create new</a>
+
+    </section>
+    <br>
+    <br>
+
+    <a href="{{ path('admin_user_new') }}">Créer un nouvel utilisateur</a>
+</section>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 {% endblock %}
