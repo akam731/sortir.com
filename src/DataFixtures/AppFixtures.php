@@ -247,7 +247,6 @@ class AppFixtures extends Fixture
         $event7->setStatus('Historisée');
         $manager->persist($event7);
 
-
         $manager->flush();
     }
 }
