@@ -101,11 +101,6 @@ class UserController extends AbstractController
 
     }
 
-
-    /* TODO: Organiser tout ça */
-
-
-
     #[Route('/admin/user/', name: 'admin_user', methods: ['GET', 'POST'])]
     public function index(UserRepository $userRepository, Request $request): Response
     {
@@ -133,41 +128,6 @@ class UserController extends AbstractController
         return $this->render('user/show.html.twig', [
             'user' => $user,
             'campus' => $campus,
-        ]);
-    }
-
-    #[Route('/admin/user/new', name: 'admin_new')]
-    public function new(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, CampusRepository $campusRepository): Response
-    {
-        $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
-        $form->handleRequest($request);
-
-
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
-            $user->setPassword(
-                $userPasswordHasher->hashPassword(
-                    $user,
-                    $form->get('plainPassword')->getData()
-                )
-            );
-
-            if ($user->isAdministrator()){
-                $user->setRoles(['ROLE_ADMIN']);
-            }
-
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            // do anything else you need here, like send an email
-
-            return $this->redirectToRoute('admin_user');
-        }
-
-        return $this->render('user/new.html.twig', [
-            'registrationForm' => $form,
         ]);
     }
 

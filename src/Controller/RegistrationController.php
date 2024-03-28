@@ -14,7 +14,8 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class RegistrationController extends AbstractController
 {
-    #[Route('/register', name: 'app_register')]
+
+    #[Route('/admin/user/new', name: 'admin_user_new')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, CampusRepository $campusRepository): Response
     {
         $user = new User();
@@ -41,11 +42,11 @@ class RegistrationController extends AbstractController
 
             // do anything else you need here, like send an email
 
-            return $this->redirectToRoute('main_home');
+            return $this->redirectToRoute('admin_user');
         }
 
         return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form,
+            'form' => $form,
         ]);
     }
 }
