@@ -95,6 +95,74 @@ class AppFixtures extends Fixture
         $manager->persist($place5Rennes);
 
 
+        /* Création des users */
+        $user = new User();
+        $user->setCampus($campusNantes);
+        $user->setEmail('user' . '@example.com');
+        $user->setRoles(['ROLE_ADMIN']);
+        $user->setPassword(password_hash('111111', PASSWORD_DEFAULT));
+        $user->setLastName('Alex');
+        $user->setFirstName('ou');
+        $user->setPhone('123456789');
+        $user->setAdministrator(true);
+        $user->setActive(true);
+        $user->setImgName(null);
+        $user->setPseudo('alexou');
+        $manager->persist($user);
+        $user2 = new User();
+        $user2->setCampus($campusNiort);
+        $user2->setEmail('user2@example.com');
+        $user2->setRoles(['ROLE_ADMIN']);
+        $user2->setPassword(password_hash('111111', PASSWORD_DEFAULT));
+        $user2->setLastName('Papy');
+        $user2->setFirstName('lataupe');
+        $user2->setPhone('123456789');
+        $user2->setAdministrator(true);
+        $user2->setActive(true);
+        $user2->setImgName(null);
+        $user2->setPseudo('papy');
+        $manager->persist($user2);
+        $user3 = new User();
+        $user3->setCampus($campusRennes);
+        $user3->setEmail('user3@example.com');
+        $user3->setRoles(['ROLE_ADMIN']);
+        $user3->setPassword(password_hash('111111', PASSWORD_DEFAULT));
+        $user3->setLastName('au');
+        $user3->setFirstName('drey');
+        $user3->setPhone('123456789');
+        $user3->setAdministrator(true);
+        $user3->setActive(true);
+        $user3->setImgName(null);
+        $user3->setPseudo('audrey');
+        $manager->persist($user3);
+        $user4 = new User();
+        $user4->setCampus($campusSaintHerblain);
+        $user4->setEmail('user4@example.com');
+        $user4->setRoles([]);
+        $user4->setPassword(password_hash('111111', PASSWORD_DEFAULT));
+        $user4->setLastName('titi');
+        $user4->setFirstName('titi');
+        $user4->setPhone('123456789');
+        $user4->setAdministrator(false);
+        $user4->setActive(false);
+        $user4->setImgName(null);
+        $user4->setPseudo('titi');
+        $manager->persist($user4);
+        $user5 = new User();
+        $user5->setCampus($campusNantes);
+        $user5->setEmail('user5@example.com');
+        $user5->setRoles([]);
+        $user5->setPassword(password_hash('111111', PASSWORD_DEFAULT));
+        $user5->setLastName('Victor');
+        $user5->setFirstName('del');
+        $user5->setPhone('123456789');
+        $user5->setAdministrator(false);
+        $user5->setActive(false);
+        $user5->setImgName(null);
+        $user5->setPseudo('Victor');
+        $manager->persist($user5);
+
+
         $manager->flush();
     }
 }
