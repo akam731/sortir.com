@@ -10,6 +10,7 @@
 
 
 {% block body %}
+  <div id="SuperCard" >
     <form method="post">
         {% if error %}
             <div class="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -41,4 +42,5 @@
             </div>
         </div>
     </form>
+  </div>
 {% endblock %}
