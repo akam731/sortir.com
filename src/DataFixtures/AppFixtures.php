@@ -2,6 +2,11 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Campus;
+use App\Entity\City;
+use App\Entity\Event;
+use App\Entity\Place;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -10,53 +15,41 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
 
-        for ($i = 1; $i <= 5; $i++) {
-
-            $
-
-
-
-
-            $user = new User();
-
-
-
-
-            $user->setCampusId(1); // Campus ID
-
-
-
-
-            $user->setEmail('user' . $i . '@example.com'); // Email
-            $user->setRoles(['ROLE_USER']); // Rôles (au format JSON)
-            $user->setPassword(password_hash('password' . $i, PASSWORD_DEFAULT)); // Mot de passe
+        /* Génération des campus */
+        $campusNantes = new Campus();
+        $campusNantes->setName('Nantes');
+        $manager->persist($campusNantes);
+        $campusNiort = new Campus();
+        $campusNiort->setName('Niort');
+        $manager->persist($campusNiort);
+        $campusSaintHerblain = new Campus();
+        $campusSaintHerblain->setName('Saint-Herblain');
+        $manager->persist($campusSaintHerblain);
+        $campusRennes = new Campus();
+        $campusRennes->setName('Rennes');
+        $manager->persist($campusRennes);
 
 
 
-
-            $user->setLastName('LastName' . $i); // Nom de famille
-
-
-
-
-            $user->setFirstName('FirstName' . $i); // Prénom
-
-
-
-
-            $user->setPhone('123456789' . $i); // Numéro de téléphone
-
-
-
-
-            $user->setAdministrator(false); // Administrateur (false = non, true = oui)
-
-
+        /* Génération des city */
+        $cityNantes = new City();
+        $cityNantes->setName('Nantes');
+        $cityNantes->setZipCode("44000");
+        $manager->persist($cityNantes);
+        $cityNiort = new City();
+        $cityNiort->setName('Niort');
+        $cityNiort->setZipCode("79000");
+        $manager->persist($cityNiort);
+        $cityRennes = new City();
+        $cityRennes->setName('Rennes');
+        $cityRennes->setZipCode("35000");
+        $manager->persist($cityRennes);
+        $citySaintHerblain = new City();
+        $citySaintHerblain->setName('Saint-Herblain');
+        $citySaintHerblain->setZipCode("44800");
+        $manager->persist($citySaintHerblain);
 
 
-            $user->setActive(true); // Actif (false = non, true = oui)
-            $user->setImgName(null); // Nom du fichier image
-            $user->setPseudo('pseudo' . $i); // Pseudo
 
         $manager->flush();
     }
