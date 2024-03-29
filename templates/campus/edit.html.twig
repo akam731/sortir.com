@@ -17,7 +17,13 @@
         <br>
 
         {{ form_start(form) }}
-            {{ form_widget(form) }}
+        {% if form_errors(form.name) %}
+            <div class="error">
+                {{ form_errors(form.name) }}
+            </div>
+            {% endif %}
+
+            {{ form_widget(form.name) }}
         <br>
             <button class="btn">{{ button_label|default('Modifier') }}</button>
         {{ form_end(form) }}

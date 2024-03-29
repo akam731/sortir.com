@@ -60,16 +60,25 @@
                         </td>
                     </tr>
                 {% endfor %}
+                {% if form_errors(form.name) %}
+                </tbody>
+            </table>
+            <div class="error">
+                {{ form_errors(form.name) }}
+            </div>
+            <table>
+                <tbody>
+                {% endif %}
+                {{ form_start(form) }}
                     <tr>
-                         {{ form_start(form) }}
                             <td>
-                                {{ form_widget(form) }}
+                                {{ form_widget(form.name) }}
                             </td>
                             <td>
                                 <button class="btn">{{ button_label|default('Ajouter') }}</button>
                             </td>
-                        {{ form_end(form) }}
                     </tr>
+                {{ form_end(form) }}
                 </tbody>
             </table>
 
