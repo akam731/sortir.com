@@ -32,7 +32,7 @@ class EventType extends AbstractType
             ->add('eventInformations', TextType::class, [
                 'constraints' => [
                     new Length([
-//                        todo:passer de 3 à 30
+//
                     'min' => 3,
                     'max' => 1000,
                     'minMessage' => 'La longueur minimale est de {{ limit }} caractères.',
