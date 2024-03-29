@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Event;
+use App\Form\EventType;
 use App\Repository\EventRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -32,11 +34,20 @@ class EventController extends AbstractController
     }
 
     #[Route('/event/create', name: 'event_create')]
-    public function create(): Response
+    public function create(Request $request, EntityManagerInterface $repositoryManager): Response
     {
-        //todo: aller chercher l'event en bdd
+        $event = new Event();
+        $form = $this->createForm(EventType::class, $event);
+        $form->handleRequest($request);
+            if ($form->isSubmitted()&& $form->isValid()){
+                $event->
+            }
+
+        $repositoryManager->persist($event);
+        $repositoryManager->flush();
 
         return $this->render('event/create.html.twig', [
+            'EventType'=>$form,
         ]);
     }
 

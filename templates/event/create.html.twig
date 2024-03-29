@@ -9,8 +9,8 @@ Créez votre évènement | {{ parent() }}
         {{ form_start(eventForm) }}
         {{ form_widget(eventForm) }}
 
-        <button type="submit" value="">Enregistrer</button>
-        <button type="submit" value="">Publier</button>
+        <button type="submit" value="save">Enregistrer</button>
+        <button type="submit" value="publish">Publier</button>
         <a href="{{ path('main_home') }}">Retour à la liste</a>
 
         {{ form_end(eventForm) }}

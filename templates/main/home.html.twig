@@ -10,10 +10,38 @@
 {% endblock %}
 
 {% block javascripts %}
+
 {% endblock %}
 
 {% block body %}
-    <a href=""> </a>
 
+    {{ form_start(eventEditForm) }}
+    {{ form_widget(eventEditForm) }}
+
+        <button>Rechercher</button>
+
+    {{ form_end(eventEditForm) }}
+
+    <div>
+
+        <select name="campus">
+            <option value="Nantes">Nantes</option>
+            <option value="Rennes">Rennes</option>
+            <option value="Niort">Niort</option>
+        </select>
+        <div>
+            <label>
+                Le nom de la sortie contient:
+                <input type="search" title="Entrez un mot-clé contenu dans le nom de la sortie recherchée" >
+            </label>
+        </div>
+        <div>
+            <label> Entre <input type="date">  </label>
+            <label> et  <input type="date"> </label>
+        </div>
+
+    </div>
+
+        <a href="{{ path('event_create') }}">Créer votre sortie</a>
 
 {% endblock %}
