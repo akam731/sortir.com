@@ -103,6 +103,21 @@ table label{
     display: none;
 }
 
+.error{
+    text-align: center;
+}
+
+.error > ul{
+    color: red;
+    display: inline-block;
+    height: 30px;
+    margin: 10px 0 0 0;
+}
+
+.error > ul > li{
+    list-style-type: none;
+}
+
 @media screen and (max-width: 650px){
 
     section > form{

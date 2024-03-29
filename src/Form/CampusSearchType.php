@@ -13,7 +13,8 @@ class CampusSearchType extends AbstractType
     {
         $builder
             ->add('search', TextType::class, [
-                'label' => false
+                'label' => false,
+                'required' => false,
             ]);
     }
 
