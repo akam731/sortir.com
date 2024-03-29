@@ -6,14 +6,14 @@ Créez votre évènement | {{ parent() }}
 
 {% block body %}
     <div>
-        {{ form_start(eventForm) }}
-        {{ form_widget(eventForm) }}
+        {{ form_start(EventType) }}
+        {{ form_widget(EventType) }}
 
         <button type="submit" value="save">Enregistrer</button>
         <button type="submit" value="publish">Publier</button>
         <a href="{{ path('main_home') }}">Retour à la liste</a>
 
-        {{ form_end(eventForm) }}
+        {{ form_end(EventType) }}
     </div>
 {% endblock %}
 

@@ -15,30 +15,14 @@
 
 {% block body %}
 
-    {{ form_start(eventEditForm) }}
-    {{ form_widget(eventEditForm) }}
+    {{ form_start(EventSearchType) }}
+    {{ form_widget(EventSearchType) }}
 
-        <button>Rechercher</button>
+    <button>Rechercher</button>
 
-    {{ form_end(eventEditForm) }}
+    {{ form_end(EventSearchType) }}
 
     <div>
-
-        <select name="campus">
-            <option value="Nantes">Nantes</option>
-            <option value="Rennes">Rennes</option>
-            <option value="Niort">Niort</option>
-        </select>
-        <div>
-            <label>
-                Le nom de la sortie contient:
-                <input type="search" title="Entrez un mot-clé contenu dans le nom de la sortie recherchée" >
-            </label>
-        </div>
-        <div>
-            <label> Entre <input type="date">  </label>
-            <label> et  <input type="date"> </label>
-        </div>
 
     </div>
 

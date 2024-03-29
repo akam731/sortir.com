@@ -10,14 +10,16 @@
 
     <h2>{{event.name}}</h2>
     <div>{{ event.eventInformations }}</div>
-    <div>{{ event.durationTime }}</div>
-    <div>{{ event.startingDate }}</div>
+    <div>{{ event.durationTime | date('H:mm' ) }}</div>
+    <div>{{ event.startingDate | date('dd/MM/Y H:mm' ) }}</div>
     <div>{{ event.maxRegistration }}</div>
-    <div>{{ event.place }}</div>
-    <div>{{ event.registrationEnd }}</div>
+    <div>{{ event.place.name }}</div>
+    <div>{{ event.registrationEnd | date('dd/MM/Y H:mm' )}}</div>
     <div>{{ event.status }}</div>
-    <div>{{ event.participants }}</div>
-    <div>{{ event.organiser }}</div>
+    {% for participant in event.participants %}
+    <div>{{ event.participants.name }}</div>
+    {% endfor %}
+    <div>{{ event.organiser.pseudo }}</div>
 
 {% endblock %}
 
