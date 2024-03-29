@@ -2,9 +2,38 @@
 
 {% block title %}City index{% endblock %}
 
+{% block head %}
+    <link rel="stylesheet" href="{{ asset('css/admin/campus_show.css') }}">
+{% endblock %}
+
 {% block body %}
     <h1>City index</h1>
+<section>
 
+    {{ form_start(searchForm) }}
+
+    <h2>Filtrer les campus</h2>
+    <br>
+
+    <div>
+        <label>Le nom contient</label>
+        <div>
+            <img src="{{ asset('img/loupe.png') }}">
+            {{ form_widget(searchForm)}}
+        </div>
+    </div>
+
+    <button name="campus_Search">
+        Rechercher
+    </button>
+
+
+    {{ form_end(searchForm) }}
+
+    <br>
+    <br>
+
+    <section class="campus_container">
     <table class="table">
         <thead>
             <tr>
@@ -33,5 +62,11 @@
         </tbody>
     </table>
 
+    </section>
+
+</section>
+    <br>
+    <br>
+    <br>
     <a href="{{ path('app_city_new') }}">Create new</a>
 {% endblock %}

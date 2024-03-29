@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Campus;
 use App\Entity\City;
+use App\Form\CampusSearchType;
+use App\Form\CampusType;
 use App\Form\CityType;
 use App\Repository\CityRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,11 +17,24 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/admin/city')]
 class CityController extends AbstractController
 {
-    #[Route('/', name: 'app_city_index', methods: ['GET'])]
-    public function index(CityRepository $cityRepository): Response
+    #[Route('/', name: 'app_city_index', methods: ['GET', 'POST'])]
+    public function index(CityRepository $cityRepository, Request $request): Response
     {
+
+        $formCampusSearch = $this->createForm(CampusSearchType::class);
+        $formCampusSearch->handleRequest($request);
+
+
+        $cities = $cityRepository->findAll();
+
+        if ($formCampusSearch->isSubmitted() && $formCampusSearch->isValid()) {
+            $sql = $formCampusSearch->getData()['search'];
+            $cities = $cityRepository->rechercherObjetsParChaine($sql);
+        }
+
         return $this->render('city/index.html.twig', [
-            'cities' => $cityRepository->findAll(),
+            'cities' => $cities,
+            'searchForm' => $formCampusSearch->createView(),
         ]);
     }
 

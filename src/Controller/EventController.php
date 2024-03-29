@@ -32,7 +32,7 @@ class EventController extends AbstractController
             "event" => $event
         ]);
     }
-
+/*
     #[Route('/event/create', name: 'event_create')]
     public function create(Request $request, EntityManagerInterface $repositoryManager): Response
     {
