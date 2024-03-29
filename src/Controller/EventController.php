@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Event;
+use App\Form\EventSearchType;
 use App\Form\EventType;
 use App\Repository\EventRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,12 +15,25 @@ use Symfony\Component\Routing\Attribute\Route;
 class EventController extends AbstractController
 {
     #[Route('/event', name: 'event_list')]
-    public function list(EventRepository $eventRepository): Response
+    public function list(EventRepository $eventRepository, Request $request, EntityManagerInterface $repositoryManager): Response
     {
         $events = $eventRepository->findBy([], ['startingDate' => 'DESC'], 10);
 
-        return $this->render('event/list.html.twig', [
-            "events" => $events
+        $event = new Event();
+        $event->setOrganiser($this->getUser());
+        $form = $this->createForm(EventSearchType::class, $event);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()&& $form->isValid()){
+            $repositoryManager->persist($event);
+            $repositoryManager->flush();
+
+            $this->addFlash('success', 'Sortie crée!');
+            return $this->redirectToRoute('event_details', ['id' => $event->getId()]);
+        }
+
+        return $this->render('main/home.html.twig', [
+            'EventSearchType'=>$form->createView(),
         ]);
     }
 
@@ -37,17 +51,21 @@ class EventController extends AbstractController
     public function create(Request $request, EntityManagerInterface $repositoryManager): Response
     {
         $event = new Event();
+        $event->setOrganiser($this->getUser());
+        $event->setStatus('Ouverte');
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
+
             if ($form->isSubmitted()&& $form->isValid()){
-                $event->
+                $repositoryManager->persist($event);
+                $repositoryManager->flush();
+
+                $this->addFlash('success', 'Sortie crée!');
+                return $this->redirectToRoute('event_details', ['id' => $event->getId()]);
             }
 
-        $repositoryManager->persist($event);
-        $repositoryManager->flush();
-
         return $this->render('event/create.html.twig', [
-            'EventType'=>$form,
+            'EventType'=>$form->createView(),
         ]);
     }
 
