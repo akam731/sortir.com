@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% for event in events %}
+ <article>
+  <a href="#" title="Afficher"></a>
+ </article>
+{% endblock %}
+
+{% block title %}
+Liste des sorties sur | {{ parent() }}
+{% endblock %}
+

@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+
+{{event.name}} | {{ parent() }}
+
+{% endblock %}
+
+{% block body %}
+
+    <h2>{{event.name}}</h2>
+    <div>{{ event.eventInformations }}</div>
+    <div>{{ event.durationTime }}</div>
+    <div>{{ event.startingDate }}</div>
+    <div>{{ event.maxRegistration }}</div>
+    <div>{{ event.place }}</div>
+    <div>{{ event.registrationEnd }}</div>
+    <div>{{ event.status }}</div>
+    <div>{{ event.participants }}</div>
+    <div>{{ event.organiser }}</div>
+
+{% endblock %}
+
