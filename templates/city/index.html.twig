@@ -50,8 +50,8 @@
                 <td>{{ city.name }}</td>
                 <td>{{ city.zipCode }}</td>
                 <td>
-                    <a href="{{ path('app_city_show', {'id': city.id}) }}">show</a>
-                    <a href="{{ path('app_city_edit', {'id': city.id}) }}">edit</a>
+                    <a href="{{ path('app_city_edit', {'id': city.id}) }}">Modifier</a>
+                    {{ include('city/_delete_form.html.twig') }}
                 </td>
             </tr>
         {% else %}

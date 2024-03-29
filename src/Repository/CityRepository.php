@@ -29,7 +29,7 @@ class CityRepository extends ServiceEntityRepository
     {
         $queryBuilder = $this->entityManager->createQueryBuilder();
         $queryBuilder->select('e')
-            ->from(Campus::class, 'e')
+            ->from(City::class, 'e')
             ->where($queryBuilder->expr()->like('e.name', ':chaine'))
             ->setParameter('chaine', '%' . $chaine . '%');
 
