@@ -1,10 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-{% for event in events %}
- <article>
-  <a href="#" title="Afficher"></a>
- </article>
+ {% for event in events %}
+  <article>
+   <a href="#" title="Afficher"></a>
+  </article>
+  {% endfor %}
 {% endblock %}
 
 {% block title %}

@@ -103,7 +103,7 @@ class AppFixtures extends Fixture
         $user->setPassword(password_hash('111111', PASSWORD_DEFAULT));
         $user->setLastName('Alex');
         $user->setFirstName('ou');
-        $user->setPhone('123456789');
+        $user->setPhone('1234567809');
         $user->setAdministrator(true);
         $user->setActive(true);
         $user->setImgName(null);
@@ -116,7 +116,7 @@ class AppFixtures extends Fixture
         $user2->setPassword(password_hash('111111', PASSWORD_DEFAULT));
         $user2->setLastName('Papy');
         $user2->setFirstName('lataupe');
-        $user2->setPhone('123456789');
+        $user2->setPhone('1234567890');
         $user2->setAdministrator(true);
         $user2->setActive(true);
         $user2->setImgName(null);
@@ -129,7 +129,7 @@ class AppFixtures extends Fixture
         $user3->setPassword(password_hash('111111', PASSWORD_DEFAULT));
         $user3->setLastName('au');
         $user3->setFirstName('drey');
-        $user3->setPhone('123456789');
+        $user3->setPhone('1234560789');
         $user3->setAdministrator(true);
         $user3->setActive(true);
         $user3->setImgName(null);
@@ -142,7 +142,7 @@ class AppFixtures extends Fixture
         $user4->setPassword(password_hash('111111', PASSWORD_DEFAULT));
         $user4->setLastName('titi');
         $user4->setFirstName('titi');
-        $user4->setPhone('123456789');
+        $user4->setPhone('1234560789');
         $user4->setAdministrator(false);
         $user4->setActive(false);
         $user4->setImgName(null);
@@ -155,7 +155,7 @@ class AppFixtures extends Fixture
         $user5->setPassword(password_hash('111111', PASSWORD_DEFAULT));
         $user5->setLastName('Victor');
         $user5->setFirstName('del');
-        $user5->setPhone('123456789');
+        $user5->setPhone('1234560789');
         $user5->setAdministrator(false);
         $user5->setActive(false);
         $user5->setImgName(null);
