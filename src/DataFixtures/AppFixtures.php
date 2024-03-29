@@ -144,7 +144,7 @@ class AppFixtures extends Fixture
         $user4->setFirstName('titi');
         $user4->setPhone('1234560789');
         $user4->setAdministrator(false);
-        $user4->setActive(false);
+        $user4->setActive(true);
         $user4->setImgName(null);
         $user4->setPseudo('titi');
         $manager->persist($user4);
