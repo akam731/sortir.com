@@ -1,13 +1,61 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit City{% endblock %}
+{% block title %}Modification de la ville{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ asset('css/admin/campus_edit.css') }}">
+{% endblock %}
 
 {% block body %}
-    <h1>Edit City</h1>
+    <br>
+    <br>
+    <br>
+    <section>
 
-    {{ include('city/_form.html.twig', {'button_label': 'Update'}) }}
+        <h1>Modifier la ville</h1>
 
-    <a href="{{ path('app_city_index') }}">back to list</a>
+        <br>
+        <br>
+        <br>
 
-    {{ include('city/_delete_form.html.twig') }}
+        {{ form_start(form) }}
+
+
+        {% if form_errors(form.name) %}
+            <div class="error">
+                {{ form_errors(form.name) }}
+            </div>
+        {% endif %}
+
+        {{ form_widget(form.name) }}
+        <br>
+        {% if form_errors(form.zipCode) %}
+            <div class="error">
+                {{ form_errors(form.zipCode) }}
+            </div>
+        {% endif %}
+
+        {{ form_widget(form.zipCode) }}
+        <br>
+        <button class="btn">{{ button_label|default('Modifier') }}</button>
+        {{ form_end(form) }}
+
+        <br>
+        {{ include('city/_delete_form.html.twig') }}
+
+        <br>
+        <br>
+        <a href="{{ path('app_campus_index') }}">Retour à la liste</a>
+
+    </section>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <a href="{{ path('admin_home') }}">Retour à l'espace Administrateur</a>
+
+    <br>
+    <br>
+    <br>
 {% endblock %}
