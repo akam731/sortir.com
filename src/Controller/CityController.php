@@ -18,8 +18,19 @@ use Symfony\Component\Routing\Attribute\Route;
 class CityController extends AbstractController
 {
     #[Route('/', name: 'app_city_index', methods: ['GET', 'POST'])]
-    public function index(CityRepository $cityRepository, Request $request): Response
+    public function index(CityRepository $cityRepository, Request $request, EntityManagerInterface $entityManager): Response
     {
+        $city = new City();
+        $form = $this->createForm(CityType::class, $city);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($city);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_city_index', [], Response::HTTP_SEE_OTHER);
+        }
+
 
         $formCampusSearch = $this->createForm(CampusSearchType::class);
         $formCampusSearch->handleRequest($request);
@@ -35,6 +46,7 @@ class CityController extends AbstractController
         return $this->render('city/index.html.twig', [
             'cities' => $cities,
             'searchForm' => $formCampusSearch->createView(),
+            'form' => $form,
         ]);
     }
 

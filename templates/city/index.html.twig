@@ -36,8 +36,6 @@
     <section class="campus_container">
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
                 <th>Name</th>
                 <th>ZipCode</th>
                 <th>actions</th>
@@ -46,7 +44,6 @@
         <tbody>
         {% for city in cities %}
             <tr>
-                <td>{{ city.id }}</td>
                 <td>{{ city.name }}</td>
                 <td>{{ city.zipCode }}</td>
                 <td>
@@ -54,11 +51,20 @@
                     {{ include('city/_delete_form.html.twig') }}
                 </td>
             </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
         {% endfor %}
+        <tr>
+            {{ form_start(form) }}
+            <td>
+                {{ form_row(form.name) }}
+            </td>
+            <td>
+                {{ form_row(form.zipCode) }}
+            </td>
+            <td>
+                <button class="btn">{{ button_label|default('Ajouter') }}</button>
+            </td>
+            {{ form_end(form) }}
+        </tr>
         </tbody>
     </table>
 
@@ -68,5 +74,4 @@
     <br>
     <br>
     <br>
-    <a href="{{ path('app_city_new') }}">Create new</a>
 {% endblock %}
