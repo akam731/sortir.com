@@ -16,6 +16,9 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class EventController extends AbstractController
 {
+    /**
+     * @throws \Exception
+     */
     #[Route('/event', name: 'event_list')]
     public function list(EventRepository $eventRepository, Request $request, EntityManagerInterface $repositoryManager, EventSearchRepository $eventSearchRepository): Response
     {

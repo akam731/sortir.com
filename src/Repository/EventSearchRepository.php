@@ -67,6 +67,14 @@ class EventSearchRepository extends ServiceEntityRepository
                 ->setParameter('user', $user);
         }
 
+        /* Recherche par sortie à laquelle on participe  */
+        if (!empty($search->isRegistered)){
+            $query->andWhere(':user MEMBER OF p.participants')
+                ->setParameter('user', $user);
+        }
+
+
+
         return $query->getQuery()->getResult();
 
     }

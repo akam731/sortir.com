@@ -184,6 +184,9 @@ class AppFixtures extends Fixture
         $event1->setRegistrationEnd($date[0]);
         $event1->setMaxRegistration(7);
         $event1->setEventInformations('Petite sortie au ciné pour se dégourdir les jambes !');
+        $event1->addParticipant($user);
+        $event1->addParticipant($user2);
+        $event1->addParticipant($user3);
         $event1->setStatus('En création');
         $manager->persist($event1);
         $event2= new Event();
@@ -195,6 +198,9 @@ class AppFixtures extends Fixture
         $event2->setRegistrationEnd($date[1]);
         $event2->setMaxRegistration(10);
         $event2->setEventInformations('Petite sortie tranquillou !');
+        $event2->addParticipant($user2);
+        $event2->addParticipant($user4);
+        $event2->addParticipant($user3);
         $event2->setStatus('Ouverte');
         $manager->persist($event2);
         $event3 = new Event();
@@ -206,6 +212,9 @@ class AppFixtures extends Fixture
         $event3->setRegistrationEnd($date[2]);
         $event3->setMaxRegistration(8);
         $event3->setEventInformations('Description de l\'événement 3');
+        $event3->addParticipant($user3);
+        $event3->addParticipant($user);
+        $event3->addParticipant($user5);
         $event3->setStatus('Cloturée');
         $manager->persist($event3);
         $event4 = new Event();
@@ -217,6 +226,9 @@ class AppFixtures extends Fixture
         $event4->setRegistrationEnd($date[4]);
         $event4->setMaxRegistration(12);
         $event4->setEventInformations('Description de l\'événement 4');
+        $event4->addParticipant($user4);
+        $event4->addParticipant($user3);
+        $event4->addParticipant($user5);
         $event4->setStatus('En cours');
         $manager->persist($event4);
         $event5 = new Event();
@@ -228,6 +240,7 @@ class AppFixtures extends Fixture
         $event5->setRegistrationEnd($date[1]);
         $event5->setMaxRegistration(10);
         $event5->setEventInformations('Description de l\'événement 5');
+        $event5->addParticipant($user5);
         $event5->setStatus('Terminée');
         $manager->persist($event5);
         $event6 = new Event();
@@ -239,6 +252,8 @@ class AppFixtures extends Fixture
         $event6->setRegistrationEnd($date[0]);
         $event6->setMaxRegistration(15);
         $event6->setEventInformations('Description de l\'événement 6');
+        $event6->addParticipant($user);
+        $event6->addParticipant($user4);
         $event6->setStatus('Annulée');
         $manager->persist($event6);
         $event7 = new Event();
@@ -250,6 +265,9 @@ class AppFixtures extends Fixture
         $event7->setRegistrationEnd($date[3]);
         $event7->setMaxRegistration(9);
         $event7->setEventInformations('Description de l\'événement 7');
+        $event7->addParticipant($user2);
+        $event7->addParticipant($user3);
+        $event7->addParticipant($user5);
         $event7->setStatus('Historisée');
         $manager->persist($event7);
 
