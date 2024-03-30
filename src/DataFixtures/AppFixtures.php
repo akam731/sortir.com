@@ -193,8 +193,8 @@ class AppFixtures extends Fixture
         $event2->setOrganiser($user2);
         $event2->setPlace($place1Niort);
         $event2->setName('Sortie a Niort');
-        $event2->setStartingDate($date[2]);
-        $event2->setDurationTime($date[3]);
+        $event2->setStartingDate($date[4]);
+        $event2->setDurationTime($date[5]);
         $event2->setRegistrationEnd($date[1]);
         $event2->setMaxRegistration(10);
         $event2->setEventInformations('Petite sortie tranquillou !');

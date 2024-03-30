@@ -68,9 +68,18 @@ class EventSearchRepository extends ServiceEntityRepository
         }
 
         /* Recherche par sortie à laquelle on participe  */
-        if (!empty($search->isRegistered)){
+        if (!empty($search->isRegistered)) {
             $query->andWhere(':user MEMBER OF p.participants')
                 ->setParameter('user', $user);
+        }
+
+        /* Recherche par sortie à laquelle on ne participe pas */
+        if (!empty($search->notRegistered)){
+            $currentDate = new \DateTime();
+            $query->andWhere(':user NOT MEMBER OF p.participants')
+                ->setParameter('user', $user)
+                ->andWhere('p.registrationEnd >= :currentDate')
+                ->setParameter('currentDate', $currentDate);
         }
 
 
