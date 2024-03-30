@@ -4,8 +4,10 @@ namespace App\Repository;
 
 use App\data\EventSearch;
 use App\Entity\Event;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\Security;
 
 /**
  * @extends ServiceEntityRepository<Event>
@@ -22,7 +24,10 @@ class EventSearchRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
-    public function findSearch(EventSearch $search)
+    /**
+     * @throws \Exception
+     */
+    public function findSearch(EventSearch $search, User $user)
     {
 
         $query = $this
@@ -42,11 +47,24 @@ class EventSearchRepository extends ServiceEntityRepository
                 ->setParameter('q', "%{$search->q}%");
         }
 
-        /* Recherche par dâte de début */
-        if (!empty($search->startDate)){
-            $query = $query
-                ->andWhere('e.starting_date >= :startDate')
-                ->setParameter('startDate', $search->startDate);
+        /* Recherche par date de début */
+        if (!empty($search->startDate)) {
+             $query = $query
+                 ->andWhere('p.startingDate >= :startDateMin')
+                 ->setParameter('startDateMin', $search->startDate);
+        }
+        if (!empty($search->endDate)) {
+             $endDate = $search->endDate;
+             $endDate->modify('+1 day');
+             $query = $query
+                 ->andWhere('p.startingDate <= :startDateMax')
+                 ->setParameter('startDateMax',$endDate);
+        }
+
+        /* Recherche par sortie organisé par soi-même */
+        if (!empty($search->isOrganizer)){
+            $query->andWhere('p.organiser = :user')
+                ->setParameter('user', $user);
         }
 
         return $query->getQuery()->getResult();

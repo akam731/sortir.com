@@ -164,18 +164,24 @@ class AppFixtures extends Fixture
 
 
         /* Création des events */
+
+        $jourUn = new \DateTime();
+        $date = array();
+        for ($i = -3; $i <= 9; $i++) {
+            $jour = clone $jourUn;
+            $jour->modify("$i days");
+            $date[] = $jour;
+        }
+
+
+
         $event1 = new Event();
         $event1->setOrganiser($user);
         $event1->setPlace($placeCinema);
         $event1->setName('Sortie au ciné');
-        $jours = new \DateTime();
-        $joursCinq = clone $jours;
-        $joursCinq->modify('+5 days');
-        $joursSept = clone $jours;
-        $joursSept->modify('+7 days');
-        $event1->setStartingDate($joursCinq);
-        $event1->setDurationTime($joursSept);
-        $event1->setRegistrationEnd($joursSept);
+        $event1->setStartingDate($date[3]);
+        $event1->setDurationTime($date[8]);
+        $event1->setRegistrationEnd($date[0]);
         $event1->setMaxRegistration(7);
         $event1->setEventInformations('Petite sortie au ciné pour se dégourdir les jambes !');
         $event1->setStatus('En création');
@@ -184,9 +190,9 @@ class AppFixtures extends Fixture
         $event2->setOrganiser($user2);
         $event2->setPlace($place1Niort);
         $event2->setName('Sortie a Niort');
-        $event2->setStartingDate($joursCinq);
-        $event2->setDurationTime($joursSept);
-        $event2->setRegistrationEnd($joursSept);
+        $event2->setStartingDate($date[2]);
+        $event2->setDurationTime($date[3]);
+        $event2->setRegistrationEnd($date[1]);
         $event2->setMaxRegistration(10);
         $event2->setEventInformations('Petite sortie tranquillou !');
         $event2->setStatus('Ouverte');
@@ -195,9 +201,9 @@ class AppFixtures extends Fixture
         $event3->setOrganiser($user3);
         $event3->setPlace($place2Rennes);
         $event3->setName('Événement 3');
-        $event3->setStartingDate($joursCinq);
-        $event3->setDurationTime($joursSept);
-        $event3->setRegistrationEnd($joursSept);
+        $event3->setStartingDate($date[3]);
+        $event3->setDurationTime($date[5]);
+        $event3->setRegistrationEnd($date[2]);
         $event3->setMaxRegistration(8);
         $event3->setEventInformations('Description de l\'événement 3');
         $event3->setStatus('Cloturée');
@@ -206,9 +212,9 @@ class AppFixtures extends Fixture
         $event4->setOrganiser($user4);
         $event4->setPlace($place3SaintHerblain);
         $event4->setName('Événement 4');
-        $event4->setStartingDate($joursCinq);
-        $event4->setDurationTime($joursSept);
-        $event4->setRegistrationEnd($joursSept);
+        $event4->setStartingDate($date[5]);
+        $event4->setDurationTime($date[9]);
+        $event4->setRegistrationEnd($date[4]);
         $event4->setMaxRegistration(12);
         $event4->setEventInformations('Description de l\'événement 4');
         $event4->setStatus('En cours');
@@ -217,9 +223,9 @@ class AppFixtures extends Fixture
         $event5->setOrganiser($user5);
         $event5->setPlace($place4Niort);
         $event5->setName('Événement 5');
-        $event5->setStartingDate($joursCinq);
-        $event5->setDurationTime($joursSept);
-        $event5->setRegistrationEnd($joursSept);
+        $event5->setStartingDate($date[3]);
+        $event5->setDurationTime($date[6]);
+        $event5->setRegistrationEnd($date[1]);
         $event5->setMaxRegistration(10);
         $event5->setEventInformations('Description de l\'événement 5');
         $event5->setStatus('Terminée');
@@ -228,9 +234,9 @@ class AppFixtures extends Fixture
         $event6->setOrganiser($user);
         $event6->setPlace($place5Rennes);
         $event6->setName('Événement 6');
-        $event6->setStartingDate($joursCinq);
-        $event6->setDurationTime($joursSept);
-        $event6->setRegistrationEnd($joursSept);
+        $event6->setStartingDate($date[1]);
+        $event6->setDurationTime($date[7]);
+        $event6->setRegistrationEnd($date[0]);
         $event6->setMaxRegistration(15);
         $event6->setEventInformations('Description de l\'événement 6');
         $event6->setStatus('Annulée');
@@ -239,9 +245,9 @@ class AppFixtures extends Fixture
         $event7->setOrganiser($user2);
         $event7->setPlace($place1Niort);
         $event7->setName('Événement 7');
-        $event7->setStartingDate($joursCinq);
-        $event7->setDurationTime($joursSept);
-        $event7->setRegistrationEnd($joursSept);
+        $event7->setStartingDate($date[4]);
+        $event7->setDurationTime($date[5]);
+        $event7->setRegistrationEnd($date[3]);
         $event7->setMaxRegistration(9);
         $event7->setEventInformations('Description de l\'événement 7');
         $event7->setStatus('Historisée');

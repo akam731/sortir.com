@@ -2,7 +2,7 @@
 
 namespace App\enum;
 
-enum State: string
+enum EventState: string
 {
     case EN_CREATION = 'En création';
     case OUVERTE = 'Ouverte';

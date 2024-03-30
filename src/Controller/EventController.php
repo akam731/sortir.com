@@ -20,6 +20,12 @@ class EventController extends AbstractController
     public function list(EventRepository $eventRepository, Request $request, EntityManagerInterface $repositoryManager, EventSearchRepository $eventSearchRepository): Response
     {
 
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }else{
+            $user = $this->getUser();
+        }
+
         $events = $eventRepository->findBy([], ['startingDate' => 'DESC'], 10);
 
         $data = new EventSearch();
@@ -30,7 +36,7 @@ class EventController extends AbstractController
 
         if ($form->isSubmitted()&& $form->isValid()){
 
-            $events = $eventSearchRepository->findSearch($data);
+            $events = $eventSearchRepository->findSearch($data, $user);
 
         }
 
