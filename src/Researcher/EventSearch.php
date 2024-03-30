@@ -1,24 +1,24 @@
 <?php
 
-namespace App\Data;
+namespace App\Researcher;
 
 use App\Entity\Campus;
 use App\Entity\User;
 
-class SearchData
+class EventSearch
 {
     public ?string $q ='';
 
     public ?Campus $campus = null;
 
     public ?User $user = null;
-    public bool $organized = false;
+    public bool $isOrganizer = false;
 
-    public bool $registered = false;
+    public bool $isRegistered = false;
 
     public bool $notRegistered = false;
 
-    public bool $eventCompleted = false;
+    public bool $pastEvent = false;
 
     public ?\DateTimeInterface $startDate = null;
 
