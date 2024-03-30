@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
 
 class EventType extends AbstractType
 {
@@ -59,7 +60,16 @@ class EventType extends AbstractType
             ])
             ->add('eventInformations', TextareaType::class, [
                 'label' => 'Description et infos',
-                'required' => false,
+                'required' => true,
+                'constraints' => [
+                    new Length([
+                        //todo : changer 3 en 30 quand on sera sûrs que tout marche
+                        'min' => 3,
+                        'max' => 1000,
+                        'minMessage' => 'La description doit contenir au moins {{ limit }} caractères.',
+                        'maxMessage' => 'La description ne peut pas dépasser {{ limit }} caractères.'
+                    ])
+                ]
             ])
             ->add('registerEvent', SubmitType::class, [
                 'label'=> 'Enregistrer',
