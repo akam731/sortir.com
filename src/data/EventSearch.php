@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Researcher;
+namespace App\data;
 
 use App\Entity\Campus;
 use App\Entity\User;

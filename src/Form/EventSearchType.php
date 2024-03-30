@@ -2,8 +2,8 @@
 
 namespace App\Form;
 
+use App\data\EventSearch;
 use App\Entity\Campus;
-use App\Researcher\EventSearch;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -38,6 +38,7 @@ class EventSearchType extends AbstractType
                 'label' => 'Campus :',
                 'required' => false,
                 'class' => Campus::class,
+                'choice_label' => 'name',
                 'multiple' => false,
             ])
 
@@ -85,9 +86,9 @@ class EventSearchType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => EventSearch::class,
             'method' => 'GET',
-            'csrf_protection' => false
+            'csrf_protection' => false,
+            'data_class' => EventSearch::class,
         ]);
     }
 

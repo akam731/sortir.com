@@ -21,21 +21,22 @@ class EventController extends AbstractController
 
         $event = new Event();
         $event->setOrganiser($this->getUser());
-        $form = $this->createForm(EventSearchType::class, $event);
+        $form = $this->createForm(EventSearchType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted()&& $form->isValid()){
-            $repositoryManager->persist($event);
-            $repositoryManager->flush();
 
-            $this->addFlash('success', 'Sortie crée!');
-            return $this->redirectToRoute('event_details', ['id' => $event->getId()]);
+            dd('yes');
+
         }
 
         return $this->render('main/home.html.twig', [
             'EventSearchType'=>$form->createView(),
+            'events' => $events,
         ]);
     }
+
+
 
     #[Route('/event/details{id}', name: 'event_details')]
     public function details(int $id, EventRepository $eventRepository): Response
@@ -46,7 +47,7 @@ class EventController extends AbstractController
             "event" => $event
         ]);
     }
-/*
+
     #[Route('/event/create', name: 'event_create')]
     public function create(Request $request, EntityManagerInterface $repositoryManager): Response
     {
