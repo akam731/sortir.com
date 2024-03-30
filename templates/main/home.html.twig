@@ -18,12 +18,16 @@
     {{ form_start(EventSearchType) }}
     {{ form_widget(EventSearchType) }}
 
-    <button>Rechercher</button>
 
     {{ form_end(EventSearchType) }}
 
     <div>
 
+        {% for event in events  %}
+
+            {{ event.name }}<br>
+
+        {% endfor %}
     </div>
 
         <a href="{{ path('event_create') }}">Créer votre sortie</a>

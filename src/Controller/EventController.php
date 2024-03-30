@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\data\EventSearch;
 use App\Entity\Event;
 use App\Form\EventSearchType;
 use App\Form\EventType;
 use App\Repository\EventRepository;
+use App\Repository\EventSearchRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,18 +17,20 @@ use Symfony\Component\Routing\Attribute\Route;
 class EventController extends AbstractController
 {
     #[Route('/event', name: 'event_list')]
-    public function list(EventRepository $eventRepository, Request $request, EntityManagerInterface $repositoryManager): Response
+    public function list(EventRepository $eventRepository, Request $request, EntityManagerInterface $repositoryManager, EventSearchRepository $eventSearchRepository): Response
     {
+
         $events = $eventRepository->findBy([], ['startingDate' => 'DESC'], 10);
 
+        $data = new EventSearch();
         $event = new Event();
         $event->setOrganiser($this->getUser());
-        $form = $this->createForm(EventSearchType::class);
+        $form = $this->createForm(EventSearchType::class, $data);
         $form->handleRequest($request);
 
         if ($form->isSubmitted()&& $form->isValid()){
 
-            dd('yes');
+            $events = $eventSearchRepository->findSearch($data);
 
         }
 
@@ -34,6 +38,7 @@ class EventController extends AbstractController
             'EventSearchType'=>$form->createView(),
             'events' => $events,
         ]);
+
     }
 
 
