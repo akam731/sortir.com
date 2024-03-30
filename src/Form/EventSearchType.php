@@ -3,9 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Campus;
-use App\Entity\Event;
-use App\Entity\Place;
-use App\Entity\User;
 use App\Researcher\EventSearch;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -32,6 +29,9 @@ class EventSearchType extends AbstractType
              *
              * évitons aussi de se poser trop de question sur entityType, c'est mauvaise magie,
              * suffit de le laisser faire sa popote dans son coin en faisant semblant d'avoir compris ><
+             *
+             * Enfin pour éviter l'intervention des Gardiens de l'Ordre et du Bien-Être, j'ai complèement
+             * dégenré les références à l'utilisateur.
              */
 
             ->add('campus', EntityType::class, [
