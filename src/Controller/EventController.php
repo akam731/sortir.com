@@ -59,11 +59,36 @@ class EventController extends AbstractController
     }
 
 
+    #[Route('/event/details', name: 'event_details_error')]
+    public function detailsError(): Response{
+        return $this->redirectToRoute('app_login');
+    }
 
     #[Route('/event/details{id}', name: 'event_details')]
     public function details(int $id, EventRepository $eventRepository): Response
     {
         $event = $eventRepository->find($id);
+
+        $user = $this->getUser();
+
+        if (!$user OR !$event) {
+            return $this->redirectToRoute('main_home');
+        }
+
+        $allowedStatus = ['En cours', 'Clôturée', 'Ouverte'];
+
+        $status = $event->getStatus();
+
+        if(!in_array($status, $allowedStatus) ){
+            return $this->redirectToRoute('main_home');
+        }
+        if($status == "En création" AND $user !== $event->getOrganiser()){
+            return $this->redirectToRoute('main_home');
+        }
+/*
+        ->andWhere('p.status != :creationStatus OR (p.status = :creationStatus AND p.organiser = :user)')
+        ->setParameter('creationStatus', 'En création')
+*/
 
         return $this->render('event/details.html.twig', [
             "event" => $event

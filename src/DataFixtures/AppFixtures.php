@@ -215,7 +215,7 @@ class AppFixtures extends Fixture
         $event3->addParticipant($user3);
         $event3->addParticipant($user);
         $event3->addParticipant($user5);
-        $event3->setStatus('Cloturée');
+        $event3->setStatus('Clôturée');
         $manager->persist($event3);
         $event4 = new Event();
         $event4->setOrganiser($user4);

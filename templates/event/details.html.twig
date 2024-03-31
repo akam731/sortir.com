@@ -8,6 +8,11 @@
 
 {% block body %}
 
+    <br>
+    <br>
+
+    <h1>Afficher une sortie</h1>
+
     <h2>{{event.name}}</h2>
     <div>{{ event.eventInformations }}</div>
     <div>{{ event.durationTime | date('H:mm' ) }}</div>
@@ -17,7 +22,7 @@
     <div>{{ event.registrationEnd | date('dd/MM/Y H:mm' )}}</div>
     <div>{{ event.status }}</div>
     {% for participant in event.participants %}
-    <div>{{ event.participants.name }}</div>
+    <div>{{ participant.firstName }}</div>
     {% endfor %}
     <div>{{ event.organiser.pseudo }}</div>
 
