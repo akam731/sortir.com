@@ -13,6 +13,8 @@ use App\Repository\CityRepository;
 use App\Repository\EventRepository;
 use App\Repository\EventSearchRepository;
 use App\Repository\PlaceRepository;
+use DateInterval;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

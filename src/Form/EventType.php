@@ -44,7 +44,7 @@ class EventType extends AbstractType
                 'required' => true,
             ])
             ->add('durationTime', TimeType::class, [
-                'label' => 'Durée (en minutes)',
+                'label' => 'Durée',
                 'required' => true,
             ])
             ->add('place', EntityType::class, [

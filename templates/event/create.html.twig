@@ -15,7 +15,11 @@ Créez votre évènement | {{ parent() }}
 
 {% block body %}
 
-
+    <br>
+    <br>
+    <h1>Création d'une sortie</h1>
+    <br>
+    <br>
     <section class="event_form">
         {{ form_start(form) }}
 
@@ -35,6 +39,7 @@ Créez votre évènement | {{ parent() }}
                         {{ form_widget(form.name) }}
                     </div>
                 </div>
+                <br>
                 <div>
                     {% if form_errors(form.startingDate) %}
                         <div>
@@ -46,6 +51,7 @@ Créez votre évènement | {{ parent() }}
                         {{ form_widget(form.startingDate) }}
                     </div>
                 </div>
+                <br>
                 <div>
                     {% if form_errors(form.registrationEnd) %}
                         <div>
@@ -57,6 +63,7 @@ Créez votre évènement | {{ parent() }}
                         {{ form_widget(form.registrationEnd) }}
                     </div>
                 </div>
+                <br>
                 <div>
                     {% if form_errors(form.maxRegistration) %}
                         <div>
@@ -68,6 +75,7 @@ Créez votre évènement | {{ parent() }}
                         {{ form_widget(form.maxRegistration) }}
                     </div>
                 </div>
+                <br>
                 <div>
                     {% if form_errors(form.durationTime) %}
                         <div>
@@ -87,9 +95,9 @@ Créez votre évènement | {{ parent() }}
             <div class="event_form_right">
 
                 <div>
-                    <p>Campus : {{ user.campus.name }}</p>
+                    <p>Campus</p><p>{{ user.campus.name }}</p>
                 </div>
-
+                <br>
                 <div>
                     <label for="citySelect">Ville</label>
                     <select id="citySelect">
@@ -99,26 +107,29 @@ Créez votre évènement | {{ parent() }}
                         {% endfor %}
                     </select>
                 </div>
-
+                <br>
                 <div>
                     {% if form_errors(form.place) %}
                         <div>
                             {{ form_errors(form.place) }}
                         </div>
                     {% endif %}
-                    <div>
+                    <div class="content_form_place">
                         {{ form_label(form.place) }}
                         {{ form_widget(form.place) }}
-                        <a id="placeFormButton">+</a>
+                        <a id="placeFormButton"><img alt="Créer un nouveau lieu" title="Créer un nouveau lieu" src="{{ asset('img/plus.png') }}"></a>
                     </div>
                 </div>
 
+                <br>
                     <div>
                         <p>Rue : <span id="place_rue"></span></p>
                     </div>
+                <br>
                     <div>
                         <p>Code postal : <span id="place_zip"></span></p>
                     </div>
+                <br>
                     <div>
                         <p>Latitude / longitude : <span id="place_coord"></span></p>
                     </div>
@@ -127,6 +138,8 @@ Créez votre évènement | {{ parent() }}
             </div>
         </div>
 
+        <br>
+        <br>
 
         <div class="event_form_bottom">
 
@@ -136,7 +149,7 @@ Créez votre évènement | {{ parent() }}
                         {{ form_errors(form.eventInformations) }}
                     </div>
                 {% endif %}
-                <div>
+                <div class="eventDesc">
                     {{ form_label(form.eventInformations) }}
                     {{ form_widget(form.eventInformations) }}
                 </div>
@@ -146,10 +159,11 @@ Créez votre évènement | {{ parent() }}
         {{ form_widget(form) }}
 
 
-        <button type="submit" name="registerEvent" value="registerEvent">Enregistrer</button>
-        <button type="submit" name="publish" value="publish">Publier</button>
-
-        <a href="{{ path('main_home') }}">Retour à la liste</a>
+        <div class="event_Buttons">
+            <button type="submit" name="registerEvent" value="registerEvent">Enregistrer</button>
+            <button type="submit" name="publish" value="publish">Publier</button>
+            <a href="{{ path('main_home') }}">Retour à la liste</a>
+        </div>
 
         {{ form_end(form) }}
     </section>
@@ -166,5 +180,16 @@ Créez votre évènement | {{ parent() }}
         {% endif %}
     </script>
 
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <a href="{{ path('main_home') }}">Retour à l'acceuil</a>
+    <br>
+    <br>
+    <br>
+    <br>
 {% endblock %}
 

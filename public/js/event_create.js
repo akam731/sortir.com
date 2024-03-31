@@ -110,6 +110,11 @@ document.addEventListener('DOMContentLoaded', function() {
         placeSelect.options[placeSelect.options.length - 1].selected = true;
     }
 
+    document.getElementById('closeAddingPLace').addEventListener('click', function (){
+        document.getElementById('add_place').style.display = "none";
+        isFormVisible = false;
+    })
+
 
 
 
