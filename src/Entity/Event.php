@@ -48,6 +48,9 @@ class Event
     #[ORM\JoinColumn(nullable: false)]
     private ?Place $place = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $concellationReason = null;
+
     public function __construct()
     {
         $this->participants = new ArrayCollection();
@@ -188,6 +191,18 @@ class Event
     public function setPlace(?Place $place): static
     {
         $this->place = $place;
+
+        return $this;
+    }
+
+    public function getConcellationReason(): ?string
+    {
+        return $this->concellationReason;
+    }
+
+    public function setConcellationReason(?string $concellationReason): static
+    {
+        $this->concellationReason = $concellationReason;
 
         return $this;
     }

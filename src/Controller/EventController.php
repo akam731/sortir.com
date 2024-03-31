@@ -237,6 +237,27 @@ class EventController extends AbstractController
             $event->getStartingDate() > new DateTime() &&
             $event->getParticipants()->contains($user)
         ) {
+            return $this->render();
+        }else{
+            return $this->redirectToRoute('main_home');
+        }
+    }
+
+
+    #[Route('/event/cancellation{id}', name: 'event_cancellation')]
+    public function cancellation(int $id, EventRepository $eventRepository, EntityManagerInterface $repositoryManager,): Response
+    {
+        $event = $eventRepository->find($id);
+        $user = $this->getUser();
+        if (!$user OR !$event) {
+            return $this->redirectToRoute('main_home');
+        }
+        $status = $event->getStatus();
+        if (
+            $status === "Ouverte" &&
+            $event->getStartingDate() > new DateTime() &&
+            $event->getOrganiser() === $user
+        ) {
             $event->removeParticipant($user);
             $repositoryManager->flush();
         }
