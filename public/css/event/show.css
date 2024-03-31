@@ -1,0 +1,123 @@
+.show_event{
+    padding: 40px;
+    border-radius: 15px;
+    -webkit-box-shadow: 5px 5px 21px -4px rgba(0, 0, 0, 0.6);
+    box-shadow: 5px 5px 21px -4px rgba(0, 0, 0, 0.6);
+    background: #ffffff;
+    margin: 50px 0 0 0;
+}
+
+.show_event_top{
+    display: flex;
+}
+
+.show_event_top p{
+    display: inline-block;
+}
+
+.show_event_left, .show_event_right{
+    width: 550px;
+}
+
+.title{
+    width: 250px;
+}
+
+.show_event_bottom{
+    margin: 30px 0 0 0;
+    display: flex;
+}
+.show_event_bottom p{
+    display: inline-block;
+}
+
+.desc{
+    max-width: 700px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.users_list{
+    margin: 50px auto 50px 20px;
+}
+
+.users_list > h2{
+    font-weight: normal;
+}
+
+
+table td, table th {
+    border: 1px solid #000;
+    text-align: center;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 300px;
+}
+table th {
+    background-color: #888888;
+    font-weight: bold;
+    text-align: center;
+    padding: 7px 20px;
+}
+
+@media screen and (max-width: 1250px){
+    .show_event_left, .show_event_right{
+        width: 430px;
+    }
+}
+@media screen and (max-width: 1050px){
+    .title {
+         width: 210px;
+    }
+    .show_event{
+        width: 100%;
+    }
+    .show_event_left, .show_event_right{
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 1000px){
+    .show_event_top {
+        flex-direction: column;
+    }
+    .show_event{
+        width: 550px;
+    }
+    .show_event_left, .show_event_right{
+        width: 100%;
+    }
+    .users_list {
+        margin: 50px auto 50px auto;
+        text-align: center;
+    }
+    table {
+        margin: 20px auto;
+    }
+    .show_event_bottom {
+        flex-direction: column;
+    }
+    .show_event_bottom .desc {
+        margin: 15px 0 0 0;
+        max-width: 100%;
+    }
+}
+@media screen and (max-width: 600px){
+
+    .show_event{
+        width: 300px;
+        padding: 20px;
+    }
+    .show_event_top p{
+        display: block;
+        margin: 15px 0;
+    }
+    .show_event_top .title {
+        margin: 30px 0 0 0;
+    }
+    .show_event_top br{
+        display: none;
+    }
+}

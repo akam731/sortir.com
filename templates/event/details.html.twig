@@ -6,25 +6,105 @@
 
 {% endblock %}
 
+{% block head %}
+
+    <link rel="stylesheet" href="{{ asset('css/event/show.css') }}">
+
+{% endblock %}
+
 {% block body %}
 
+    <br>
     <br>
     <br>
 
     <h1>Afficher une sortie</h1>
 
-    <h2>{{event.name}}</h2>
-    <div>{{ event.eventInformations }}</div>
-    <div>{{ event.durationTime | date('H:mm' ) }}</div>
-    <div>{{ event.startingDate | date('dd/MM/Y H:mm' ) }}</div>
-    <div>{{ event.maxRegistration }}</div>
-    <div>{{ event.place.name }}</div>
-    <div>{{ event.registrationEnd | date('dd/MM/Y H:mm' )}}</div>
-    <div>{{ event.status }}</div>
-    {% for participant in event.participants %}
-    <div>{{ participant.firstName }}</div>
-    {% endfor %}
-    <div>{{ event.organiser.pseudo }}</div>
+    <section class="show_event">
+
+        <div class="show_event_top">
+
+            <div class="show_event_left">
+
+                <p class="title">Nom de la sortie :</p>
+                <p class="attr">{{ event.name }}</p>
+                <br><br>
+                <p class="title">Date et heure de la sortie :</p>
+                <p class="attr">{{ event.startingDate|date('d/m/Y à H:i') }}</p>
+                <br><br>
+                <p class="title">Date limite d'inscription :</p>
+                <p class="attr">{{ event.registrationEnd|date('d/m/Y') }}</p>
+                <br><br>
+                <p class="title">Nombres de places:</p>
+                <p class="attr">{{ event.maxRegistration }}</p>
+                <br><br>
+                <p class="title">Durée (en minutes):</p>
+                {% set timeInSeconds = event.durationTime|date('H') * 3600 + event.durationTime|date('i') * 60 + event.durationTime|date('s') %}
+                {% set timeInMinutes = timeInSeconds / 60 %}
+                <p class="attr">{{ timeInMinutes|number_format(0, '.', ' ')  }}</p>
+
+            </div>
+            <div class="show_event_right">
+
+                <p class="title">Campus :</p>
+                <p class="attr">{{ event.organiser.campus.name }}</p>
+                <br><br>
+                <p class="title">Ville :</p>
+                <p class="attr">{{ city.name }}</p>
+                <br><br>
+                <p class="title">Lieu :</p>
+                <p class="attr">{{ event.place.name }}</p>
+                <br><br>
+                <p class="title">Rue :</p>
+                <p class="attr">{{ event.place.street }}</p>
+                <br><br>
+                <p class="title">Code postal :</p>
+                <p class="attr">{{ city.zipCode }}</p>
+                <br><br>
+                <p class="title">Latitude / Longitude :</p>
+                <p class="attr">{{ event.place.latitude }} / {{ event.place.longitude }} </p>
+
+
+            </div>
+
+        </div>
+
+        <div class="show_event_bottom">
+
+            <p class="title">Description et infos :</p>
+            <p class="desc">{{ event.eventInformations }}</p>
+
+        </div>
+
+    </section>
+
+
+    <section class="users_list">
+        <h2>Liste des participants inscrits</h2>
+
+        <table>
+            <thead>
+            <tr>
+                <th>Pseudo</th>
+                <th>Nom</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for participant in event.participants %}
+                <tr>
+                    <td><a href="{{ path('profil_home_id' , { 'id' : event.organiser.id} ) }}">{{ participant.pseudo }}</a></td>
+                    <td>{{ participant.firstName }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+    <a href="{{ path('main_home') }}">Retour à l'acceuil</a>
+    <br>
+    <br>
+    <br>
+    <br>
 
 {% endblock %}
 

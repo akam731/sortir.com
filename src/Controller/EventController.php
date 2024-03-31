@@ -83,8 +83,11 @@ class EventController extends AbstractController
             return $this->redirectToRoute('main_home');
         }
 
+        $city = $event->getPlace()->getCity();
+
         return $this->render('event/details.html.twig', [
-            "event" => $event
+            "event" => $event,
+            "city" => $city,
         ]);
     }
 
