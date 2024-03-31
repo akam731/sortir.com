@@ -2,6 +2,9 @@
 
 namespace App\enum;
 
+
+
+
 enum EventState: string
 {
     case EN_CREATION = 'En création';
@@ -16,7 +19,7 @@ enum EventState: string
     {
         return array_reduce(
             self::cases(),
-            static fn (array $choices, State $type) => $choices + [$type->name => $type->value],
+            static fn (array $choices, EventState $type) => $choices + [$type->name => $type->value],
             [],
         );
     }
