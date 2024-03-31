@@ -32,7 +32,6 @@ class EventController extends AbstractController
             $user = $this->getUser();
         }
 
-        $events = $eventRepository->findBy([], ['startingDate' => 'DESC'], 10);
 
         $data = new EventSearch();
         $event = new Event();
@@ -44,6 +43,8 @@ class EventController extends AbstractController
 
             $events = $eventSearchRepository->findSearch($data, $user);
 
+        }else{
+            $events = $eventRepository->findActive($user);
         }
 
         return $this->render('main/home.html.twig', [

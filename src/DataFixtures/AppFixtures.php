@@ -273,7 +273,7 @@ class AppFixtures extends Fixture
         $event8 = new Event();
         $event8->setOrganiser($user2);
         $event8->setPlace($place1Niort);
-        $event8->setName('Événement 7');
+        $event8->setName('Événement 8');
         $event8->setStartingDate($date[8]);
         $event8->setDurationTime($date[9]);
         $event8->setRegistrationEnd($date[7]);

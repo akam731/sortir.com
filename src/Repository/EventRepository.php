@@ -29,11 +29,13 @@ class EventRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-    public function findActive()
+    public function findActive($user)
     {
+        $exludedStates = ['En création','Historisée'];
         return $this->createQueryBuilder('e')
-            ->andWhere('e.status = :status')
-            ->setParameter('status', $state)
+            ->andWhere('e.status != :creationStatus OR (e.status = :creationStatus AND e.organiser = :user)')
+            ->setParameter('creationStatus', 'En création')
+            ->setParameter('user', $user)
             ->getQuery()
             ->getResult();
     }
