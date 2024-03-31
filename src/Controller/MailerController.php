@@ -12,7 +12,7 @@ class MailerController extends AbstractController
 {
     #[Route('/mailer', name: 'app_mailer')]
     public function index(MailerInterface $mailer): Response
-    {
+    {/*
         $email = (new Email())
 
             ->from('8a0fc97851ba3c@sandbox.smtp.mailtrap.io')
@@ -26,5 +26,6 @@ class MailerController extends AbstractController
         return $this->render('mailer/index.html.twig', [
             'controller_name' => 'MailerController',
         ]);
+*/
     }
 }

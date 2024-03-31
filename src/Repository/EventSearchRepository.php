@@ -90,7 +90,6 @@ class EventSearchRepository extends ServiceEntityRepository
         }
 
 
-
         return $query->getQuery()->getResult();
 
     }

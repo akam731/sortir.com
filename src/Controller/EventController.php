@@ -6,12 +6,14 @@ use App\data\EventSearch;
 use App\Entity\Event;
 use App\Form\EventSearchType;
 use App\Form\EventType;
+use App\Message\EventManager;
 use App\Repository\EventRepository;
 use App\Repository\EventSearchRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
 class EventController extends AbstractController
@@ -20,8 +22,9 @@ class EventController extends AbstractController
      * @throws \Exception
      */
     #[Route('/event', name: 'event_list')]
-    public function list(EventRepository $eventRepository, Request $request, EntityManagerInterface $repositoryManager, EventSearchRepository $eventSearchRepository): Response
+    public function list(MessageBusInterface $bus,EventRepository $eventRepository, Request $request, EntityManagerInterface $repositoryManager, EventSearchRepository $eventSearchRepository): Response
     {
+        $bus->dispatch(new EventManager());
 
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
