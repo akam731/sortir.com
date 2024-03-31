@@ -79,16 +79,9 @@ class EventController extends AbstractController
 
         $status = $event->getStatus();
 
-        if(!in_array($status, $allowedStatus) ){
+        if(!in_array($status, $allowedStatus) AND $status == "En création" AND $user !== $event->getOrganiser()){
             return $this->redirectToRoute('main_home');
         }
-        if($status == "En création" AND $user !== $event->getOrganiser()){
-            return $this->redirectToRoute('main_home');
-        }
-/*
-        ->andWhere('p.status != :creationStatus OR (p.status = :creationStatus AND p.organiser = :user)')
-        ->setParameter('creationStatus', 'En création')
-*/
 
         return $this->render('event/details.html.twig', [
             "event" => $event
