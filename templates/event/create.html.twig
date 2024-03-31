@@ -8,9 +8,12 @@ Créez votre évènement | {{ parent() }}
 <link rel="stylesheet" href="{{ asset('css/event/create.css') }}">
     <script type="text/javascript" >
         const placesData = {{ places|json_encode|raw }};
-
+        let isPlaceCreated = {{ isPlaceCreated }};
+        {% if app.session.get('nom_variable') is not null %}
+        placeFormManager()
+        {% endif %}
     </script>
-    <script type="text/javascript" src="{{ asset('js/event_create.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/event_create.js') }}" async></script>
 {% endblock %}
 
 {% block body %}
@@ -109,25 +112,25 @@ Créez votre évènement | {{ parent() }}
                     <div>
                         {{ form_label(form.place) }}
                         {{ form_widget(form.place) }}
-                        <a>+</a>
+                        <a id="placeFormButton">+</a>
                     </div>
                 </div>
 
-                <div>
-                    <p>Rue : <span id="place_rue"></span></p>
-                </div>
-                <div>
-                    <p>Code postal : <span id="place_zip"></span></p>
-                </div>
-                <div>
-                    <p>Latitude / longitude : <span id="place_coord"></span></p>
-                </div>
-
-
+                    <div>
+                        <p>Rue : <span id="place_rue"></span></p>
+                    </div>
+                    <div>
+                        <p>Code postal : <span id="place_zip"></span></p>
+                    </div>
+                    <div>
+                        <p>Latitude / longitude : <span id="place_coord"></span></p>
+                    </div>
 
 
             </div>
         </div>
+
+
         <div class="event_form_bottom">
 
             <div>
@@ -153,5 +156,9 @@ Créez votre évènement | {{ parent() }}
 
         {{ form_end(form) }}
     </section>
+
+
+    {% include 'place/_placeForm.html.twig' %}
+
 {% endblock %}
 

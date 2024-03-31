@@ -76,4 +76,44 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         return i;
     }
+
+
+
+
+
+
+
+
+
+
+    /* Gestion de l'affichage du formulaire de créatuib de place */
+
+    var isFormVisible = false;
+    const placeForm = document.getElementById('add_place');
+    const placeFormButton = document.getElementById('placeFormButton');
+
+    placeFormButton.addEventListener('click',placeFormManager);
+
+    function placeFormManager() {
+
+        if (isFormVisible){
+            placeForm.style.display = 'none';
+            isFormVisible = false;
+        }else{
+            placeForm.style.display = 'block';
+            isFormVisible = true;
+        }
+
+    }
+
+    if (isPlaceCreated == true){
+        placeFormManager()
+        replaceDetails(placeSelect[placeSelect.length - 1].value);
+        console.log(isPlaceCreated + "oui")
+    }
+
+
+
+
+
 });

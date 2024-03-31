@@ -18,3 +18,67 @@
 .placeDetailsHidden{
     display: none;
 }
+
+#add_place{
+
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: auto;
+
+}
+
+#add_place > div{
+
+    background-color: #fefefe;
+    margin: auto;
+    padding: 40px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 15px;
+    text-align: center;
+}
+
+#add_place > div label{
+    display: inline-block;
+    width: 150px;
+    text-align: left;
+}
+#add_place > div input, #add_place > div select{
+    display: inline-block;
+    width: 300px;
+    height: 25px;
+    padding: 0 10px;
+}
+#add_place > div li{
+    display: inline-block;
+    list-style-type: none;
+    color: red;
+    margin: 0 0 10px 0;
+}
+#add_place  button{
+     display: inline-block;
+     margin: 25px 0 0 50px;
+     width: 170px;
+     height: 40px;
+     background: #D9EC3E;
+     border: 1px solid #D9EC3E;
+     color: #fff;
+     font-size: 14px;
+     cursor: pointer;
+ }
+
+#add_place button:hover{
+    color: #D9EC3E;
+    background: transparent;
+}
