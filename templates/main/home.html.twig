@@ -74,10 +74,10 @@
                 <th>Nom de la sortie</th>
                 <th>Date de la sortie</th>
                 <th class="hidden">Clôture</th>
-                <th>Inscrits/Places</th>
-                <th>Etat</th>
+                <th class="hidden750">Inscrits/Places</th>
+                <th class="hidden750">Etat</th>
                 <th class="hidden">Inscrit</th>
-                <th>Organisateur</th>
+                <th class="hidden750">Organisateur</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -87,14 +87,14 @@
                     <td><a href="{{ path('event_details', { 'id': event.id }) }}">{{ event.name }}</a></td>
                     <td>{{ event.startingDate|date('d / m / Y H:i:s') }}</td>
                     <td class="hidden">{{ event.registrationEnd|date('d / m / Y H:i:s')}}</td>
-                    <td>{{ event.getParticipants.count() }} / {{ event.maxRegistration }}</td>
-                    <td>{{ event.status }}</td>
+                    <td class="hidden750">{{ event.getParticipants.count() }} / {{ event.maxRegistration }}</td>
+                    <td class="hidden750">{{ event.status }}</td>
                     <td class="hidden">
                         {% if event.participants.contains(app.user) %}
                             X
                         {% endif %}
                     </td>
-                    <td><a href="{{ path('profil_home_id' , { 'id' : event.organiser.id} ) }}">{{ event.organiser.firstName }} {{ event.organiser.lastName|slice(0, 1) }}</a></td>
+                    <td class="hidden750"><a href="{{ path('profil_home_id' , { 'id' : event.organiser.id} ) }}">{{ event.organiser.firstName }} {{ event.organiser.lastName|slice(0, 1) }}</a></td>
                     <td>
                         {% if event.organiser != app.user or event.status != 'En création'%}
 
@@ -146,6 +146,10 @@
     <br>
     <br>
 
-        <a href="{{ path('event_create') }}">Créer une sortie</a>
+    <a href="{{ path('event_create') }}" class="event_create">Créer une sortie</a>
+
+    <br>
+    <br>
+    <br>
 
 {% endblock %}

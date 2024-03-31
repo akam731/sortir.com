@@ -59,9 +59,36 @@ table th {
     padding: 7px 20px;
 }
 
+table a {
+    color: #436B7C;
+    margin: 0 5px;
+}
+table a:hover{
+    text-decoration: none;
+}
+
 td{
     text-align: center;
     padding: 7px 20px;
+}
+
+.event_create{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    margin: 0 auto 0 50px;
+    width: 170px;
+    height: 50px;
+    background: #80EA9B;
+    border: 1px solid #80EA9B;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+}
+.event_create:hover{
+    color: #80EA9B;
+    background: transparent;
 }
 
 @media screen and (max-width: 1150px){
@@ -79,13 +106,42 @@ td{
         width: 170px;
         height: 40px;
     }
-
+    .event_search_form_left {
+        width: auto;
+    }
 }
 
 @media screen and (max-width: 1000px){
 
     .hidden{
         display: none;
+    }
+
+}
+
+@media screen and (max-width: 750px){
+
+    .hidden750{
+        display: none;
+    }
+
+    form{
+        margin: 0 auto 0 10px;
+    }
+    .event_search_form_left label, .event_search_form_right label {
+         margin: 0 10px;
+        font-size: 12px;
+     }
+    .event_search_form_left input {
+        width: 70px;
+    }
+    td {
+         text-align: center;
+         padding: 7px 10px;
+     }
+
+    .event_create{
+        margin: auto;
     }
 
 }
