@@ -84,7 +84,7 @@
                             X
                         {% endif %}
                     </td>
-                    <td><a href="{{ path('profil_home_id' , { 'id' : event.organiser.id} ) }}">{{ event.organiser.pseudo }}</a></td>
+                    <td><a href="{{ path('profil_home_id' , { 'id' : event.organiser.id} ) }}">{{ event.organiser.firstName }} {{ event.organiser.lastName|slice(0, 1) }}</a></td>
                     <td>
                         {% if event.organiser != app.user or event.status != 'En création'%}
 
