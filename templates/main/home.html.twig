@@ -12,6 +12,16 @@
 
 {% block body %}
 
+    <br>
+
+    <div class="app_details">
+        <p>Date du jour : {{ "now"|date("d / m / Y") }}</p>
+        <p>Participant : {{ app.user.firstName }} {{ app.user.lastName|slice(0,1) }}</p>
+    </div>
+
+    <br>
+    <br>
+
     {{ form_start(EventSearchType) }}
     <h2>Filtrer les sorties :</h2>
     <section class="event_search_form">
@@ -63,10 +73,10 @@
             <tr>
                 <th>Nom de la sortie</th>
                 <th>Date de la sortie</th>
-                <th>Clôture</th>
+                <th class="hidden">Clôture</th>
                 <th>Inscrits/Places</th>
                 <th>Etat</th>
-                <th>Inscrit</th>
+                <th class="hidden">Inscrit</th>
                 <th>Organisateur</th>
                 <th>Actions</th>
             </tr>
@@ -74,12 +84,12 @@
             <tbody>
             {% for event in events  %}
                 <tr>
-                    <td>{{ event.name }}</td>
-                    <td>{{ event.startingDate|date('d-m-Y H:i:s') }}</td>
-                    <td>{{ event.registrationEnd|date('d-m-Y H:i:s')}}</td>
+                    <td><a href="{{ path('event_details', { 'id': event.id }) }}">{{ event.name }}</a></td>
+                    <td>{{ event.startingDate|date('d / m / Y H:i:s') }}</td>
+                    <td class="hidden">{{ event.registrationEnd|date('d / m / Y H:i:s')}}</td>
                     <td>{{ event.getParticipants.count() }} / {{ event.maxRegistration }}</td>
                     <td>{{ event.status }}</td>
-                    <td>
+                    <td class="hidden">
                         {% if event.participants.contains(app.user) %}
                             X
                         {% endif %}

@@ -1,3 +1,7 @@
+.app_details{
+    margin: 0 50px 0 auto;
+}
+
 .event_search_form{
     display: flex;
 }
@@ -58,4 +62,30 @@ table th {
 td{
     text-align: center;
     padding: 7px 20px;
+}
+
+@media screen and (max-width: 1150px){
+
+    .event_search_form {
+        display: block;
+    }
+
+    form{
+        margin: 0 auto 0 50px;
+    }
+
+    .event_search_form > button {
+        margin: 0;
+        width: 170px;
+        height: 40px;
+    }
+
+}
+
+@media screen and (max-width: 1000px){
+
+    .hidden{
+        display: none;
+    }
+
 }
