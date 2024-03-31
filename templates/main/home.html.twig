@@ -4,32 +4,138 @@
     {{ parent() }} - Accueil
 {% endblock %}
 
-{% block stylesheets %}
+{% block head %}
     {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/connexion.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/event/home.css') }}">
 {% endblock %}
 
-{% block javascripts %}
-
-{% endblock %}
 
 {% block body %}
 
     {{ form_start(EventSearchType) }}
-    {{ form_widget(EventSearchType) }}
+    <h2>Filtrer les sorties :</h2>
+    <section class="event_search_form">
 
+
+            <div class="event_search_form_left">
+
+
+                {{ form_row(EventSearchType.campus) }}
+                {{ form_row(EventSearchType.q) }}
+
+                <div class="event_search_form_dates">
+
+                    {{ form_row(EventSearchType.startDate) }}
+                    {{ form_row(EventSearchType.endDate) }}
+
+                </div>
+            </div>
+
+            <div class="event_search_form_right">
+
+                <div>
+
+                    {{ form_row(EventSearchType.isOrganizer) }}
+                    {{ form_row(EventSearchType.isRegistered) }}
+                    {{ form_row(EventSearchType.notRegistered) }}
+                    {{ form_row(EventSearchType.pastEvent) }}
+
+                </div>
+
+
+            </div>
+
+
+        {{ form_widget(EventSearchType.search) }}
+
+
+    </section>
 
     {{ form_end(EventSearchType) }}
 
-    <div>
+    <br>
+    <br>
 
-        {% for event in events  %}
+    <section class="campus_container">
 
-            {{ event.name }}<br>
+        <table>
+            <thead>
+            <tr>
+                <th>Nom de la sortie</th>
+                <th>Date de la sortie</th>
+                <th>Clôture</th>
+                <th>Inscrits/Places</th>
+                <th>Etat</th>
+                <th>Inscrit</th>
+                <th>Organisateur</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for event in events  %}
+                <tr>
+                    <td>{{ event.name }}</td>
+                    <td>{{ event.startingDate|date('d-m-Y H:i:s') }}</td>
+                    <td>{{ event.registrationEnd|date('d-m-Y H:i:s')}}</td>
+                    <td>{{ event.getParticipants.count() }} / {{ event.maxRegistration }}</td>
+                    <td>{{ event.status }}</td>
+                    <td>
+                        {% if event.participants.contains(app.user) %}
+                            X
+                        {% endif %}
+                    </td>
+                    <td><a href="{{ path('profil_home_id' , { 'id' : event.organiser.id} ) }}">{{ event.organiser.pseudo }}</a></td>
+                    <td>
+                        {% if event.organiser != app.user or event.status != 'En création'%}
 
-        {% endfor %}
-    </div>
+                        <a href="{{ path('event_details', { 'id': event.id }) }}">Afficher</a>
 
-        <a href="{{ path('event_create') }}">Créer votre sortie</a>
+                        {% endif %}
+
+                        {% if event.organiser == app.user%}
+
+                            {% if event.status == 'En création' %}
+
+                                <a href="#">Modifier</a>
+                                <a href="#">Publier</a>
+                                <a href="#">Supprimer</a>
+
+                            {% else %}
+
+
+                            {% endif %}
+
+                            {% if event.status == 'Ouverte '%}
+
+                                <a href="#">S'inscrire</a>
+                                <a href="#">Annuler</a>
+
+                            {% endif %}
+
+                        {% elseif event.participants.contains(app.user) %}
+                            <a href="#">Se désister</a>
+
+                        {% endif %}
+                        {% if event.participants.contains(app.user) and event.status == 'Ouverte' and event.getParticipants.count() < event.maxRegistration %}
+                            <a href="#">S'inscrire</a>
+                        {% endif %}
+
+
+
+
+
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </section>
+
+    <br>
+    <br>
+    <br>
+
+        <a href="{{ path('event_create') }}">Créer une sortie</a>
 
 {% endblock %}

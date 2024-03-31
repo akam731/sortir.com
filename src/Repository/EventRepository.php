@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\User;
 use App\Entity\Event;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -33,9 +34,14 @@ class EventRepository extends ServiceEntityRepository
     {
         $exludedStates = ['En création','Historisée'];
         return $this->createQueryBuilder('e')
+            ->leftJoin('e.organiser', 'u')
             ->andWhere('e.status != :creationStatus OR (e.status = :creationStatus AND e.organiser = :user)')
             ->setParameter('creationStatus', 'En création')
             ->setParameter('user', $user)
+
+            ->andWhere('u.campus = :campus')
+            ->setParameter('campus', $user->getCampus()->getId())
+
             ->getQuery()
             ->getResult();
     }

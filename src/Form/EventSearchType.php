@@ -41,6 +41,7 @@ class EventSearchType extends AbstractType
                 'class' => Campus::class,
                 'choice_label' => 'name',
                 'multiple' => false,
+                'data' => $options['user']->getCampus(),
             ])
 
             //dernier détail, en cherchant des infos j'ai trouvé un détail,
@@ -66,19 +67,19 @@ class EventSearchType extends AbstractType
                 'widget' => 'single_text',
             ])
             ->add('isOrganizer', CheckboxType::class, [
-                'label' => 'Sorties organisées par mes soins',
+                'label' => 'Sorties dont je suis l\'organisateur/trice',
                 'required' => false,
             ])
             ->add('isRegistered', CheckboxType::class, [
-                'label' => 'Sorties incluant ma participation',
+                'label' => 'Sorties auquelles je suis inscrit/e',
                 'required' => false,
             ])
             ->add('notRegistered', CheckboxType::class, [
-                'label' => 'Sorties auxquelles je peux encore m\'inscrire',
+                'label' => 'Sorties auquelles je ne suis pas inscrit/e',
                 'required' => false,
             ])
             ->add('pastEvent', CheckboxType::class, [
-                'label' => 'Sorties récemment terminées',
+                'label' => 'Sorties terminées',
                 'required' => false,
             ])
             ->add('search', SubmitType::class, [
@@ -93,6 +94,7 @@ class EventSearchType extends AbstractType
             'method' => 'GET',
             'csrf_protection' => false,
             'data_class' => EventSearch::class,
+            'user' => null,
         ]);
     }
 

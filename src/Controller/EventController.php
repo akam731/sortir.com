@@ -21,7 +21,7 @@ class EventController extends AbstractController
     /**
      * @throws \Exception
      */
-    #[Route('/event', name: 'event_list')]
+    #[Route('/home', name: 'main_home')]
     public function list(MessageBusInterface $bus,EventRepository $eventRepository, Request $request, EntityManagerInterface $repositoryManager, EventSearchRepository $eventSearchRepository): Response
     {
         $bus->dispatch(new EventManager());
@@ -36,7 +36,9 @@ class EventController extends AbstractController
         $data = new EventSearch();
         $event = new Event();
         $event->setOrganiser($this->getUser());
-        $form = $this->createForm(EventSearchType::class, $data);
+        $form = $this->createForm(EventSearchType::class, $data, [
+            'user' => $user,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted()&& $form->isValid()){
@@ -44,7 +46,9 @@ class EventController extends AbstractController
             $events = $eventSearchRepository->findSearch($data, $user);
 
         }else{
+
             $events = $eventRepository->findActive($user);
+
         }
 
         return $this->render('main/home.html.twig', [

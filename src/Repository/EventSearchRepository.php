@@ -32,7 +32,15 @@ class EventSearchRepository extends ServiceEntityRepository
 
         $query = $this
             ->createQueryBuilder('p')
-            ->leftJoin('p.organiser', 'u');
+            ->leftJoin('p.organiser', 'u')
+            ->andWhere('p.status != :creationStatus OR (p.status = :creationStatus AND p.organiser = :user)')
+            ->setParameter('creationStatus', 'En création')
+            ->setParameter('user', $user)
+            ->andWhere('p.status = :enCours OR p.status = :cloturee OR p.status = :enCrea  OR p.status = :ouverte ')
+            ->setParameter('enCours', 'En cours')
+            ->setParameter('cloturee', 'Clôturée')
+            ->setParameter('ouverte', 'Ouverte')
+            ->setParameter('enCrea', 'En création');
 
         /* Recherche par campus */
         if (!empty($search->campus)){
