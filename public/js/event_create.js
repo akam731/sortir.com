@@ -38,31 +38,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
     /*  Fonction qui adapte la select des places en focntion du choix dans le select city  */
     citySelect.addEventListener('change', function() {
-        const citySelectValue = citySelect.value;
+        let citySelectValue = citySelect.value;
         resetPlaceOptions();
-    console.log(citySelectValue)
         if(citySelectValue != "all") {
-
+            citySelectValue = "City_id_"+citySelectValue;
             for (let i = 0; i < placeSelectOptions.length; i++) {
-                console.log(i + ' ' +placeSelectOptions[i])
-                if (placeSelectOptions[i].className != citySelectValue){
-                    console.log('remove')
-                    placeSelect.remove(i);
+                if (placeSelectOptions[i].className == citySelectValue){
+                    placeSelect.appendChild(placeSelectOptions[i]);
                 }
             }
+        }else{
+            addPlaceOptions();
         }
+
+        placeSelect.options[0].selected = true;
+        replaceDetails(placeSelect.options[0].value);
+
     });
 
     /* Fonctions qui remetent à 0 les options du select place */
     function resetPlaceOptions() {
-        const options = placeSelect.options;
-        for (let i = 0; i < options.length; i++) {
-            placeSelect.remove(i);
-        }
+            placeSelect.innerText = '';
     }
     function addPlaceOptions() {
-        const options = placeSelect.options;
-        for (let i = 0; i < options.length; i++) {
+        for (let i = 0; i < placeSelectOptions.length; i++) {
             placeSelect.add(placeSelectOptions[i]);
         }
     }
@@ -77,7 +76,4 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         return i;
     }
-
-
-
 });
