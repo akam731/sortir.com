@@ -107,7 +107,7 @@
                             {% if event.status == 'En création' %}
 
                                 <a href="#">Modifier</a>
-                                <a href="#">Publier</a>
+                                <a href="{{ path('event_publish' , { 'id' : event.id} ) }}">Publier</a>
                                 <a href="#">Supprimer</a>
 
                             {% else %}
@@ -117,17 +117,16 @@
 
                             {% if event.status == 'Ouverte '%}
 
-                                <a href="#">S'inscrire</a>
                                 <a href="#">Annuler</a>
 
                             {% endif %}
 
                         {% elseif event.participants.contains(app.user) %}
-                            <a href="#">Se désister</a>
-
+                            <a href="{{ path('event_leave' , { 'id' : event.id} ) }}">Se désister</a>
                         {% endif %}
-                        {% if event.participants.contains(app.user) and event.status == 'Ouverte' and event.getParticipants.count() < event.maxRegistration %}
-                            <a href="#">S'inscrire</a>
+
+                        {% if not event.participants.contains(app.user) and event.status == 'Ouverte' and event.getParticipants.count() < event.maxRegistration %}
+                            <a href="{{ path('event_join' , { 'id' : event.id} ) }}">S'inscrire</a>
                         {% endif %}
 
 

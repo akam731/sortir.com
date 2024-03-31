@@ -179,4 +179,69 @@ class EventController extends AbstractController
             'isPlaceCreated' => $isPlaceCreated,
         ]);
     }
+
+
+
+    #[Route('/event/publish{id}', name: 'event_publish')]
+    public function publish(int $id, EventRepository $eventRepository, EntityManagerInterface $repositoryManager,): Response
+    {
+        $event = $eventRepository->find($id);
+        $user = $this->getUser();
+        if (!$user OR !$event) {
+            return $this->redirectToRoute('main_home');
+        }
+        $status = $event->getStatus();
+
+        if($status == "En création" AND $user === $event->getOrganiser()){
+
+            $event->setStatus('Ouverte');
+            $repositoryManager->flush();
+
+        }
+        return $this->redirectToRoute('main_home');
+    }
+
+
+    #[Route('/event/join{id}', name: 'event_join')]
+    public function join(int $id, EventRepository $eventRepository, EntityManagerInterface $repositoryManager,): Response
+    {
+        $event = $eventRepository->find($id);
+        $user = $this->getUser();
+        if (!$user OR !$event) {
+            return $this->redirectToRoute('main_home');
+        }
+        $status = $event->getStatus();
+        if (
+            $status === "Ouverte" &&
+            $event->getRegistrationEnd() > new DateTime() &&
+            $event->getMaxRegistration() > $event->getParticipants()->count() &&
+            !$event->getParticipants()->contains($user)
+        ) {
+            $event->addParticipant($user);
+            $repositoryManager->flush();
+        }
+        return $this->redirectToRoute('event_details', ['id' => $event->getId() ]);
+    }
+
+    #[Route('/event/leave{id}', name: 'event_leave')]
+    public function leave(int $id, EventRepository $eventRepository, EntityManagerInterface $repositoryManager,): Response
+    {
+        $event = $eventRepository->find($id);
+        $user = $this->getUser();
+        if (!$user OR !$event) {
+            return $this->redirectToRoute('main_home');
+        }
+        $status = $event->getStatus();
+        if (
+            $status === "Ouverte" &&
+            $event->getStartingDate() > new DateTime() &&
+            $event->getParticipants()->contains($user)
+        ) {
+            $event->removeParticipant($user);
+            $repositoryManager->flush();
+        }
+        return $this->redirectToRoute('event_details', ['id' => $event->getId()]);
+    }
+
+
 }
