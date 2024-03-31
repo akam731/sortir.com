@@ -1,0 +1,20 @@
+.event_form{
+    padding: 40px;
+    border-radius: 15px;
+    -webkit-box-shadow: 5px 5px 21px -4px rgba(0, 0, 0, 0.6);
+    box-shadow: 5px 5px 21px -4px rgba(0, 0, 0, 0.6);
+    background: #ffffff;
+    margin: 50px 0 0 0;
+}
+
+.event_form_top{
+    display: flex;
+}
+
+.event_form_right, .event_form_left{
+    width: 550px;
+}
+
+.placeDetailsHidden{
+    display: none;
+}

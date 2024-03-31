@@ -4,16 +4,154 @@
 Créez votre évènement | {{ parent() }}
 {% endblock %}
 
-{% block body %}
-    <div>
-        {{ form_start(EventType) }}
-        {{ form_widget(EventType) }}
+{% block head %}
+<link rel="stylesheet" href="{{ asset('css/event/create.css') }}">
+    <script type="text/javascript" >
+        const placesData = {{ places|json_encode|raw }};
 
-        <button type="submit" value="save">Enregistrer</button>
-        <button type="submit" value="publish">Publier</button>
+    </script>
+    <script type="text/javascript" src="{{ asset('js/event_create.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+
+
+    <section class="event_form">
+        {{ form_start(form) }}
+
+        <div class="event_form_top">
+
+            <div class="event_form_left">
+
+
+                <div>
+                    {% if form_errors(form.name) %}
+                        <div>
+                            {{ form_errors(form.name) }}
+                        </div>
+                    {% endif %}
+                    <div>
+                        {{ form_label(form.name) }}
+                        {{ form_widget(form.name) }}
+                    </div>
+                </div>
+                <div>
+                    {% if form_errors(form.startingDate) %}
+                        <div>
+                            {{ form_errors(form.startingDate) }}
+                        </div>
+                    {% endif %}
+                    <div>
+                        {{ form_label(form.startingDate) }}
+                        {{ form_widget(form.startingDate) }}
+                    </div>
+                </div>
+                <div>
+                    {% if form_errors(form.registrationEnd) %}
+                        <div>
+                            {{ form_errors(form.registrationEnd) }}
+                        </div>
+                    {% endif %}
+                    <div>
+                        {{ form_label(form.registrationEnd) }}
+                        {{ form_widget(form.registrationEnd) }}
+                    </div>
+                </div>
+                <div>
+                    {% if form_errors(form.maxRegistration) %}
+                        <div>
+                            {{ form_errors(form.maxRegistration) }}
+                        </div>
+                    {% endif %}
+                    <div>
+                        {{ form_label(form.maxRegistration) }}
+                        {{ form_widget(form.maxRegistration) }}
+                    </div>
+                </div>
+                <div>
+                    {% if form_errors(form.durationTime) %}
+                        <div>
+                            {{ form_errors(form.durationTime) }}
+                        </div>
+                    {% endif %}
+                    <div>
+                        {{ form_label(form.durationTime) }}
+                        {{ form_widget(form.durationTime) }}
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <div class="event_form_right">
+
+                <div>
+                    <p>Campus : {{ user.campus.name }}</p>
+                </div>
+
+                <div>
+                    <label for="citySelect">Ville</label>
+                    <select id="citySelect">
+                        <option value="all" selected>Toutes</option>
+                        {% for city in cities %}
+                            <option value="{{ city.id }}">{{ city.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div>
+                    {% if form_errors(form.place) %}
+                        <div>
+                            {{ form_errors(form.place) }}
+                        </div>
+                    {% endif %}
+                    <div>
+                        {{ form_label(form.place) }}
+                        {{ form_widget(form.place) }}
+                        <a>+</a>
+                    </div>
+                </div>
+
+                <div>
+                    <p>Rue : <span id="place_rue"></span></p>
+                </div>
+                <div>
+                    <p>Code postal : <span id="place_zip"></span></p>
+                </div>
+                <div>
+                    <p>Latitude / longitude : <span id="place_coord"></span></p>
+                </div>
+
+
+
+
+            </div>
+        </div>
+        <div class="event_form_bottom">
+
+            <div>
+                {% if form_errors(form.eventInformations) %}
+                    <div>
+                        {{ form_errors(form.eventInformations) }}
+                    </div>
+                {% endif %}
+                <div>
+                    {{ form_label(form.eventInformations) }}
+                    {{ form_widget(form.eventInformations) }}
+                </div>
+            </div>
+        </div>
+
+        {{ form_widget(form) }}
+
+
+        <button type="submit" name="registerEvent" value="registerEvent">Enregistrer</button>
+        <button type="submit" name="publish" value="publish">Publier</button>
+
         <a href="{{ path('main_home') }}">Retour à la liste</a>
 
-        {{ form_end(EventType) }}
-    </div>
+        {{ form_end(form) }}
+    </section>
 {% endblock %}
 

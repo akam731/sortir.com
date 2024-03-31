@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\City;
 use App\Entity\Event;
 use App\Entity\Place;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -21,36 +22,29 @@ class EventType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            /* Je le dis d'avance, je n'aime pas du tout la manière dont je l'ai refais.
-            Nonobstant, suite à nos échanges j'ai refondu ce formulaire qui était encore en cours
-            de création pour le faire en 100% Symfony, ce qui inclus les boutons submits et tout et tout
-            le but ce serait d'avoir just {{form(ceForm)}} dans twig.
-            J'ai seulement pris l'entité 1, et gardé bêtement ce qui est écrit pour le moment.
-            */
-
             ->add('name', TextType::class, [
                 'label' => 'Nom de la sortie',
                 'required' => true,
             ])
             ->add('startingDate', DateTimeType::class, [
-                'widget' => 'datetime_local',
                 'label' => 'Date et heure de la sortie',
                 'required' => true,
+                'html5' => true,
+                'widget' => 'single_text',
             ])
             ->add('registrationEnd', DateTimeType::class, [
-                'widget' => 'datetime_Local',
                 'label' => 'Date limite d\'inscription',
                 'required' => true,
+                'html5' => true,
+                'widget' => 'single_text',
             ])
             ->add('maxRegistration', IntegerType::class, [
                 'label' => 'Nombre de places',
-                    //honnêtement je suis pas fan mais flemme de faire attr-placeholder. vu que c'est modifiable plus tard en plus.
                 'data' =>10,
                 'required' => true,
             ])
             ->add('durationTime', TimeType::class, [
                 'label' => 'Durée (en minutes)',
-                'data' => 60,
                 'required' => true,
             ])
             ->add('place', EntityType::class, [
@@ -70,12 +64,6 @@ class EventType extends AbstractType
                         'maxMessage' => 'La description ne peut pas dépasser {{ limit }} caractères.'
                     ])
                 ]
-            ])
-            ->add('registerEvent', SubmitType::class, [
-                'label'=> 'Enregistrer',
-            ])
-            ->add('publish', SubmitType::class, [
-                'label'=> 'Publier',
             ])
         ;
     }

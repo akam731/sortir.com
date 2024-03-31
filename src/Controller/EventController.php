@@ -7,8 +7,10 @@ use App\Entity\Event;
 use App\Form\EventSearchType;
 use App\Form\EventType;
 use App\Message\EventManager;
+use App\Repository\CityRepository;
 use App\Repository\EventRepository;
 use App\Repository\EventSearchRepository;
+use App\Repository\PlaceRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -91,9 +93,18 @@ class EventController extends AbstractController
         ]);
     }
 
+    /**
+     * @throws \Exception
+     */
     #[Route('/event/create', name: 'event_create')]
-    public function create(Request $request, EntityManagerInterface $repositoryManager): Response
+    public function create(Request $request, EntityManagerInterface $repositoryManager, PlaceRepository $placeRepository, CityRepository $cityRepository): Response
     {
+        $user = $this->getUser();
+
+        if (!$user) {
+            return $this->redirectToRoute('main_home');
+        }
+
         $event = new Event();
         $event->setOrganiser($this->getUser());
         $event->setStatus('Ouverte');
@@ -101,6 +112,13 @@ class EventController extends AbstractController
         $form->handleRequest($request);
 
             if ($form->isSubmitted()&& $form->isValid()){
+
+                if ($request->request->has('registerEvent')) {
+                    $event->setStatus('En création');
+                } elseif ($request->request->has('publish')) {
+                    $event->setStatus('Ouverte');
+                }
+
                 $repositoryManager->persist($event);
                 $repositoryManager->flush();
 
@@ -108,32 +126,28 @@ class EventController extends AbstractController
                 return $this->redirectToRoute('event_details', ['id' => $event->getId()]);
             }
 
-        return $this->render('event/create.html.twig', [
-            'EventType'=>$form->createView(),
-        ]);
-    }
+        $places = $placeRepository->findAll();
+        $placesData = [];
+        foreach ($places as $place) {
+            $placesData[] = [
+                'id' => $place->getId(),
+                'City_id' => $place->getCity()->getId(),
+                'City_name' => $place->getCity()->getName(),
+                'zip_code' => $place->getCity()->getZipCode(),
+                'name' => $place->getName(),
+                'street' => $place->getStreet(),
+                'latitude' => $place->getLatitude(),
+                'longitude' => $place->getLongitude(),
+            ];
+        }
 
-    /*
-    #[Route('/event/demo', name: 'event_demo')]
-    public function demo(EntityManagerInterface $entityManager): Response
-    {
-        $event = new Event();
-
-        $event->setName('cinéma');
-        $event->setStartingDate(new \DateTime());
-        $event->setDurationTime(new \DateTime());
-        $event->setRegistrationEnd(new \DateTime());
-        $event->setMaxRegistration('15');
-        $event->setEventInformations('blablabla');
-        $event->setStatus();
-        $event->setOrganiser();
-
-        dump($event);
-        $entityManager->persist($event);
-        $entityManager->flush();
+        $cities = $cityRepository->findAll();
 
         return $this->render('event/create.html.twig', [
+            'form'=>$form->createView(),
+            'user' => $user,
+            'places' => $placesData,
+            'cities' => $cities,
         ]);
     }
-    */
 }
