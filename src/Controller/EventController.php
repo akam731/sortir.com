@@ -127,6 +127,7 @@ class EventController extends AbstractController
 
             $isPlaceCreated = "true";
 
+            $session->set('isPlaceCreated', false);
         }
 
             $event = new Event();

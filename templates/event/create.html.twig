@@ -9,9 +9,6 @@ Créez votre évènement | {{ parent() }}
     <script type="text/javascript" >
         const placesData = {{ places|json_encode|raw }};
         let isPlaceCreated = {{ isPlaceCreated }};
-        {% if app.session.get('nom_variable') is not null %}
-        placeFormManager()
-        {% endif %}
     </script>
     <script type="text/javascript" src="{{ asset('js/event_create.js') }}" async></script>
 {% endblock %}
@@ -159,6 +156,15 @@ Créez votre évènement | {{ parent() }}
 
 
     {% include 'place/_placeForm.html.twig' %}
+
+
+    <script>
+        {% if app.session.get('isPlaceCreated') == true %}
+        document.getElementById('add_place').style.display = "block";
+        {% else %}
+        document.getElementById('add_place').style.display = "none";
+        {% endif %}
+    </script>
 
 {% endblock %}
 

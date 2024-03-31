@@ -1,7 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    console.log(placesData)
-
     const placeSelect = document.getElementById('event_place');
     replaceDetails(placeSelect.value);
 
@@ -88,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     /* Gestion de l'affichage du formulaire de créatuib de place */
 
-    var isFormVisible = false;
+    let isFormVisible = false;
     const placeForm = document.getElementById('add_place');
     const placeFormButton = document.getElementById('placeFormButton');
 
@@ -107,9 +105,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     if (isPlaceCreated == true){
-        placeFormManager()
+        document.getElementById('add_place').style.display = "none";
         replaceDetails(placeSelect[placeSelect.length - 1].value);
-        console.log(isPlaceCreated + "oui")
+        placeSelect.options[placeSelect.options.length - 1].selected = true;
     }
 
 
