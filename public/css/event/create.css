@@ -138,10 +138,11 @@ li{
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 .event_Buttons  button{
     display: inline-block;
-    margin: 25px 0 0 20px;
+    margin:  25px 10px 0 10px;
     width: 170px;
     height: 40px;
     background: #369C7F;
@@ -160,7 +161,7 @@ li{
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    margin:  25px  0 0 20px;
+    margin:  25px 10px 0 10px;
     width: 170px;
     height: 40px;
     background: #369C7F;
@@ -173,4 +174,87 @@ li{
 .event_Buttons a:hover{
     color: #369C7F;
     background: transparent;
+}
+
+@media screen and (max-width: 1250px){
+
+    .event_form label, .event_form p {
+        display: inline-block;
+        width: 200px;
+    }
+
+    .event_form_top .event_form_right,.event_form_top .event_form_left {
+        width: 450px;
+    }
+
+}
+
+@media screen and (max-width: 1100px){
+
+    .event_form_top {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .event_form_top .event_form_right,.event_form_top .event_form_left {
+        text-align: center;
+    }
+
+}
+
+@media screen and (max-width: 700px){
+    .event_form {
+        width: 350px;
+    }
+    .event_form_top {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .event_form_top .event_form_right, .event_form_top .event_form_left {
+        text-align: left;
+        width: 300px;
+    }
+
+    .event_form label, .event_form p , .event_form select {
+        display: block;
+    }
+
+    .content_form_place{
+        display: block;
+    }
+
+    .eventDesc {
+        flex-direction: column;
+    }
+    #event_eventInformations {
+        margin: 20px 0 0 0;
+        width: 100%;
+        max-width: 100%;
+        min-width: 100%;
+        min-height: 150px;
+    }
+
+
+    .event_Buttons{
+        flex-direction: column;
+    }
+
+}
+
+@media screen and (max-width: 700px){
+
+    h1{
+        font-size: 28px;
+    }
+
+    .event_form {
+        width: 280px;
+    }
+
+    .event_form_top .event_form_right, .event_form_top .event_form_left {
+        width: 250px;
+    }
+
 }
