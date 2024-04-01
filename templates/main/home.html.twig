@@ -108,21 +108,18 @@
 
                                 <a href="#">Modifier</a>
                                 <a href="{{ path('event_publish' , { 'id' : event.id} ) }}">Publier</a>
-                                <a href="#">Supprimer</a>
-
-                            {% else %}
-
-
+                                <a href="{{ path('event_cancellation' , { 'id' : event.id} ) }}">Supprimer</a>
                             {% endif %}
 
-                            {% if event.status == 'Ouverte '%}
-
-                                <a href="#">Annuler</a>
-
-                            {% endif %}
 
                         {% elseif event.participants.contains(app.user) %}
                             <a href="{{ path('event_leave' , { 'id' : event.id} ) }}">Se désister</a>
+                        {% endif %}
+
+                        {% if event.status == 'Ouverte '%}
+
+                            <a href="{{ path('event_cancellation' , { 'id' : event.id} ) }}">Annuler</a>
+
                         {% endif %}
 
                         {% if not event.participants.contains(app.user) and event.status == 'Ouverte' and event.getParticipants.count() < event.maxRegistration %}

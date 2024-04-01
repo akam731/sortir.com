@@ -32,12 +32,16 @@ class EventRepository extends ServiceEntityRepository
     }
     public function findActive($user)
     {
-        $exludedStates = ['En création','Historisée'];
         return $this->createQueryBuilder('e')
             ->leftJoin('e.organiser', 'u')
             ->andWhere('e.status != :creationStatus OR (e.status = :creationStatus AND e.organiser = :user)')
             ->setParameter('creationStatus', 'En création')
             ->setParameter('user', $user)
+            ->andWhere('e.status = :enCours OR e.status = :cloturee OR e.status = :enCrea  OR e.status = :ouverte ')
+            ->setParameter('enCours', 'En cours')
+            ->setParameter('cloturee', 'Clôturée')
+            ->setParameter('ouverte', 'Ouverte')
+            ->setParameter('enCrea', 'En création')
 
             ->andWhere('u.campus = :campus')
             ->setParameter('campus', $user->getCampus()->getId())

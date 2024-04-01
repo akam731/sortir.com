@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\data\EventSearch;
 use App\Entity\Event;
 use App\Entity\Place;
+use App\Form\CancelEventType;
 use App\Form\EventSearchType;
 use App\Form\EventType;
 use App\Form\PlaceType;
@@ -233,19 +234,28 @@ class EventController extends AbstractController
         }
         $status = $event->getStatus();
         if (
-            $status === "Ouverte" &&
+            $status === "Ouverte" ||
+            $status === "Clôturée" &&
             $event->getStartingDate() > new DateTime() &&
             $event->getParticipants()->contains($user)
         ) {
-            return $this->render();
+            $event->removeParticipant($user);
+
+            if($status === "Clôturée" && $event->getRegistrationEnd() > new DateTime()){
+                $event->setStatus('Ouverte');
+            }
+
+            $repositoryManager->flush();
+
         }else{
-            return $this->redirectToRoute('main_home');
+            return $this->redirectToRoute('event_details', ['id' => $event->getId()]);
         }
+        return $this->redirectToRoute('main_home');
     }
 
 
     #[Route('/event/cancellation{id}', name: 'event_cancellation')]
-    public function cancellation(int $id, EventRepository $eventRepository, EntityManagerInterface $repositoryManager,): Response
+    public function cancellation(int $id, EventRepository $eventRepository, EntityManagerInterface $repositoryManager, Request $request): Response
     {
         $event = $eventRepository->find($id);
         $user = $this->getUser();
@@ -254,12 +264,29 @@ class EventController extends AbstractController
         }
         $status = $event->getStatus();
         if (
-            $status === "Ouverte" &&
+            $status === "Ouverte" ||
+            $status === "En création" &&
             $event->getStartingDate() > new DateTime() &&
             $event->getOrganiser() === $user
         ) {
-            $event->removeParticipant($user);
-            $repositoryManager->flush();
+
+            if ($status === "En création" ){
+                $repositoryManager->remove($event);
+                $repositoryManager->flush();
+                return $this->redirectToRoute('main_home');
+            }
+
+            $form = $this->createForm(CancelEventType::class);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+
+            }
+
+
+            return $this->render('event/cancel.html.twig' ,[
+                'form' => $form,
+            ]);
         }
         return $this->redirectToRoute('event_details', ['id' => $event->getId()]);
     }
