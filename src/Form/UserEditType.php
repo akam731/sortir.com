@@ -2,14 +2,12 @@
 
 namespace App\Form;
 
-use App\Entity\Campus;
-use App\Entity\Event;
 use App\Entity\User;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -19,11 +17,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Flex\Options;
 
 class UserEditType extends AbstractType
 {
+    private $passwordHasher;
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+
 
         $builder
             ->add('pseudo', TextType::class,[
@@ -75,8 +77,8 @@ class UserEditType extends AbstractType
                 'label' => 'Téléphone',
                 'constraints' => [
                     new Regex([
-                        'pattern' => '/^\d+$/',
-                        'message' => 'Ce champ doit être un nombre.',
+                        'pattern' => '/^(06|07)\d{8}$/',
+                        'message' => 'Ce champ doit être un numéro de téléphone valide.',
                     ]),
                     new Length([
                         'min' => 10,
@@ -109,10 +111,36 @@ class UserEditType extends AbstractType
                 'type' => PasswordType::class,
                 'label' => 'Mot de passe',
                 'invalid_message' => 'Les mots de passe doivent correspondre.',
-                'required' => true,
-                'first_options'  => ['label' => 'Mot de passe'],
-                'second_options' => ['label' => 'Confirmation'],
+                //Déjà le but c'était de modifier ça è_é
+                'required' => false,
+                // C'est ça là, cette putain de ligne de merde qui me les brisent à 7h du mat
+                // à pas exister quand on en a besoin ! GNIIIIIIIIIII >.<"
+                'mapped' => false,
+                //Bref, ça marche maintenant è_é
+
+                'first_options'  => ['label' => 'Nouveau mot de passe', 'empty_data' => ''],
+                'second_options' => ['label' => 'Confirmation du mot de passe', 'empty_data' => ''],
                 'constraints' => [
+                    //OK, avec ça y'a moyen que ça marche, de ne pas remplir le champs mdp.
+                    new Assert\Callback([
+                        'callback' => function ($value, ExecutionContextInterface $context) use ($options) {
+
+                            if (null === $value || '' === $value) {
+                                return;
+                            }
+
+                            // On récupère l'utilisateur ET le service d'encodage de mot de passe, sinon marche pas
+                            //je crois même que dans le fond c'était en grande partie ça le souci
+                            $user = $context->getRoot()->getData();
+                            $encodedPassword = $this->passwordHasher->hashPassword($user, $value);
+
+                            if ($user->getPassword() === $encodedPassword) {
+                                $context->buildViolation("Le nouveau mot de passe doit être différent de l'ancien.")
+                                    ->atPath('password')
+                                    ->addViolation();
+                            }
+                        },
+                    ]),
                     new Length([
                         'min' => 6,
                         'max' => 255,
@@ -150,10 +178,22 @@ class UserEditType extends AbstractType
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver): void
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'password_hasher' => null,
+            'allow_extra_fields' => true,
         ]);
+
+        $resolver->setAllowedTypes('password_hasher', UserPasswordHasherInterface::class);
+
+        $resolver->setRequired('password_hasher');
+
+        $resolver->setNormalizer('password_hasher', function (OptionsResolver $options, $value) {
+            $this->passwordHasher = $value;
+
+            return $options;
+        });
     }
 }

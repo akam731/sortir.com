@@ -21,7 +21,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class UserController extends AbstractController
 {
 
-    private UserPasswordHasherInterface $passwordEncoder;
+
 
     #[Route('/profil/', name: 'profil_home')]
     public function home(): Response
@@ -47,11 +47,17 @@ class UserController extends AbstractController
 
             if ($id == $this->getUser()->getId()) {
 
-                $form = $this->createForm(UserEditType::class, $user);
+                /*
+                ATTENTION ICI MODIFICATION : j'ajoute le 'password_encoder' dont il ya besoin
+                dans la logique implantée dans UserEditType
+                */
+
+                $form = $this->createForm(UserEditType::class, $user, [
+                    'password_hasher' => $userPasswordHasher,
+                ]);
                 $form->handleRequest($request);
 
                 if ($form->isSubmitted() && $form->isValid()) {
-
 
                     $user = $form->getData();
                     $imgNameFile = $form->get('imgName')->getData();
@@ -71,10 +77,12 @@ class UserController extends AbstractController
                         }
                     }
 
-                    $this->passwordEncoder = $userPasswordHasher;
-                    $mdp = $user->getPassword();
-                    $hashedPassword = $this->passwordEncoder->hashPassword($user, $mdp);
-                    $user->setPassword($hashedPassword);
+                    $plainPassword = $form->get('password')->getData();
+                    dump($plainPassword);
+                    if (!empty($plainPassword)) {
+                        $hashedPassword = $userPasswordHasher->hashPassword($user, $plainPassword);
+                        $user->setPassword($hashedPassword);
+                    }
 
 
                     $entityManager->persist($user);
