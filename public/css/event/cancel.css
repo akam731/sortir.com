@@ -37,3 +37,18 @@ section > form > div > button:hover{
     color: red;
     background: transparent;
 }
+
+@media screen and (max-width: 500px){
+
+    section > form > div >textarea{
+        min-width: 230px;
+        max-width: 230px;
+        width: 230px;
+        min-height: 100px;
+    }
+
+    section > form > div > label{
+        font-size: 11px;
+    }
+
+}
