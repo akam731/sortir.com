@@ -295,7 +295,7 @@ class EventController extends AbstractController
                 'form' => $form->createView(),
             ]);
         }
-        return $this->redirectToRoute('event_details', ['id' => $event->getId()]);
+        return $this->redirectToRoute('main_home');
     }
 
 
