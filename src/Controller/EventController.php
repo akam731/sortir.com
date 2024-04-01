@@ -254,7 +254,7 @@ class EventController extends AbstractController
     }
 
 
-    #[Route('/event/cancellation{id}', name: 'event_cancellation')]
+    #[Route('/event/cancellation{id}', name: 'event_cancellation', methods: ['GET','POST'])]
     public function cancellation(int $id, EventRepository $eventRepository, EntityManagerInterface $repositoryManager, Request $request): Response
     {
         $event = $eventRepository->find($id);
@@ -265,7 +265,8 @@ class EventController extends AbstractController
         $status = $event->getStatus();
         if (
             $status === "Ouverte" ||
-            $status === "En création" &&
+            $status === "En création" ||
+            $status === "Clôturée" &&
             $event->getStartingDate() > new DateTime() &&
             $event->getOrganiser() === $user
         ) {
@@ -281,11 +282,17 @@ class EventController extends AbstractController
 
             if ($form->isSubmitted() && $form->isValid()) {
 
+                $data = $form->getData();
+
+                $event->setConcellationReason($data['cancelationReason']);
+                $event->setStatus("Annulée");
+                $repositoryManager->flush();
+                return $this->redirectToRoute('main_home');
             }
 
 
             return $this->render('event/cancel.html.twig' ,[
-                'form' => $form,
+                'form' => $form->createView(),
             ]);
         }
         return $this->redirectToRoute('event_details', ['id' => $event->getId()]);

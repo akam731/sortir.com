@@ -2,9 +2,25 @@
 
 {% block title %}Annuler une sortie | {{ parent() }}{% endblock %}
 
+{% block head %}
+    <link rel="stylesheet" href="{{ asset('css/event/cancel.css') }}">
+{% endblock %}
+
 {% block body %}
 
-    {{ form_start(form) }}
-    {{ form_end(form) }}
+    <section>
+        {{ form_start(form) }}
+        {{ form_end(form) }}
+    </section>
 
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <a href="{{ path('main_home') }}">Retour à l'acceuil</a>
+    <br>
+    <br>
+    <br>
+    <br>
 {% endblock %}

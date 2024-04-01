@@ -1,0 +1,39 @@
+section{
+    padding: 40px;
+    border-radius: 15px;
+    -webkit-box-shadow: 5px 5px 21px -4px rgba(0, 0, 0, 0.6);
+    box-shadow: 5px 5px 21px -4px rgba(0, 0, 0, 0.6);
+    background: #ffffff;
+    margin: 50px 0 0 0;
+}
+
+section > form > div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+section > form > div >textarea{
+    min-width: 350px;
+    max-width: 350px;
+    width: 350px;
+    min-height: 150px;
+    padding: 20px;
+    margin: 20px 0 20px 0;
+}
+section > form > div > button{
+    display: inline-block;
+    margin: 25px 0 0 0;
+    width: 170px;
+    height: 40px;
+    background: red;
+    border: 1px solid red;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+section > form > div > button:hover{
+    color: red;
+    background: transparent;
+}
