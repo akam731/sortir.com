@@ -11,9 +11,19 @@
 
 {% block body %}
 
+<br>
+<br>
+<br>
 
     <section>
 
+        {% if user.imgName != null %}
+            {% set imagePath = 'img/profil/' ~ user.imgName %}
+            <img src="{{ asset(imagePath) }}">
+        {% else %}
+            <img src="{{ asset('img/profil/default.png') }}">
+        {% endif %}
+        <br>
         <h1>{{ user.firstName }}&nbsp;{{ user.lastName }}</h1>
         <br>
         <p>Campus</p><p>{{ user.campus.name }}</p>
@@ -28,5 +38,16 @@
 
     </section>
 
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <a href="{{ path('main_home') }}">Retour à l'accueil</a>
+    <br>
+    <br>
+    <br>
+    <br>
 
 {% endblock %}

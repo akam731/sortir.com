@@ -7,6 +7,15 @@ section{
     margin: 50px 0 0 0;
 }
 
+section > h1{
+    text-align: center;
+}
+
+section > div > p{
+    display: inline-block;
+    width: 250px;
+}
+
 section > form > div{
     display: flex;
     flex-direction: column;
@@ -38,6 +47,15 @@ section > form > div > button:hover{
     background: transparent;
 }
 
+@media screen and (max-width: 700px){
+
+    section > div > p{
+        display: block;
+        width: 220px;
+        margin: 5px 0 5px 0;
+    }
+}
+
 @media screen and (max-width: 500px){
 
     section > form > div >textarea{
@@ -45,10 +63,6 @@ section > form > div > button:hover{
         max-width: 230px;
         width: 230px;
         min-height: 100px;
-    }
-
-    section > form > div > label{
-        font-size: 11px;
     }
 
 }

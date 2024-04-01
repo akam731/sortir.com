@@ -17,7 +17,7 @@ class CancelEventType extends AbstractType
     {
         $builder
             ->add('cancelationReason', TextareaType::class, [
-                'label' => 'Pourquoi voulez-vous annuler votre sortie ?',
+                'label' => 'Motif :',
                 'constraints' => [
                     new Length([
                         'max' => 255,

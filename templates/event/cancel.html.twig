@@ -8,7 +8,37 @@
 
 {% block body %}
 
+    <br>
+    <br>
+    <br>
+
     <section>
+
+        <h1>Annuler une sortie</h1>
+
+        <br>
+        <br>
+
+        <div>
+            <br>
+            <p>Nom de la sortie :</p> <p>{{ event.name }}</p>
+            <br>
+            <br>
+            <p>Date et heure de la sortie :</p> <p>{{ event.startingDate|date('d/m/y à H:i') }}</p>
+            <br>
+            <br>
+            <p>Campus :</p> <p>{{ event.organiser.campus.name }}</p>
+            <br>
+            <br>
+            <p>Lieu :</p> <p>{{ event.place.name }}</p>
+            <br>
+            <br>
+            <p>Ville :</p> <p>{{ event.place.city.name }}</p>
+
+        </div>
+
+        <br>
+        <br>
         {{ form_start(form) }}
         {{ form_end(form) }}
     </section>
@@ -18,7 +48,7 @@
     <br>
     <br>
 
-    <a href="{{ path('main_home') }}">Retour à l'acceuil</a>
+    <a href="{{ path('main_home') }}">Retour à l'accueil</a>
     <br>
     <br>
     <br>
