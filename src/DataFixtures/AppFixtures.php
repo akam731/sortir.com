@@ -176,6 +176,8 @@ class AppFixtures extends Fixture
             $date[] = $jour;
         }
 
+        $jourUn->modify('-2 month');
+
 
 
         $event1 = new Event();
@@ -227,18 +229,18 @@ class AppFixtures extends Fixture
         $event4->setStartingDate($date[5]);
         $event4->setDurationTime($date[9]);
         $event4->setRegistrationEnd($date[4]);
-        $event4->setMaxRegistration(12);
+        $event4->setMaxRegistration(3);
         $event4->setEventInformations('Description de l\'événement 4');
         $event4->addParticipant($user4);
         $event4->addParticipant($user3);
         $event4->addParticipant($user5);
-        $event4->setStatus('En cours');
+        $event4->setStatus('Ouverte');
         $manager->persist($event4);
         $event5 = new Event();
         $event5->setOrganiser($user5);
         $event5->setPlace($place4Niort);
         $event5->setName('Événement 5');
-        $event5->setStartingDate($date[3]);
+        $event5->setStartingDate($jourUn);
         $event5->setDurationTime($date[6]);
         $event5->setRegistrationEnd($date[1]);
         $event5->setMaxRegistration(10);

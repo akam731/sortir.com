@@ -24,13 +24,25 @@ final class EventManagerHandler
     public function __invoke(EventManager $message): void
     {
 
+        $currentDate = new \DateTime();
+
         /* Cloture les events si il n'y à plus de places */
         $events = $this->eventRepository->findByState('Ouverte');
-        $currentDate = new \DateTime();
         foreach ($events as $event) {
             $nbParticipant = $event->getParticipants()->count();
             if ($nbParticipant == $event->getMaxRegistration() || $event->getRegistrationEnd() < $currentDate){
                 $event->setStatus('Clôturée');
+            }
+        }
+
+
+        /* Historisation des sorties réalisées depuis plus d’un mois". */
+        $events = $this->eventRepository->findByState('Terminée');
+        foreach ($events as $event) {
+            $date = $event->getStartingDate();
+            $dateMore1Month = $date->modify('+1 month');
+            if ($currentDate > $dateMore1Month){
+                $event->setStatus('Historisée');
             }
         }
 
