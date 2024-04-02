@@ -3,13 +3,16 @@
 namespace App\Controller;
 
 
+use App\Entity\ResetPassword;
 use App\Entity\User;
 use App\Form\CampusSearchType;
 use App\Form\RegistrationFormType;
+use App\Form\ResetPasswordProcessType;
 use App\Form\ResetPasswordType;
 use App\Form\UserEditType;
 use App\Form\UserType;
 use App\Repository\CampusRepository;
+use App\Repository\ResetPasswordRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use JetBrains\PhpStorm\NoReturn;
@@ -185,7 +188,7 @@ class UserController extends AbstractController
      * @throws TransportExceptionInterface
      */
    #[Route('/resetPassword', name: 'user_reset_password')]
-    public function resetPassword(MailerInterface $mailer,Request $request, EntityManagerInterface $entityManager): Response
+    public function resetPassword(MailerInterface $mailer,Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository,  ResetPasswordRepository $passwordRepository): Response
     {
 
 
@@ -195,20 +198,105 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
 
+            $mail = $form->getData()['email'];
+            $user = $userRepository->findOneBy(['email' => $mail]);
+
+
+            if(!$user){
+                $error = 'Votre email n\' est pas relié à un compte !';
+                return $this->render('security/resetPassword.html.twig',[
+                    'form' => $form->createView(),
+                    'error' => $error,
+                ]);
+            }
+
             /* Génére un token de 250 caractères */
             $randomBytes = openssl_random_pseudo_bytes(125);
             $token = bin2hex($randomBytes);
 
+            $timeDelay = new \DateTime();
+            $timeDelay->modify('+1 day');
+
+            $passwordReseting = new ResetPassword();
+            $passwordReseting->setUser($user);
+            $passwordReseting->setToken($token);
+            $passwordReseting->setValideDelay($timeDelay);
+
+            $passwordEntity = $passwordRepository->findBy(['user' => $user]);
+            if ($passwordEntity){
+                foreach ($passwordEntity as $entity) {
+                    $entityManager->remove($entity);
+                }
+                $entityManager->flush();
+            }
+
+            $entityManager->persist($passwordReseting);
+            $entityManager->flush();
+
             $email = (new Email())
                 ->from('no.reply.sortir@gmail.com')
-                ->to('alexandre.marteau63@gmail.com')
+                ->to($mail)
                 ->subject('Test email')
-                ->text($token);
+                ->html("
+                    <h1>Sortir.com</h1>
+                    <br>
+                    <h2>Réinitialisation du mot de passe</h2>
+                    <br>
+                    <h2>Voici le lien pour réinitialiser votre mot de passe :</h2>
+                    <br>
+                    <a href='http://localhost:8087/sortir.com/public/resetPassword/$token'>Réinitialiser mon mot de passe</a>
+                    
+                "
+                );
 
             $mailer->send($email);
+
+            return $this->render('security/resetPassword.html.twig',[
+                'validateAction' => true,
+            ]);
+
         }
 
         return $this->render('security/resetPassword.html.twig',[
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/resetPassword/{token}', name: 'user_reset_password_process')]
+    public function resetProcess($token, Request $request, EntityManagerInterface $entityManager, ResetPasswordRepository $passwordRepository, UserPasswordHasherInterface $userPasswordHasher): Response
+    {
+
+        $passwordEntity = $passwordRepository->findBy(['token' => $token]);
+        foreach ($passwordEntity as $password){
+            $passwordEntity = $password;
+        }
+
+        $currentDate = new \DateTime();
+
+        if (!$passwordEntity or $currentDate > $passwordEntity->getValideDelay()){
+            return $this->redirectToRoute('app_login');
+        }
+
+        $form = $this->createForm(ResetPasswordProcessType::class);
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $user = $passwordEntity->getUser();
+
+            $password = $form->getData()['password'];
+
+            $hashedPassword = $userPasswordHasher->hashPassword($user, $password);
+            $user->setPassword($hashedPassword);
+            $entityManager->remove($passwordEntity);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_login');
+
+        }
+
+        return $this->render('security/resetPasswordProcess.html.twig',[
             'form' => $form->createView(),
         ]);
     }
