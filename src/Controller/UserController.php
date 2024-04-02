@@ -6,15 +6,21 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\CampusSearchType;
 use App\Form\RegistrationFormType;
+use App\Form\ResetPasswordType;
 use App\Form\UserEditType;
 use App\Form\UserType;
 use App\Repository\CampusRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use JetBrains\PhpStorm\NoReturn;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -172,4 +178,39 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('admin_user');
     }
+
+    /*   Gestion de la rénitialisation de mots de passes   */
+
+    /**
+     * @throws TransportExceptionInterface
+     */
+   #[Route('/resetPassword', name: 'user_reset_password')]
+    public function resetPassword(MailerInterface $mailer,Request $request, EntityManagerInterface $entityManager): Response
+    {
+
+
+        $form = $this->createForm(ResetPasswordType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+
+            /* Génére un token de 250 caractères */
+            $randomBytes = openssl_random_pseudo_bytes(125);
+            $token = bin2hex($randomBytes);
+
+            $email = (new Email())
+                ->from('no.reply.sortir@gmail.com')
+                ->to('alexandre.marteau63@gmail.com')
+                ->subject('Test email')
+                ->text($token);
+
+            $mailer->send($email);
+        }
+
+        return $this->render('security/resetPassword.html.twig',[
+            'form' => $form->createView(),
+        ]);
+    }
+
 }
