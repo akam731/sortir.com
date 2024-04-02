@@ -23,6 +23,8 @@ final class EventManagerHandler
 
     public function __invoke(EventManager $message): void
     {
+
+        /* Cloture les events si il n'y à plus de places */
         $events = $this->eventRepository->findByState('Ouverte');
         $currentDate = new \DateTime();
         foreach ($events as $event) {
@@ -31,6 +33,8 @@ final class EventManagerHandler
                 $event->setStatus('Clôturée');
             }
         }
+
+
 
         $this->entityManager->flush();
     }
