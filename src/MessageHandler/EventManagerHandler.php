@@ -27,7 +27,9 @@ final class EventManagerHandler
         $currentDate = new \DateTime();
 
         /* Cloture les events si il n'y à plus de places */
+
         $events = $this->eventRepository->findByState('Ouverte');
+        $events[] = $this->eventRepository->findByState('Annulée');
         foreach ($events as $event) {
             $nbParticipant = $event->getParticipants()->count();
             if ($nbParticipant == $event->getMaxRegistration() || $event->getRegistrationEnd() < $currentDate){
