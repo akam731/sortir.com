@@ -8,6 +8,7 @@ use App\Entity\Place;
 use App\Form\CancelEventType;
 use App\Form\EventSearchType;
 use App\Form\EventType;
+use App\Form\EventUpdateType;
 use App\Form\PlaceType;
 use App\Message\EventManager;
 use App\Repository\CityRepository;
@@ -300,7 +301,7 @@ class EventController extends AbstractController
     }
 
     #[Route('/event/update{id}', name: 'event_update')]
-    public function update(int $id, EventRepository $eventRepository, EntityManagerInterface $repositoryManager,): Response
+    public function update(int $id, EventRepository $eventRepository, EntityManagerInterface $repositoryManager, Request $request, EventUpdateType $eventUpdateType): Response
     {
         $event = $eventRepository->find($id);
         $user = $this->getUser();
@@ -308,15 +309,20 @@ class EventController extends AbstractController
             return $this->redirectToRoute('event_update');
         }
         $status = $event->getStatus();
+        $form = $this->createForm(EventUpdateType::class, $event);
+        if ($status === "En création" AND $user === $event->getOrganiser()){
+            if ($form->isSubmitted() AND $form->isValid()){
+                $form->handleRequest($request);
+                $repositoryManager->persist($form);
+                $repositoryManager->flush();
 
-        if($status == "En création" AND $user === $event->getOrganiser()){
-
-            $event->setStatus('Ouverte');
-            $repositoryManager->flush();
-
+                return $this->redirectToRoute('main_home');
+            }
+                return $this->render('event/update.html.twig', [
+                'EventUpdateType'=>$form->createView()
+            ]);
         }
         return $this->redirectToRoute('main_home');
     }
-
 
 }
