@@ -299,5 +299,24 @@ class EventController extends AbstractController
         return $this->redirectToRoute('main_home');
     }
 
+    #[Route('/event/update{id}', name: 'event_update')]
+    public function update(int $id, EventRepository $eventRepository, EntityManagerInterface $repositoryManager,): Response
+    {
+        $event = $eventRepository->find($id);
+        $user = $this->getUser();
+        if (!$user OR !$event) {
+            return $this->redirectToRoute('event_update');
+        }
+        $status = $event->getStatus();
+
+        if($status == "En création" AND $user === $event->getOrganiser()){
+
+            $event->setStatus('Ouverte');
+            $repositoryManager->flush();
+
+        }
+        return $this->redirectToRoute('main_home');
+    }
+
 
 }
