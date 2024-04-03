@@ -34,7 +34,7 @@
                 {{ form_row(EventSearchType.campus) }}
                 {{ form_row(EventSearchType.q) }}
 
-                <div class="event_search_form_dates">
+                <div id="event_search_form_dates">
 
                     {{ form_row(EventSearchType.startDate) }}
                     {{ form_row(EventSearchType.endDate) }}
@@ -44,15 +44,10 @@
 
             <div class="event_search_form_right">
 
-                <div>
-
-                    {{ form_row(EventSearchType.isOrganizer) }}
-                    {{ form_row(EventSearchType.isRegistered) }}
-                    {{ form_row(EventSearchType.notRegistered) }}
-                    {{ form_row(EventSearchType.pastEvent) }}
-
-                </div>
-
+                {{ form_row(EventSearchType.isOrganizer) }}
+                {{ form_row(EventSearchType.isRegistered) }}
+                {{ form_row(EventSearchType.notRegistered) }}
+                {{ form_row(EventSearchType.pastEvent) }}
 
             </div>
 

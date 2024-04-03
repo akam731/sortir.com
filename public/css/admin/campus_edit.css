@@ -1,6 +1,6 @@
 section{
     text-align: center;
-    background: #fff;
+    background: rgba(245,245,245,0.5);
     border-radius: 15px;
     -webkit-box-shadow: 5px 5px 21px -4px rgba(0,0,0,0.6);
     box-shadow: 5px 5px 21px -4px rgba(0,0,0,0.6);

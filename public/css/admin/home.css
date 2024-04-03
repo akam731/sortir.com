@@ -1,5 +1,7 @@
 section{
     margin: 50px 0 0 0;
+    background: rgba(245,245,245,0.5);
+
 }
 section > a{
     display: inline-flex;
