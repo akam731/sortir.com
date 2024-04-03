@@ -6,27 +6,32 @@
     z-index: 1;
     height: 100vh;
     width:100vw;
-    background: rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.3);
 }
 
 form{
-    background: #fff;
+    background: rgba(245,245,245,0.5);
+    width:40vw;
     border-radius: 15px;
     -webkit-box-shadow: 5px 5px 21px -4px rgba(0,0,0,0.6);
     box-shadow: 5px 5px 21px -4px rgba(0,0,0,0.6);
-    padding: 40px;
+    padding:1.5vh 3vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 label{
-    display: inline-block;
-    width: 200px;
-    margin: 0;
+    display: none
 }
 
 input{
-    width: 200px;
-    height: 25px;
+    width: 100%;
+    height: 5vh;
+    margin:1.5vh 3vh;
     padding: 0 5px;
+
 }
 
 input[type='checkbox']{
@@ -34,26 +39,33 @@ input[type='checkbox']{
     width: 15px;
 }
 
-form > div >  button{
+form  >  button{
     display: inline-block;
-    height: 40px;
-    width: 150px;
-    background: #43CD40;
-    color: white;
-    border: 1px solid #43CD40;
+    width:100%;
+    height: 5vh;
+    margin:1.5vh 3vh;
+    border-radius:1vh;
+    background: lightblue;
+    color: black;
+    border: none;
     cursor: pointer;
 }
 
-form > div > button:hover{
-    background: transparent;
-    color: #43CD40;
+form > button:hover{
+    box-shadow: inset 0.2vh 0.2vh 0.5vh 0.2vh midnightblue;
+    background: cornflowerblue;
+    border-radius:1vh;
+    color: black;
 }
 
-form > div{
-    margin: 30px 0 0 0;
+#BugDeMesCouilles{
+    margin-top:1.5vh;
+    margin-bottom: 1.5vh;
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
 }
 
 .checkbox{

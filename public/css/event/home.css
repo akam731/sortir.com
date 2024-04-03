@@ -1,5 +1,25 @@
+.filtre{
+    background: rgba(245,245,245,0.5);
+    width: 90vw;
+    border-radius: 15px;
+    -webkit-box-shadow: 5px 5px 21px -4px rgba(0,0,0,0.6);
+    box-shadow: 5px 5px 21px -4px rgba(0,0,0,0.6);
+    padding:3vh;
+}
+
+tr{
+    background: rgba(245,245,245,0.8);
+}
+
 .app_details{
-    margin: 0 50px 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.app_details>h2{
+    margin-right: auto;
 }
 
 .event_search_form{
