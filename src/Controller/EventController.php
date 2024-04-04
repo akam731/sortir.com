@@ -94,7 +94,13 @@ class EventController extends AbstractController
 
         $city = $event->getPlace()->getCity();
 
+        $isAdmin = false;
+        if($this->isGranted('ROLE_ADMIN')){
+            $isAdmin = true;
+        }
+
         return $this->render('event/details.html.twig', [
+            'isAdmin' => $isAdmin,
             "event" => $event,
             "city" => $city,
         ]);
@@ -256,7 +262,8 @@ class EventController extends AbstractController
             $status === "En création" ||
             $status === "Clôturée" &&
             $event->getStartingDate() > new DateTime() &&
-            $event->getOrganiser() === $user
+            $event->getOrganiser() === $user ||
+            $this->isGranted('ROLE_ADMIN')
         ) {
 
             if ($status === "En création" ){

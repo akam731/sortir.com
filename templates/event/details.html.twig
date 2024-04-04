@@ -93,6 +93,11 @@
             initMap();
         </script>
 
+        {% if isAdmin %}
+        <br>
+            <a href="{{ path('event_cancellation' , { 'id' : event.id} ) }}">Annuler la sortie</a>
+        <br>
+        {% endif   %}
     </section>
 
 
