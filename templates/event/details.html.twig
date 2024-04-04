@@ -9,7 +9,9 @@
 {% block head %}
 
     <link rel="stylesheet" href="{{ asset('css/event/show.css') }}">
-
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
 {% endblock %}
 
 {% block body %}
@@ -76,22 +78,7 @@
 
         </div>
 
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d0!2d1!3d2!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e1f06e2b70f%3A0x40b82c3688c9460!2sParis!5e0!3m2!1sfr!2sfr!4v1712242105132!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-
-        <script>
-            let map;
-
-            async function initMap() {
-                const { Map } = await google.maps.importLibrary("maps");
-
-                map = new Map(document.getElementById("map"), {
-                    center: { lat: -34.397, lng: 150.644 },
-                    zoom: 8,
-                });
-            }
-
-            initMap();
-        </script>
+        <div id="map"></div>
 
         {% if isAdmin %}
         <br>
@@ -127,6 +114,16 @@
     <br>
     <br>
     <br>
-
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+    <script type="text/javascript">
+        var map = L.map('map').setView([{{ event.place.latitude }}, {{ event.place.longitude }}], 17);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+        var marker = L.marker([{{ event.place.latitude }}, {{ event.place.longitude }}]).addTo(map);
+    </script>
 {% endblock %}
 
