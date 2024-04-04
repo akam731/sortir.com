@@ -26,35 +26,21 @@
       </div>
       <hr>
     <section class="event_search_form">
-
-
             <div class="event_search_form_left">
-
-
                 {{ form_row(EventSearchType.campus) }}
                 {{ form_row(EventSearchType.q) }}
-
                 <div id="event_search_form_dates">
-
                     {{ form_row(EventSearchType.startDate) }}
                     {{ form_row(EventSearchType.endDate) }}
-
                 </div>
             </div>
-
             <div class="event_search_form_right">
-
                 {{ form_row(EventSearchType.isOrganizer) }}
                 {{ form_row(EventSearchType.isRegistered) }}
                 {{ form_row(EventSearchType.notRegistered) }}
                 {{ form_row(EventSearchType.pastEvent) }}
-
             </div>
-
-
         {{ form_widget(EventSearchType.search) }}
-
-
     </section>
 
     {{ form_end(EventSearchType) }}
