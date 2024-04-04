@@ -38,7 +38,6 @@ class EventUpdateType extends AbstractType
             ])
             ->add('maxRegistration', IntegerType::class, [
                 'label' => 'Nombre de places',
-                'data' =>10,
                 'required' => true,
             ])
             ->add('durationTime', TimeType::class, [

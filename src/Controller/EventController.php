@@ -155,20 +155,7 @@ class EventController extends AbstractController
                 return $this->redirectToRoute('event_details', ['id' => $event->getId()]);
             }
 
-        $places = $placeRepository->findAll();
-        $placesData = [];
-        foreach ($places as $place) {
-            $placesData[] = [
-                'id' => $place->getId(),
-                'City_id' => $place->getCity()->getId(),
-                'City_name' => $place->getCity()->getName(),
-                'zip_code' => $place->getCity()->getZipCode(),
-                'name' => $place->getName(),
-                'street' => $place->getStreet(),
-                'latitude' => $place->getLatitude(),
-                'longitude' => $place->getLongitude(),
-            ];
-        }
+        $placesData = $this->getPlaces($placeRepository);
 
         $cities = $cityRepository->findAll();
 
@@ -304,7 +291,7 @@ class EventController extends AbstractController
     public function update(Event $event, EntityManagerInterface $repositoryManager, Request $request, PlaceRepository $placeRepository, CityRepository $cityRepository, Session $session): Response
     {
         $user = $this->getUser();
-        $isPlaceCreated = false;
+        $isPlaceCreated = "false";
         if (!$user OR $user !== $event->getOrganiser()) {
             return $this->redirectToRoute('main_home');
         }
@@ -327,16 +314,21 @@ class EventController extends AbstractController
         $form->handleRequest($request);
         if ($status === "En création"){
             if ($form->isSubmitted() AND $form->isValid()){
+
+                if ($request->request->has('publish')) {
+                    $event->setStatus('Ouverte');
+                }
                 $repositoryManager->persist($event);
                 $repositoryManager->flush();
 
-                return $this->redirectToRoute('main_home');
+                return $this->redirectToRoute('event_details', ['id' => $event->getId()]);
             }
+            $placesData = $this->getPlaces($placeRepository);
             return $this->render('event/update.html.twig', [
                 'EventUpdateType'=>$form->createView(),
                     'event'=>$event,
-                    'places'=>$placeRepository->findAll(),
-                    'placeForm' => $placeForm,
+                    'places'=>$placesData,
+                    'placeForm' => $placeForm->createView(),
                     'isPlaceCreated' => $isPlaceCreated,
                     'form'=>$form->createView(),
                     'user' => $user,
@@ -346,4 +338,28 @@ class EventController extends AbstractController
         return $this->redirectToRoute('main_home');
     }
 
+    /**
+     * @param PlaceRepository $placeRepository
+     * @return array
+     */
+    public function getPlaces(PlaceRepository $placeRepository): array
+    {
+        $places = $placeRepository->findAll();
+        $placesData = [];
+        foreach ($places as $place) {
+            $placesData[] = [
+                'id' => $place->getId(),
+                'City_id' => $place->getCity()->getId(),
+                'City_name' => $place->getCity()->getName(),
+                'zip_code' => $place->getCity()->getZipCode(),
+                'name' => $place->getName(),
+                'street' => $place->getStreet(),
+                'latitude' => $place->getLatitude(),
+                'longitude' => $place->getLongitude(),
+            ];
+        }
+        return $placesData;
+    }
 }
+
+
