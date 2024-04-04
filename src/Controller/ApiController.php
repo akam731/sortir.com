@@ -3,15 +3,22 @@
 namespace App\Controller;
 
 use App\Repository\EventRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 class ApiController extends AbstractController
 {
-    #[Route('/api/events', name: 'api_events')]
-    public function index(EventRepository $eventRepository): Response
+    #[Route('/api/events/{token}', name: 'api_events')]
+    public function index($token,EventRepository $eventRepository, UserRepository $userRepository): Response
     {
+
+        $user = $userRepository->findBy(['token' => $token]);
+
+        if (!$user){
+            return new Response('Unauthorized', Response::HTTP_UNAUTHORIZED);
+        }
 
         $events = $eventRepository->findAll();
 
