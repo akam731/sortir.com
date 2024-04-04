@@ -305,8 +305,8 @@ class EventController extends AbstractController
     {
         $user = $this->getUser();
         $isPlaceCreated = false;
-        if (!$user OR !$event OR $user === $event->getOrganiser()) {
-
+        if (!$user OR $user !== $event->getOrganiser()) {
+            return $this->redirectToRoute('main_home');
         }
         $place = new Place();
         $placeForm = $this->createForm(PlaceType::class, $place);
@@ -317,20 +317,17 @@ class EventController extends AbstractController
             $session->set('isPlaceCreated', false);
         }
         if ($placeForm->isSubmitted() && $placeForm->isValid()) {
-
             $repositoryManager->persist($place);
             $repositoryManager->flush();
-
             $isPlaceCreated = true;
-
             $session->set('isPlaceCreated', false);
         }
         $status = $event->getStatus();
         $form = $this->createForm(EventUpdateType::class, $event);
+        $form->handleRequest($request);
         if ($status === "En création"){
             if ($form->isSubmitted() AND $form->isValid()){
-                $form->handleRequest($request);
-                $repositoryManager->persist($form);
+                $repositoryManager->persist($event);
                 $repositoryManager->flush();
 
                 return $this->redirectToRoute('main_home');
