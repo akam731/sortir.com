@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\ApiKeys;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Repository\CampusRepository;
@@ -37,8 +38,18 @@ class RegistrationController extends AbstractController
                 $user->setRoles(['ROLE_ADMIN']);
             }
 
+            $randomBytes = openssl_random_pseudo_bytes(25);
+            $token = bin2hex($randomBytes);
+
+            $apiToken = new ApiKeys();
+            $apiToken->setUser($user);
+            $apiToken->setToken($token);
+
             $entityManager->persist($user);
+            $entityManager->persist($apiToken);
             $entityManager->flush();
+
+
 
             // do anything else you need here, like send an email
 
