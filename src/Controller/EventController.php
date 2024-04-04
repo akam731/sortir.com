@@ -300,17 +300,34 @@ class EventController extends AbstractController
         return $this->redirectToRoute('main_home');
     }
 
-    #[Route('/event/update{id}', name: 'event_update')]
-    public function update(int $id, EventRepository $eventRepository, EntityManagerInterface $repositoryManager, Request $request, EventUpdateType $eventUpdateType): Response
+    #[Route('/event/update/{id}', name: 'event_update')]
+    public function update(Event $event, EntityManagerInterface $repositoryManager, Request $request, PlaceRepository $placeRepository, CityRepository $cityRepository, Session $session): Response
     {
-        $event = $eventRepository->find($id);
         $user = $this->getUser();
-        if (!$user OR !$event) {
-            return $this->redirectToRoute('event_update');
+        $isPlaceCreated = false;
+        if (!$user OR !$event OR $user === $event->getOrganiser()) {
+            throw $this->createAccessDeniedException();
+        }
+        $place = new Place();
+        $placeForm = $this->createForm(PlaceType::class, $place);
+        $placeForm->handleRequest($request);
+        if ($placeForm->isSubmitted()){
+            $session->set('isPlaceCreated', true);
+        }else{
+            $session->set('isPlaceCreated', false);
+        }
+        if ($placeForm->isSubmitted() && $placeForm->isValid()) {
+
+            $repositoryManager->persist($place);
+            $repositoryManager->flush();
+
+            $isPlaceCreated = true;
+
+            $session->set('isPlaceCreated', false);
         }
         $status = $event->getStatus();
         $form = $this->createForm(EventUpdateType::class, $event);
-        if ($status === "En création" AND $user === $event->getOrganiser()){
+        if ($status === "En création"){
             if ($form->isSubmitted() AND $form->isValid()){
                 $form->handleRequest($request);
                 $repositoryManager->persist($form);
@@ -318,8 +335,15 @@ class EventController extends AbstractController
 
                 return $this->redirectToRoute('main_home');
             }
-                return $this->render('event/update.html.twig', [
-                'EventUpdateType'=>$form->createView()
+            return $this->render('event/update.html.twig', [
+                'EventUpdateType'=>$form->createView(),
+                    'event'=>$event,
+                    'places'=>$placeRepository->findAll(),
+                    'placeForm' => $placeForm,
+                    'isPlaceCreated' => $isPlaceCreated,
+                    'form'=>$form->createView(),
+                    'user' => $user,
+                    'cities' => $cityRepository->findAll(),
             ]);
         }
         return $this->redirectToRoute('main_home');
