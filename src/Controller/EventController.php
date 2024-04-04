@@ -306,7 +306,7 @@ class EventController extends AbstractController
         $user = $this->getUser();
         $isPlaceCreated = false;
         if (!$user OR !$event OR $user === $event->getOrganiser()) {
-            throw $this->createAccessDeniedException();
+
         }
         $place = new Place();
         $placeForm = $this->createForm(PlaceType::class, $place);
