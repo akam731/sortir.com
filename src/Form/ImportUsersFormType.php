@@ -14,7 +14,7 @@ class ImportUsersFormType extends AbstractType
     {
         $builder
             ->add('csvFile', FileType::class, [
-                'label' => 'CSV File',
+                'label' => 'Votre fichier CSV : ',
                 'required' => true,
                 'mapped' => false,
                 'constraints' => [

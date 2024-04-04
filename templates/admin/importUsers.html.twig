@@ -1,3 +1,35 @@
-{{ form_start(form) }}
-<button></button>
-{{ form_end(form) }}
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ asset('css/admin/home.css') }}">
+{% endblock %}
+
+{% block body %}
+
+    <h1>Ajout d'utilisateurs</h1>
+
+    <section>
+
+        {{ form_start(form) }}
+
+        {{ form_label(form.csvFile) }}<br>
+        {{ form_widget(form.csvFile) }}
+    <br>
+        <button>Valider</button>
+        {{ form_end(form) }}
+
+
+    </section>
+
+    <br>
+    <br>
+    <br>
+
+    <a href="{{ path('main_home') }}">Retour à l'accueil</a>
+    <br>
+    <br>
+    <br>
+    <br>
+{% endblock %}
