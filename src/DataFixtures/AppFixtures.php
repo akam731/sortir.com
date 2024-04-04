@@ -109,14 +109,8 @@ class AppFixtures extends Fixture
         $user->setActive(true);
         $user->setImgName(null);
         $user->setPseudo('alexou');
+        $user->setToken(bin2hex(openssl_random_pseudo_bytes(25)));
         $manager->persist($user);
-
-        $randomBytes = openssl_random_pseudo_bytes(25);
-        $token = bin2hex($randomBytes);
-        $apiToken = new ApiKeys();
-        $apiToken->setUser($user);
-        $apiToken->setToken($token);
-        $manager->persist($apiToken);
 
         $user2 = new User();
         $user2->setCampus($campusNiort);
@@ -130,14 +124,8 @@ class AppFixtures extends Fixture
         $user2->setActive(true);
         $user2->setImgName(null);
         $user2->setPseudo('papy');
+        $user2->setToken(bin2hex(openssl_random_pseudo_bytes(25)));
         $manager->persist($user2);
-
-        $randomBytes = openssl_random_pseudo_bytes(25);
-        $token = bin2hex($randomBytes);
-        $apiToken = new ApiKeys();
-        $apiToken->setUser($user2);
-        $apiToken->setToken($token);
-        $manager->persist($apiToken);
 
         $user3 = new User();
         $user3->setCampus($campusRennes);
@@ -151,14 +139,8 @@ class AppFixtures extends Fixture
         $user3->setActive(true);
         $user3->setImgName(null);
         $user3->setPseudo('audrey');
+        $user3->setToken(bin2hex(openssl_random_pseudo_bytes(25)));
         $manager->persist($user3);
-
-        $randomBytes = openssl_random_pseudo_bytes(25);
-        $token = bin2hex($randomBytes);
-        $apiToken = new ApiKeys();
-        $apiToken->setUser($user3);
-        $apiToken->setToken($token);
-        $manager->persist($apiToken);
 
         $user4 = new User();
         $user4->setCampus($campusSaintHerblain);
@@ -172,14 +154,8 @@ class AppFixtures extends Fixture
         $user4->setActive(true);
         $user4->setImgName(null);
         $user4->setPseudo('titi');
+        $user4->setToken(bin2hex(openssl_random_pseudo_bytes(25)));
         $manager->persist($user4);
-
-        $randomBytes = openssl_random_pseudo_bytes(25);
-        $token = bin2hex($randomBytes);
-        $apiToken = new ApiKeys();
-        $apiToken->setUser($user4);
-        $apiToken->setToken($token);
-        $manager->persist($apiToken);
 
         $user5 = new User();
         $user5->setCampus($campusNantes);
@@ -193,14 +169,8 @@ class AppFixtures extends Fixture
         $user5->setActive(false);
         $user5->setImgName(null);
         $user5->setPseudo('Victor');
+        $user5->setToken(bin2hex(openssl_random_pseudo_bytes(25)));
         $manager->persist($user5);
-
-        $randomBytes = openssl_random_pseudo_bytes(25);
-        $token = bin2hex($randomBytes);
-        $apiToken = new ApiKeys();
-        $apiToken->setUser($user5);
-        $apiToken->setToken($token);
-        $manager->persist($apiToken);
 
 
         /* Création des events */

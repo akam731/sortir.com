@@ -44,16 +44,16 @@ class UserController extends AbstractController
     }
 
     #[Route('/profil/{id}', name: 'profil_home_id')]
-    public function homeId(UserPasswordHasherInterface $userPasswordHasher,Request $request,EntityManagerInterface $entityManager,UserRepository $userRepository ,$id): Response
+    public function homeId(User $user,UserPasswordHasherInterface $userPasswordHasher,Request $request,EntityManagerInterface $entityManager,UserRepository $userRepository): Response
     {
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
         }
 
-        $user = $userRepository->find($id);
 
         if($user) {
 
+            $id = $user->getId();
             if ($id == $this->getUser()->getId()) {
 
                 /*
@@ -100,6 +100,7 @@ class UserController extends AbstractController
                     return $this->redirectToRoute('profil_home_id', ['id' => $user->getId()]);
 
                 }
+
                 return $this->render('user/editProfil.html.twig', [
                     'user' => $user,
                     'form' => $form->createView(),
