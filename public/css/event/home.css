@@ -9,18 +9,33 @@
 
 .event_search_form{
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
 }
 
 .event_search_form_right,
-.event_search_form_left{
+.event_search_form_left,
+#search{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    width:30vw;
+    flex-grow: 1;
     padding:1.5vh 3vh;
+}
+
+#search{
+    border-radius: 1vw;
+    background: #80B5EA;
+    border: none;
+    color: #fff;
+    font-size: 2vw;
+    cursor: pointer;
+}
+.event_search_form > button:hover{
+    color: #80B5EA;
+    background: transparent;
 }
 
 .event_search_form_right>div,
@@ -28,7 +43,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    width:100%;
+    width:30vw;
     padding:1.5vh 0;
 }
 
@@ -63,24 +78,7 @@ tr{
     margin-right: auto;
 }
 
-.event_search_form > button{
-    display: inline-block;
-    margin: 1.5vh 1.5vw;
-    padding:1vw 1.5vw;
-    border-radius: 1vw;
-    min-width: 10vw;
-    min-height: 4vw;
-    background: #80B5EA;
-    border: none;
-    color: #fff;
-    font-size: 2vw;
 
-    cursor: pointer;
-}
-.event_search_form > button:hover{
-    color: #80B5EA;
-    background: transparent;
-}
 
 table td, table th {
     border: 1px solid #000;
@@ -127,7 +125,7 @@ td{
     color: #80EA9B;
     background: transparent;
 }
-
+/*
 @media screen and (max-width: 1150px){
 
     .event_search_form {
@@ -147,16 +145,37 @@ td{
         width: auto;
     }
 }
-
-@media screen and (max-width: 1000px){
-
+*/
+@media screen and (max-width: 1150px){
+    .event_search_form_right,
+    .event_search_form_left,
+    #search{
+        min-width: 50%;
+    }
     .hidden{
         display: none;
     }
 
 }
 
-@media screen and (max-width: 750px){
+@media screen and (max-width: 450px){
+    .event_search_form_right,
+    .event_search_form_left,
+    #search{
+        min-width: 60vw;
+    }
+
+    .event_search_form_left,
+    .event_search_form_left>div,
+    .event_search_form_right{
+        width:60%;
+        flex-direction: column;
+    }
+
+    #event_search_form_dates{
+        width:60%;
+        justify-content: space-evenly;
+    }
 
     .hidden750{
         display: none;
