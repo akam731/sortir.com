@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', function() {
     var selectElement = document.getElementById('event_update_place');
     selectElement.id = 'event_place';
     const placeSelect = document.getElementById('event_place');
-    console.log(placeSelect)
     replaceDetails(placeSelect.value);
 
     /* Création du tableau contenant toutes les options du select places */
