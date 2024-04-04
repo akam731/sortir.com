@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\ApiKeys;
 use App\Entity\Campus;
 use App\Entity\City;
 use App\Entity\Event;
@@ -108,6 +109,7 @@ class AppFixtures extends Fixture
         $user->setActive(true);
         $user->setImgName(null);
         $user->setPseudo('alexou');
+        $user->setToken(bin2hex(openssl_random_pseudo_bytes(25)));
         $manager->persist($user);
 
         $user2 = new User();
@@ -122,6 +124,7 @@ class AppFixtures extends Fixture
         $user2->setActive(true);
         $user2->setImgName(null);
         $user2->setPseudo('papy');
+        $user2->setToken(bin2hex(openssl_random_pseudo_bytes(25)));
         $manager->persist($user2);
 
         $user3 = new User();
@@ -136,6 +139,7 @@ class AppFixtures extends Fixture
         $user3->setActive(true);
         $user3->setImgName(null);
         $user3->setPseudo('audrey');
+        $user3->setToken(bin2hex(openssl_random_pseudo_bytes(25)));
         $manager->persist($user3);
 
         $user4 = new User();
@@ -150,7 +154,9 @@ class AppFixtures extends Fixture
         $user4->setActive(true);
         $user4->setImgName(null);
         $user4->setPseudo('titi');
+        $user4->setToken(bin2hex(openssl_random_pseudo_bytes(25)));
         $manager->persist($user4);
+
         $user5 = new User();
         $user5->setCampus($campusNantes);
         $user5->setEmail('user5@example.com');
@@ -163,6 +169,7 @@ class AppFixtures extends Fixture
         $user5->setActive(false);
         $user5->setImgName(null);
         $user5->setPseudo('Victor');
+        $user5->setToken(bin2hex(openssl_random_pseudo_bytes(25)));
         $manager->persist($user5);
 
 

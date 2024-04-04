@@ -1,0 +1,196 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Modifier votre évènement | {{ parent() }}
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ asset('css/event/create.css') }}">
+    <script type="text/javascript" >
+        const placesData = {{ places|json_encode|raw }};
+        let isPlaceCreated = {{ isPlaceCreated }};
+    </script>
+    <script type="text/javascript" src="{{ asset('js/event_create.js') }}" async></script>
+{% endblock %}
+
+{% block body %}
+
+    <br>
+    <br>
+    <h1>Création d'une sortie</h1>
+    <br>
+    <br>
+    <section class="event_form">
+        {{ form_start(form) }}
+
+        <div class="event_form_top">
+
+            <div class="event_form_left">
+
+
+                <div>
+                    {% if form_errors(form.name) %}
+                        <div>
+                            {{ form_errors(form.name) }}
+                        </div>
+                    {% endif %}
+                    <div>
+                        {{ form_label(form.name) }}
+                        {{ form_widget(form.name) }}
+                    </div>
+                </div>
+                <br>
+                <div>
+                    {% if form_errors(form.startingDate) %}
+                        <div>
+                            {{ form_errors(form.startingDate) }}
+                        </div>
+                    {% endif %}
+                    <div>
+                        {{ form_label(form.startingDate) }}
+                        {{ form_widget(form.startingDate) }}
+                    </div>
+                </div>
+                <br>
+                <div>
+                    {% if form_errors(form.registrationEnd) %}
+                        <div>
+                            {{ form_errors(form.registrationEnd) }}
+                        </div>
+                    {% endif %}
+                    <div>
+                        {{ form_label(form.registrationEnd) }}
+                        {{ form_widget(form.registrationEnd) }}
+                    </div>
+                </div>
+                <br>
+                <div>
+                    {% if form_errors(form.maxRegistration) %}
+                        <div>
+                            {{ form_errors(form.maxRegistration) }}
+                        </div>
+                    {% endif %}
+                    <div>
+                        {{ form_label(form.maxRegistration) }}
+                        {{ form_widget(form.maxRegistration) }}
+                    </div>
+                </div>
+                <br>
+                <div>
+                    {% if form_errors(form.durationTime) %}
+                        <div>
+                            {{ form_errors(form.durationTime) }}
+                        </div>
+                    {% endif %}
+                    <div>
+                        {{ form_label(form.durationTime) }}
+                        {{ form_widget(form.durationTime) }}
+                    </div>
+                </div>
+                <br>
+
+
+
+            </div>
+
+            <div class="event_form_right">
+
+                <div>
+                    <p>Campus</p><p>{{ user.campus.name }}</p>
+                </div>
+                <br>
+                <div>
+                    <label for="citySelect">Ville</label>
+                    <select id="citySelect">
+                        <option value="all" selected>Toutes</option>
+                        {% for city in cities %}
+                            <option value="{{ city.id }}">{{ city.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <br>
+                <div>
+                    {% if form_errors(form.place) %}
+                        <div>
+                            {{ form_errors(form.place) }}
+                        </div>
+                    {% endif %}
+                    <div class="content_form_place">
+                        {{ form_label(form.place) }}
+                        {{ form_widget(form.place)}}
+
+                        <a id="placeFormButton"><img alt="Créer un nouveau lieu" title="Créer un nouveau lieu" src="{{ asset('img/plus.png') }}"></a>
+                    </div>
+                </div>
+                <br>
+                <div>
+                    <p>Rue </p><p id="place_rue"></p>
+                </div>
+                <br>
+                <div>
+                    <p>Code postal </p><p id="place_zip"></p>
+                </div>
+                <br>
+                <div>
+                    <p>Latitude / longitude </p><p id="place_coord"></p>
+                </div>
+
+
+            </div>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="event_form_bottom">
+
+            <div>
+                {% if form_errors(form.eventInformations) %}
+                    <div>
+                        {{ form_errors(form.eventInformations) }}
+                    </div>
+                {% endif %}
+                <div class="eventDesc">
+                    {{ form_label(form.eventInformations) }}
+                    {{ form_widget(form.eventInformations) }}
+                </div>
+            </div>
+        </div>
+
+        {{ form_widget(form) }}
+
+
+        <div class="event_Buttons">
+            <button type="submit" name="registerEvent" value="registerEvent">Enregistrer</button>
+            <button type="submit" name="publish" value="publish">Publier</button>
+            <a href="{{ path('main_home') }}">Retour à la liste</a>
+        </div>
+
+        {{ form_end(form) }}
+    </section>
+
+
+    {% include 'place/_placeForm.html.twig' %}
+
+
+    <script>
+        {% if app.session.get('isPlaceCreated') == true %}
+        document.getElementById('add_place').style.display = "block";
+        {% else %}
+        document.getElementById('add_place').style.display = "none";
+        {% endif %}
+    </script>
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <a href="{{ path('main_home') }}">Retour à l'accueil</a>
+    <br>
+    <br>
+    <br>
+    <br>
+{% endblock %}
+

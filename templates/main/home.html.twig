@@ -90,7 +90,7 @@
 
                             {% if event.status == 'En création' %}
 
-                                <a href="#">Modifier</a>
+                                <a href="{{ path('event_update' , { 'id' : event.id} ) }}">Modifier</a>
                                 <a href="{{ path('event_publish' , { 'id' : event.id} ) }}">Publier</a>
                                 <a href="{{ path('event_cancellation' , { 'id' : event.id} ) }}">Supprimer</a>
                             {% endif %}

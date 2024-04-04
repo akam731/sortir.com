@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
 
+    var selectElement = document.getElementById('event_update_place');
+    selectElement.id = 'event_place';
     const placeSelect = document.getElementById('event_place');
     replaceDetails(placeSelect.value);
 
