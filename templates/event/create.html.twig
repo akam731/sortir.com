@@ -15,12 +15,11 @@ Créez votre évènement | {{ parent() }}
 
 {% block body %}
 
-    <br>
-    <br>
-    <h1>Création d'une sortie</h1>
-    <br>
-    <br>
+
+
+
     <section class="event_form">
+        <h1>Création d'une sortie</h1>
         {{ form_start(form) }}
 
         <div class="event_form_top">
@@ -182,15 +181,7 @@ Créez votre évènement | {{ parent() }}
     </script>
 
 
-    <br>
-    <br>
-    <br>
-    <br>
+    <a id="GoHome" href="{{ path('main_home') }}">Retour à l'accueil</a>
 
-    <a href="{{ path('main_home') }}">Retour à l'accueil</a>
-    <br>
-    <br>
-    <br>
-    <br>
 {% endblock %}
 

@@ -1,13 +1,28 @@
 /* Affichage d'un profil */
-section{
+form{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     text-align: center;
+    flex-direction: column;
+    gap:1vh;
     padding: 40px;
     border-radius: 15px;
     -webkit-box-shadow: 5px 5px 21px -4px rgba(0,0,0,0.6);
     box-shadow: 5px 5px 21px -4px rgba(0,0,0,0.6);
     background: rgba(245,245,245,0.5);
 }
-
+form>div,
+form>div>div{
+    width:100%;
+}
+img{
+    max-height:10vw;
+    max-width:10vw;
+}
+label{
+    margin-right: auto;
+}
 h1{
     font-weight: normal;
     font-size: 30px;
@@ -23,7 +38,7 @@ section > p{
 
 
 
-@media screen and (max-width: 500px){
+@media screen and (max-width: 1200px){
 
     section{
         width: 100%;
@@ -132,17 +147,35 @@ input[type="file"]{
 }
 
 
+#GoHome{
+    margin:3vh auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    background: darkgreen;
+    border: none;
+    color: #fff;
+    border-radius: 1vw;
+    padding:1.5vh 3vh;
+    font-size: 2vh;
+    cursor: pointer;
+}
 
+#GoHome:hover{
+    color: #80EA9B;
+    background: transparent;
+}
 @media screen and (max-width: 550px){
 
     form{
-        width: 100%;
-        padding: 40px 0;
+        width:90vw;
+        margin:0;
+        padding:0;
     }
-
-    form > div > div > label{
-        min-width: 100px;
-        width: 100px;
+    img{
+        max-height:10dvh;
+        max-width:10dvh;
     }
 
 }

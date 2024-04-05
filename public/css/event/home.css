@@ -33,7 +33,7 @@
     font-size: 2vw;
     cursor: pointer;
 }
-.event_search_form > button:hover{
+#search:hover{
     color: #80B5EA;
     background: transparent;
 }
@@ -108,17 +108,17 @@ td{
 }
 
 .event_create{
-    display: inline-flex;
+    margin:3vh auto;
+    display: flex;
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    margin: 0 auto 0 50px;
-    width: 170px;
-    height: 50px;
-    background: #80EA9B;
-    border: 1px solid #80EA9B;
+    background: darkgreen;
+    border: none;
     color: #fff;
-    font-size: 14px;
+    border-radius: 1vw;
+    padding:1.5vh 3vh;
+    font-size: 2vh;
     cursor: pointer;
 }
 .event_create:hover{

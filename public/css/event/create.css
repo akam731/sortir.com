@@ -5,6 +5,14 @@
     box-shadow: 5px 5px 21px -4px rgba(0, 0, 0, 0.6);
     background: rgba(245,245,245,0.5);
     margin: 50px 0 0 0;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.event_form>h1{
+    margin-bottom: 5vh;
 }
 
 .event_form label,.event_form p{
@@ -142,14 +150,14 @@ li{
 }
 .event_Buttons  button{
     display: inline-block;
-    margin:  25px 10px 0 10px;
-    width: 170px;
-    height: 40px;
+    margin:  0 1vw;
     background: #369C7F;
-    border: 1px solid #369C7F;
+    border: none;
     color: #fff;
-    font-size: 14px;
     cursor: pointer;
+    border-radius: 1vw;
+    padding:1.5vh 3vh;
+    font-size: 2vh;
 }
 
 .event_Buttons button:hover{
@@ -161,21 +169,39 @@ li{
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    margin:  25px 10px 0 10px;
-    width: 170px;
-    height: 40px;
+    margin:  0 1vw;
     background: #369C7F;
-    border: 1px solid #369C7F;
+    border: none;
     color: #fff;
-    font-size: 14px;
     cursor: pointer;
+    border-radius: 1vw;
+    padding:1.5vh 3vh;
+    font-size: 2vh;
 }
 
 .event_Buttons a:hover{
     color: #369C7F;
     background: transparent;
 }
+#GoHome{
+    margin:3vh auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    background: darkgreen;
+    border: none;
+    color: #fff;
+    border-radius: 1vw;
+    padding:1.5vh 3vh;
+    font-size: 2vh;
+    cursor: pointer;
+}
 
+#GoHome:hover{
+    color: #80EA9B;
+    background: transparent;
+}
 @media screen and (max-width: 1250px){
 
     .event_form label, .event_form p {
@@ -201,6 +227,8 @@ li{
     }
 
 }
+
+
 
 @media screen and (max-width: 700px){
     .event_form {
