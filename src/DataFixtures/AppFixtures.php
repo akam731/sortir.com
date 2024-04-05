@@ -267,6 +267,7 @@ class AppFixtures extends Fixture
         $event6->addParticipant($user);
         $event6->addParticipant($user4);
         $event6->setStatus('Annulée');
+        $event6->setConcellationReason('Sortie annulée');
         $manager->persist($event6);
         $event7 = new Event();
         $event7->setOrganiser($user2);

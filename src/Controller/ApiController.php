@@ -15,7 +15,6 @@ class ApiController extends AbstractController
     #[Route('/api/events/', name: 'api_events')]
     public function index(Request $request,EventRepository $eventRepository, UserRepository $userRepository): Response
     {
-
         $state = $request->query->get('state');
         $date = $request->query->get('date');
         $token = $request->query->get('apiKey');
