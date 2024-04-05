@@ -179,7 +179,7 @@ input[type="file"]{
     color: #80EA9B;
     background: transparent;
 }
-@media screen and (max-width: 550px){
+@media screen and (max-width: 800px){
 
     form{
         width:90vw;
