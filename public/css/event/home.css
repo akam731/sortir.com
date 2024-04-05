@@ -158,7 +158,7 @@ td{
 
 }
 
-@media screen and (max-width: 450px){
+@media screen and (max-width: 800px){
     .event_search_form_right,
     .event_search_form_left,
     #search{

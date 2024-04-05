@@ -6,6 +6,7 @@ form{
     text-align: center;
     flex-direction: column;
     gap:1vh;
+    margin-top: 2vh;
     padding: 40px;
     border-radius: 15px;
     -webkit-box-shadow: 5px 5px 21px -4px rgba(0,0,0,0.6);
@@ -36,7 +37,15 @@ section > p{
     text-align: left;
 }
 
+#API{
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    width:90%;
+}
 
+#user_edit_save{
+    margin-bottom: 2vh;
+}
 
 @media screen and (max-width: 1200px){
 
@@ -61,8 +70,10 @@ form {
     -webkit-box-shadow: 5px 5px 21px -4px rgba(0, 0, 0, 0.6);
     box-shadow: 5px 5px 21px -4px rgba(0, 0, 0, 0.6);
     background: #ffffff;
-    margin: 50px 0 0 0;
+    margin: 1dvh 0;
 }
+
+
 
 form > img, section > img{
     height: 200px;
@@ -131,19 +142,19 @@ input[type="file"]{
 }
 
 #user_edit_save, div > button{
-    display: inline-block;
-    margin: 40px 0 0 0;
-    color: #ffffff;
-    background: #65A4E3;
-    border: 1px solid #65A4E3;
+    border-radius: 1vw;
+    margin-top: 2vh;
+    padding:1.5vh 3vh;
+    background: #80B5EA;
+    border: none;
+    color: #fff;
+    font-size: 2vw;
     cursor: pointer;
-    height: 40px;
-    width: 150px;
 }
 
 #user_edit_save:hover, div > button:hover{
-    color: #65A4E3;
-    background: #fff;
+    color: #80B5EA;
+    background: transparent;
 }
 
 
@@ -161,21 +172,25 @@ input[type="file"]{
     font-size: 2vh;
     cursor: pointer;
 }
-
+#user_edit_save{
+    margin-bottom: 2dvh;
+}
 #GoHome:hover{
     color: #80EA9B;
     background: transparent;
 }
-@media screen and (max-width: 550px){
+@media screen and (max-width: 800px){
 
     form{
         width:90vw;
-        margin:0;
+        margin:2dvh 0 0 0;
         padding:0;
     }
     img{
         max-height:10dvh;
         max-width:10dvh;
     }
-
+    #user_edit_save{
+        margin-bottom: 2dvh;
+    }
 }
