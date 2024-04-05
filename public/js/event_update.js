@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const placeSelect = document.getElementById('event_place');
+
+
+
+    const placeSelect = document.getElementById('event_update_place');
     replaceDetails(placeSelect.value);
 
     /* Création du tableau contenant toutes les options du select places */
