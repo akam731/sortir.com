@@ -147,3 +147,23 @@ table label{
         width: 50%;
     }
 }
+
+#GoHome{
+    margin:3vh auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    background: darkgreen;
+    border: none;
+    color: #fff;
+    border-radius: 1vw;
+    padding:1.5vh 3vh;
+    font-size: 2vh;
+    cursor: pointer;
+}
+
+#GoHome:hover{
+    color: #80EA9B;
+    background: transparent;
+}

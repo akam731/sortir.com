@@ -8,10 +8,12 @@
 
 {% block body %}
 
-    <h1>Page Administration</h1>
+
 
     <section>
-
+        <h1>Page Administration</h1>
+        <br>
+        <br>
         <a href="{{ path('app_campus_index') }}">Gérer les campus</a>
         <a href="{{ path('app_city_index') }}">Gérer les villes</a>
         <a href="{{ path('admin_user') }}">Gérer les utilisateurs</a>
@@ -23,7 +25,7 @@
     <br>
     <br>
 
-    <a href="{{ path('main_home') }}">Retour à l'accueil</a>
+    <a id="GoHome" href="{{ path('main_home') }}">Retour à l'accueil</a>
     <br>
     <br>
     <br>

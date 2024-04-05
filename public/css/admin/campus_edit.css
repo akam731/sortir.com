@@ -5,7 +5,13 @@ section{
     -webkit-box-shadow: 5px 5px 21px -4px rgba(0,0,0,0.6);
     box-shadow: 5px 5px 21px -4px rgba(0,0,0,0.6);
     padding: 40px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    gap: 2vh;
 }
+
 
 label{
     display: none;
@@ -73,4 +79,24 @@ tr > * {
     height: 25px;
     text-align: left;
     min-width: 100px;
+}
+
+#GoHome{
+    margin:3vh auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    background: darkgreen;
+    border: none;
+    color: #fff;
+    border-radius: 1vw;
+    padding:1.5vh 3vh;
+    font-size: 2vh;
+    cursor: pointer;
+}
+
+#GoHome:hover{
+    color: #80EA9B;
+    background: transparent;
 }

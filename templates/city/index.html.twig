@@ -12,15 +12,16 @@
     <br>
     <br>
 
+
+<section>
+
+    {{ form_start(searchForm) }}
+
     <h1>Gérer les villes</h1>
 
     <br>
     <br>
     <br>
-<section>
-
-    {{ form_start(searchForm) }}
-
     <h2>Filtrer les villes</h2>
     <br>
 
@@ -104,7 +105,7 @@
     <br>
     <br>
     <br>
-    <a href="{{ path('admin_home') }}">Retour à l'espace Administrateur</a>
+    <a id="GoHome" href="{{ path('admin_home') }}">Retour à l'espace Administrateur</a>
 
     <br>
     <br>

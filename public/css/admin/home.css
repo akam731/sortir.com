@@ -3,6 +3,11 @@ section{
     background: rgba(245,245,245,0.5);
 
 }
+
+h1{
+    margin: 0 30%;
+    padding-top: 2vh;
+}
 section > a{
     display: inline-flex;
     width: 200px;
@@ -30,4 +35,24 @@ section > a:hover{
         font-size: 28px;
     }
 
+}
+
+#GoHome{
+    margin:3vh auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    background: darkgreen;
+    border: none;
+    color: #fff;
+    border-radius: 1vw;
+    padding:1.5vh 3vh;
+    font-size: 2vh;
+    cursor: pointer;
+}
+
+#GoHome:hover{
+    color: #80EA9B;
+    background: transparent;
 }
