@@ -10,10 +10,6 @@
 
 
 {% block body %}
-
-    <br>
-    <br>
-
     <form method="POST" enctype="multipart/form-data">
         <h1>Mon Profil</h1>
 
@@ -128,29 +124,17 @@
                 {{ form_widget(form.imgName) }}
             </div>
         </div>
+        <div>
+            <p>Votre clef API :</p>
+            <p>{{ user.token }}</p>
+        </div>
 
-        <br>
-        <p>Votre clef API :</p>
-        <p>{{ user.token }}</p>
 
 
 
         {{ form_end(form) }}
     </form>
 
-
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-
-    <a href="{{ path('main_home') }}">Retour à l'accueil</a>
-    <br>
-    <br>
-    <br>
-    <br>
+    <a id="GoHome" href="{{ path('main_home') }}">Retour à l'accueil</a>
 
 {% endblock %}
