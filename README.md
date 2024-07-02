@@ -1,6 +1,6 @@
 # Sortir.com
 
-Premier projet s'inscrivant dans le cadre de ma formation Développeur Web & Web Mobile au sein de l'ENI Ecole Informatique, cette application a été développée par un groupe de 3 personnes en l'espace de deux semaines.
+Premier projet s'inscrivant dans le cadre de notre formation Développeur Web & Web Mobile au sein de l'ENI Ecole Informatique, cette application a été développée par un groupe de 3 personnes en l'espace de deux semaines.
 
 ## 🚀 Objectif
 Réaliser une application web Backend d'événementiel.
